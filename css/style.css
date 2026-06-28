@@ -1047,3 +1047,18 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+
+.mi-menu {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+.mi-menu a {
+    color: #333333;
+}
+[data-theme="dark"] .mi-menu {
+    background: #212529;
+}
+[data-theme="dark"] .mi-menu a {
+    color: #ffffff;
+}
