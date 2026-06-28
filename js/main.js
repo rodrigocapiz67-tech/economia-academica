@@ -64,12 +64,24 @@ function initAccordion() {
                     t.classList.remove('active');
                     const content = t.querySelector('.tema-content');
                     if (content) content.style.maxHeight = null;
+                    const h = t.querySelector('.tema-header');
+                    if (h) h.setAttribute('aria-expanded', 'false');
                 });
 
                 if (!isActive) {
                     tema.classList.add('active');
                     const content = tema.querySelector('.tema-content');
-                    if (content) content.style.maxHeight = content.scrollHeight + 'px';
+                    if (content) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        header.setAttribute('aria-expanded', 'true');
+                    }
+                }
+            });
+
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    header.click();
                 }
             });
         }
@@ -203,7 +215,7 @@ function typeWriter(element, text, speed = 50) {
 
 // Initialize typing effect if on home page
 const heroTitle = document.querySelector('.hero-content h2');
-if (heroTitle && window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')) {
+if (heroTitle && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/'))) {
     const originalText = heroTitle.textContent;
     typeWriter(heroTitle, originalText, 30);
 }

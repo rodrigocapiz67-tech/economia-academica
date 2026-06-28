@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Macroeconomía - Economía para Principiantes</title>
+    <meta name="description" content="Aprende Macroeconomía desde cero: PIB, inflación, desempleo, política fiscal y monetaria, crecimiento económico, tipo de cambio, balanza de pagos y más. Explicaciones simples con ejemplos prácticos.">
+    <meta property="og:title" content="Macroeconomía - Economía para Principiantes">
+    <meta property="og:description" content="Aprende Macroeconomía desde cero: PIB, inflación, desempleo, política fiscal y monetaria, y más.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/materias/macroeconomia.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +19,11 @@
 </head>
 <body>
     <header>
-        <h1><a href="../index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="../index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -27,13 +35,20 @@
             <p>Economía a escala nacional y global</p>
         </section>
 
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><span aria-current="page">Macroeconomía</span></li>
+            </ol>
+        </nav>
+
         <section class="contenido">
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-pib">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-pib-content">
                     <h3>1. Producto Interno Bruto (PIB)</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-pib-content" role="region" aria-labelledby="tema-pib-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Valor total de todos los bienes y servicios producidos en un país durante un año</li>
                         <li><strong>Método de gasto:</strong> PIB = C + I + G + (X - M)</li>
@@ -47,12 +62,12 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-inflacion">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-inflacion-content">
                     <h3>2. Inflación</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-inflacion-content" role="region" aria-labelledby="tema-inflacion-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Aumento sostenido del nivel general de precios</li>
                         <li><strong>Cómo se mide:</strong> Índice de Precios al Consumidor (IPC)</li>
@@ -68,12 +83,12 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-desempleo">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-desempleo-content">
                     <h3>3. Desempleo</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-desempleo-content" role="region" aria-labelledby="tema-desempleo-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Personas en edad laboral que buscan trabajo pero no lo encuentran</li>
                         <li><strong>Fórmula:</strong> Tasa = (Desempleados / Población activa) × 100</li>
@@ -89,30 +104,30 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-politica-fiscal">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-politica-fiscal-content">
                     <h3>4. Política Fiscal</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-politica-fiscal-content" role="region" aria-labelledby="tema-politica-fiscal-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Uso del gasto público e impuestos para influir en la economía</li>
                         <li><strong>Política expansiva:</strong> Aumentar gasto o bajar impuestos → estimula la economía</li>
                         <li><strong>Política contractiva:</strong> Bajar gasto o subir impuestos → frena la inflación</li>
-                        <li><strong>Multiplcador fiscal:</strong> Cada peso de gasto genera más de un peso de actividad económica</li>
+                        <li><strong>Multiplicador fiscal:</strong> Cada peso de gasto genera más de un peso de actividad económica</li>
                         <li><strong>Ejemplo:</strong> El gobierno invierte $100 millones en carreteras → los trabajadores gastan su salario → los comercios ganan más → la economía crece más de $100 millones</li>
                         <li><strong>Deuda pública:</strong> Cuando el gasto supera los ingresos, el gobierno se endeuda</li>
-                        <li><strong>Problema:</strong> Too much fiscal stimulus puede causar inflación</li>
+                        <li><strong>Problema:</strong> Un estímulo fiscal excesivo puede causar inflación</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-politica-monetaria">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-politica-monetaria-content">
                     <h3>5. Política Monetaria</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-politica-monetaria-content" role="region" aria-labelledby="tema-politica-monetaria-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Control de la oferta monetaria y tasas de interés por el banco central</li>
                         <li><strong>Herramientas:</strong></li>
@@ -126,12 +141,12 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-crecimiento">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-crecimiento-content">
                     <h3>6. Crecimiento Económico</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-crecimiento-content" role="region" aria-labelledby="tema-crecimiento-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Aumento sostenido del PIB per cápita en el tiempo</li>
                         <li><strong>Modelo de Solow:</strong> Crecimiento depende de capital, trabajo y tecnología</li>
@@ -146,12 +161,12 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-tipo-cambio">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-tipo-cambio-content">
                     <h3>7. Tipo de Cambio</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-tipo-cambio-content" role="region" aria-labelledby="tema-tipo-cambio-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Precio de una moneda en términos de otra</li>
                         <li><strong>Tipos de régimen:</strong></li>
@@ -163,18 +178,18 @@
                         <li>• Tasas de interés</li>
                         <li>• Balanza comercial</li>
                         <li>• Confianza de los inversionistas</li>
-                        <li><strong>Ejemplo:</strong> Si el dólar sube de $17 a $20 pesos, los mexicanos pueden comprar más en EE.UU., pero las exportaciones mexicanas se encarecen</li>
+                        <li><strong>Ejemplo:</strong> Si el dólar sube de $17 a $20 pesos, los mexicanos pueden comprar menos en EE.UU. (su poder adquisitivo internacional baja), pero las exportaciones mexicanas se abaratan para compradores extranjeros, volviéndose más competitivas</li>
                         <li><strong>Devaluación vs depreciación:</strong> Devaluación es decisión del gobierno, depreciación es del mercado</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-balanza-pagos">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-balanza-pagos-content">
                     <h3>8. Balanza de Pagos</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-balanza-pagos-content" role="region" aria-labelledby="tema-balanza-pagos-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Registro de todas las transacciones económicas entre un país y el resto del mundo</li>
                         <li><strong>Componentes principales:</strong></li>
@@ -190,12 +205,12 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-deuda">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-deuda-content">
                     <h3>9. Deuda Pública</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-deuda-content" role="region" aria-labelledby="tema-deuda-header">
                     <ul>
                         <li><strong>¿Qué es?</strong> Dinero que el gobierno debe a prestamistas (nacionales y extranjeros)</li>
                         <li><strong>¿Por qué se endeuda?</strong></li>
@@ -207,7 +222,7 @@
                         <li>• Externa: debe a extranjeros (en moneda extranjera)</li>
                         <li><strong>Indicadores:</strong></li>
                         <li>• Deuda/PIB: proporción de la deuda respecto al tamaño de la economía</li>
-                        <li>• Peru aceptable: menos del 30% del PIB</li>
+                        <li>• Porcentaje aceptable: menos del 30% del PIB</li>
                         <li><strong>Riesgos:</strong></li>
                         <li>• Si la deuda crece más rápido que el PIB → insostenible</li>
                         <li>• Deuda externa en moneda extranjera → riesgo cambiario</li>
@@ -216,12 +231,12 @@
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-oferta-demanda">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-oferta-demanda-content">
                     <h3>10. Oferta y Demanda Agregada</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-oferta-demanda-content" role="region" aria-labelledby="tema-oferta-demanda-header">
                     <ul>
                         <li><strong>Demanda Agregada (DA):</strong> Cantidad total de bienes y servicios que todos quieren comprar</li>
                         <li>• DA = C + I + G + (X - M)</li>
@@ -234,17 +249,17 @@
                         <li>• Determina el PIB real y el nivel de precios</li>
                         <li><strong>Shocks de demanda:</strong> Cambios en C, I, G o X-M → desplazan la DA</li>
                         <li><strong>Shocks de oferta:</strong> Cambios en costos de producción → desplazan la OA</li>
-                        <li><strong>Ejemplo:</strong> Una subida del petróleo → increase costos → OA se desplaza a la izquierda → inflación + menor producción (estanflación)</li>
+                        <li><strong>Ejemplo:</strong> Una subida del petróleo → aumentan los costos → OA se desplaza a la izquierda → inflación + menor producción (estanflación)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-modelos">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-modelos-content">
                     <h3>11. Modelos Macroeconómicos</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-modelos-content" role="region" aria-labelledby="tema-modelos-header">
                     <ul>
                         <li><strong>Modelo Keynesiano:</strong></li>
                         <li>• La demanda agregada determina el nivel de actividad</li>
@@ -262,17 +277,17 @@
                         <li>• La gente anticipa las políticas del gobierno</li>
                         <li>• Las políticas sistemáticas no funcionan</li>
                         <li>• Solo shocks inesperados tienen efecto real</li>
-                        <li><strong>Ejemplo comparativo:</strong> En una recesión, keynesianos dirían "aumentar gasto", monetaristas dirían "控制ar la oferta monetaria"</li>
+                        <li><strong>Ejemplo comparativo:</strong> En una recesión, keynesianos dirían "aumentar gasto", monetaristas dirían "controlar la oferta monetaria"</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-ciclos">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-ciclos-content">
                     <h3>12. Ciclos Económicos</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-ciclos-content" role="region" aria-labelledby="tema-ciclos-header">
                     <ul>
                         <li><strong>¿Qué son?</strong> Fluctuaciones periódicas de la actividad económica alrededor de su tendencia de crecimiento</li>
                         <li><strong>Fases del ciclo:</strong></li>
@@ -287,13 +302,15 @@
                         <li><strong>Indicadores adelantados:</strong></li>
                         <li>• Índice de confianza del consumidor</li>
                         <li>• Permisos de construcción</li>
-                        <li>• Stock market (bolsa)</li>
+                        <li>• Mercado bursátil (bolsa de valores)</li>
                         <li><strong>Ejemplo:</strong> Crisis 2008: pico en 2007, recesión 2008-2009, recuperación gradual</li>
                         <li><strong>En Perú:</strong> Los ciclos están influenciados por precios de materias primas (cobre, oro)</li>
                     </ul>
                 </div>
             </article>
         </section>
+
+        <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
     </main>
 
     <footer>

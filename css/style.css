@@ -13,7 +13,7 @@
     --bg: #f0fdfa;
     --bg-secondary: #ffffff;
     --text: #134e4a;
-    --text-muted: #5eead4;
+    --text-muted: #64748b;
     --text-dark: #0f172a;
     --border: #99f6e4;
     --card-bg: #ffffff;
@@ -521,7 +521,7 @@ nav a:hover {
 }
 
 .tema.active .tema-content {
-    max-height: 600px;
+    max-height: none;
 }
 
 .tema-content ul {
@@ -633,6 +633,102 @@ footer p {
     0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
     40% { transform: translateX(-50%) translateY(-15px); }
     60% { transform: translateX(-50%) translateY(-7px); }
+}
+
+.header-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.breadcrumbs {
+    max-width: 1000px;
+    margin: 1.5rem auto 0;
+    padding: 0 2rem;
+}
+
+.breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.breadcrumbs li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.breadcrumbs li + li::before {
+    content: '/';
+    margin-right: 0.5rem;
+    color: var(--text-muted);
+}
+
+.breadcrumbs a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumbs [aria-current="page"] {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+    transition: all 0.3s;
+    z-index: 999;
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(13, 148, 136, 0.4);
+}
+
+.btn-primary {
+    display: inline-flex;
+    padding: 1rem 2rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(13, 148, 136, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .tema-content {
+        transition: none;
+    }
 }
 
 @media (max-width: 768px) {
