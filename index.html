@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -15,6 +15,7 @@
         <nav>
             <ul>
                 <li><a href="#materias">Materias</a></li>
+                <li><a href="#economistas">Economistas</a></li>
                 <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
             </ul>
         </nav>
@@ -22,23 +23,34 @@
 
     <main>
         <section id="hero">
-            <h2>Aprende Economía desde cero</h2>
-            <p>Material simplificado para entender los conceptos fundamentales</p>
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h2>Aprende Economía desde cero</h2>
+                <p>Conceptos fundamentales explicados de forma simple para que entiendas cómo funciona el mundo económico</p>
+                <div class="hero-quote">
+                    "La economía es la ciencia de cómo la gente toma decisiones bajo escasez."
+                    <cite>— Paul Samuelson</cite>
+                </div>
+            </div>
+            <div class="scroll-indicator">↓</div>
         </section>
 
         <section id="busqueda">
-            <input type="text" id="search-input" placeholder="Buscar temas...">
+            <input type="text" id="search-input" placeholder="Buscar temas de economía...">
             <div id="search-results"></div>
         </section>
 
         <section id="materias">
-            <h2>Explora las Materias</h2>
+            <div class="section-title">
+                <h2>Explora las Materias</h2>
+                <p>Domina los fundamentos de la ciencia económica</p>
+            </div>
             <div class="materias-grid">
                 <article class="materia-card">
                     <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400&fit=crop" alt="Macroeconomía" class="materia-card-img">
                     <div class="materia-card-content">
                         <h3>Macroeconomía</h3>
-                        <p>PIB, inflación, desempleo y política económica a escala nacional.</p>
+                        <p>PIB, inflación, desempleo y política económica. Entiende cómo funciona una economía nacional.</p>
                         <a href="materias/macroeconomia.html">Explorar →</a>
                     </div>
                 </article>
@@ -46,7 +58,7 @@
                     <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop" alt="Microeconomía" class="materia-card-img">
                     <div class="materia-card-content">
                         <h3>Microeconomía</h3>
-                        <p>Oferta, demanda, costos y decisiones de consumidores y empresas.</p>
+                        <p>Cómo deciden consumidores y empresas. Oferta, demanda y formación de precios.</p>
                         <a href="materias/microeconomia.html">Explorar →</a>
                     </div>
                 </article>
@@ -54,7 +66,7 @@
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop" alt="Estadística" class="materia-card-img">
                     <div class="materia-card-content">
                         <h3>Estadística</h3>
-                        <p>Datos, probabilidades, regresiones e inferencia estadística.</p>
+                        <p>Herramientas para analizar datos. Probabilidad, regresiones e inferencia.</p>
                         <a href="materias/estadistica.html">Explorar →</a>
                     </div>
                 </article>
@@ -62,7 +74,7 @@
                     <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&h=400&fit=crop" alt="Matemáticas" class="materia-card-img">
                     <div class="materia-card-content">
                         <h3>Matemáticas</h3>
-                        <p>Cálculo, álgebra y optimización para el análisis económico.</p>
+                        <p>Cálculo, álgebra y optimización. La base matemática de la economía.</p>
                         <a href="materias/matematicas.html">Explorar →</a>
                     </div>
                 </article>
@@ -70,10 +82,43 @@
                     <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&h=400&fit=crop" alt="Economía Política" class="materia-card-img">
                     <div class="materia-card-content">
                         <h3>Economía Política</h3>
-                        <p>Sistemas económicos, globalización y rol del Estado.</p>
+                        <p>Sistemas económicos, globalización y el rol del Estado en la economía.</p>
                         <a href="materias/economia-politica.html">Explorar →</a>
                     </div>
                 </article>
+            </div>
+        </section>
+
+        <section id="economistas" class="economistas">
+            <div class="section-title">
+                <h2>Economistas Destacados</h2>
+                <p>Los pensadores que formaron la ciencia económica</p>
+            </div>
+            <div class="economistas-grid">
+                <div class="economista-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Adam_Smith.jpg/440px-Adam_Smith.jpg" alt="Adam Smith" class="economista-img">
+                    <h4>Adam Smith</h4>
+                    <p class="years">1723 - 1790</p>
+                    <p>Padre de la economía moderna. Su obra "La Riqueza de las Naciones" sentó las bases del libre mercado.</p>
+                </div>
+                <div class="economista-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Karl_Marx_001.jpg/440px-Karl_Marx_001.jpg" alt="Karl Marx" class="economista-img">
+                    <h4>Karl Marx</h4>
+                    <p class="years">1818 - 1883</p>
+                    <p>Autor de "El Capital". Criticó el capitalismo y analizó las relaciones de clase y producción.</p>
+                </div>
+                <div class="economista-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/John_Maynard_Keynes.jpg/440px-John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="economista-img">
+                    <h4>John Maynard Keynes</h4>
+                    <p class="years">1883 - 1946</p>
+                    <p>Fundador del keynesianismo. Propuso la intervención del Estado para estabilizar la economía.</p>
+                </div>
+                <div class="economista-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Milton_Friedman.jpg/440px-Milton_Friedman.jpg" alt="Milton Friedman" class="economista-img">
+                    <h4>Milton Friedman</h4>
+                    <p class="years">1912 - 2006</p>
+                    <p>Líder del monetarismo. Defendió el libre mercado y la importancia de la política monetaria.</p>
+                </div>
             </div>
         </section>
     </main>
