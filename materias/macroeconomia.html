@@ -95,50 +95,6 @@
             font-size: 2.5rem;
             font-weight: 800;
         }
-        .ejercicios-section {
-            margin: 3rem 0;
-            padding: 2rem;
-            background: var(--bs-body-bg);
-            border-radius: 20px;
-            border: 2px solid var(--bs-border-color);
-        }
-        .ejercicios-section h3 {
-            color: var(--bs-primary);
-            margin-bottom: 1.5rem;
-        }
-        .pregunta {
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: var(--bs-tertiary-bg);
-            border-radius: 16px;
-            border: 1px solid var(--bs-border-color);
-        }
-        .pregunta p { font-weight: 600; margin-bottom: 1rem; }
-        .pregunta label {
-            display: block;
-            padding: 0.75rem 1rem;
-            margin: 0.3rem 0;
-            border-radius: 12px;
-            border: 2px solid var(--bs-border-color);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .pregunta label:hover {
-            border-color: #0d9488;
-            background: rgba(13,148,136,0.05);
-        }
-        .pregunta.correcta label.selected { border-color: #22c55e; background: rgba(34,197,94,0.1); }
-        .pregunta.incorrecta label.selected { border-color: #ef4444; background: rgba(239,68,68,0.1); }
-        .pregunta .feedback { margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 12px; display: none; font-weight: 500; }
-        .pregunta.correcta .feedback { display: block; background: rgba(34,197,94,0.1); color: #22c55e; }
-        .pregunta.incorrecta .feedback { display: block; background: rgba(239,68,68,0.1); color: #ef4444; }
-        .btn-ejercicio {
-            display: inline-flex; padding: 0.75rem 1.5rem;
-            background: #0d9488; color: white; border: none;
-            border-radius: 30px; font-weight: 600; cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-ejercicio:hover { background: #0f766e; transform: translateY(-2px); }
         .reading-toggle {
             background: none; border: 2px solid var(--bs-border-color);
             color: var(--bs-body-color); padding: 0.5rem 1rem;
@@ -484,33 +440,78 @@
         </div>
 
         <!-- EJERCICIOS -->
-        <div class="ejercicios-section">
-            <h3><i class="fa-solid fa-pen-to-square me-2"></i> Practica lo aprendido</h3>
-            <div class="pregunta" data-correcta="b">
-                <p>1. ¿Qué mide el PIB?</p>
-                <label><input type="radio" name="macro1" value="a"> El ingreso total del gobierno</label>
-                <label><input type="radio" name="macro1" value="b"> El valor total de bienes y servicios finales producidos</label>
-                <label><input type="radio" name="macro1" value="c"> La inflación acumulada</label>
-                <label><input type="radio" name="macro1" value="d"> El desempleo del país</label>
-                <div class="feedback">El PIB mide la producción total de bienes y servicios finales en un período.</div>
+        <div class="card shadow-sm border-0 mt-5 border-top border-primary border-4">
+            <div class="card-body p-4">
+                <h3 class="card-title text-primary"><i class="fa-solid fa-list-check me-2"></i>Ponte a prueba</h3>
+                <p class="text-muted">Veamos qué tanto aprendiste sobre Macroeconomía.</p>
+
+                <div class="mb-4 p-3 bg-light rounded">
+                    <h5 class="fw-bold">1. ¿Qué mide el PIB?</h5>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="radio" name="macro1" id="macro1_a" value="incorrecto">
+                        <label class="form-check-label" for="macro1_a">El ingreso total del gobierno</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro1" id="macro1_b" value="correcto">
+                        <label class="form-check-label" for="macro1_b">El valor total de bienes y servicios finales producidos</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro1" id="macro1_c" value="incorrecto">
+                        <label class="form-check-label" for="macro1_c">La inflación acumulada</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro1" id="macro1_d" value="incorrecto">
+                        <label class="form-check-label" for="macro1_d">El desempleo del país</label>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary mt-3" onclick="verificarRespuesta('macro1', 'feedbackMacro1', 'El PIB mide la producción total de bienes y servicios finales en un período.')">Comprobar</button>
+                    <div id="feedbackMacro1" class="mt-2 fw-bold"></div>
+                </div>
+
+                <div class="mb-4 p-3 bg-light rounded">
+                    <h5 class="fw-bold">2. Cuando el banco central sube la tasa de interés, busca:</h5>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="radio" name="macro2" id="macro2_a" value="correcto">
+                        <label class="form-check-label" for="macro2_a">Reducir la inflación</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro2" id="macro2_b" value="incorrecto">
+                        <label class="form-check-label" for="macro2_b">Aumentar el empleo</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro2" id="macro2_c" value="incorrecto">
+                        <label class="form-check-label" for="macro2_c">Subir el PIB</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro2" id="macro2_d" value="incorrecto">
+                        <label class="form-check-label" for="macro2_d">Depreciar la moneda</label>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary mt-3" onclick="verificarRespuesta('macro2', 'feedbackMacro2', 'Subir la tasa de interés encarece el crédito, reduce el consumo y frena la inflación.')">Comprobar</button>
+                    <div id="feedbackMacro2" class="mt-2 fw-bold"></div>
+                </div>
+
+                <div class="mb-4 p-3 bg-light rounded">
+                    <h5 class="fw-bold">3. La curva de Phillips muestra la relación inversa entre:</h5>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="radio" name="macro3" id="macro3_a" value="incorrecto">
+                        <label class="form-check-label" for="macro3_a">PIB e inflación</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro3" id="macro3_b" value="incorrecto">
+                        <label class="form-check-label" for="macro3_b">Tipo de cambio y exportaciones</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro3" id="macro3_c" value="correcto">
+                        <label class="form-check-label" for="macro3_c">Desempleo e inflación</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="macro3" id="macro3_d" value="incorrecto">
+                        <label class="form-check-label" for="macro3_d">Ahorro e inversión</label>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary mt-3" onclick="verificarRespuesta('macro3', 'feedbackMacro3', 'La curva de Phillips clásica muestra que menor desempleo se asocia con mayor inflación.')">Comprobar</button>
+                    <div id="feedbackMacro3" class="mt-2 fw-bold"></div>
+                </div>
+
             </div>
-            <div class="pregunta" data-correcta="a">
-                <p>2. Cuando el banco central sube la tasa de interés, busca:</p>
-                <label><input type="radio" name="macro2" value="a"> Reducir la inflación</label>
-                <label><input type="radio" name="macro2" value="b"> Aumentar el empleo</label>
-                <label><input type="radio" name="macro2" value="c"> Subir el PIB</label>
-                <label><input type="radio" name="macro2" value="d"> Depreciar la moneda</label>
-                <div class="feedback">Subir la tasa de interés encarece el crédito, reduce el consumo y frena la inflación.</div>
-            </div>
-            <div class="pregunta" data-correcta="c">
-                <p>3. La curva de Phillips muestra la relación inversa entre:</p>
-                <label><input type="radio" name="macro3" value="a"> PIB e inflación</label>
-                <label><input type="radio" name="macro3" value="b"> Tipo de cambio y exportaciones</label>
-                <label><input type="radio" name="macro3" value="c"> Desempleo e inflación</label>
-                <label><input type="radio" name="macro3" value="d"> Ahorro e inversión</label>
-                <div class="feedback">La curva de Phillips clásica muestra que menor desempleo se asocia con mayor inflación.</div>
-            </div>
-            <button class="btn-ejercicio"><i class="fa-regular fa-circle-check me-1"></i> Verificar respuestas</button>
         </div>
     </main>
 
@@ -577,6 +578,26 @@
             el.addEventListener('input', actualizarSimulador);
         });
         actualizarSimulador();
+    </script>
+    <script>
+        function verificarRespuesta(nombreRadio, idFeedback, explicacion) {
+            let opciones = document.getElementsByName(nombreRadio);
+            let seleccionado = null;
+            let cajaFeedback = document.getElementById(idFeedback);
+            for(let i = 0; i < opciones.length; i++) {
+                if(opciones[i].checked) {
+                    seleccionado = opciones[i].value;
+                    break;
+                }
+            }
+            if(seleccionado === "correcto") {
+                cajaFeedback.innerHTML = `<span class="text-success"><i class="fa-solid fa-circle-check"></i> ¡Correcto!</span> <span class="text-muted small d-block">${explicacion}</span>`;
+            } else if (seleccionado === "incorrecto") {
+                cajaFeedback.innerHTML = `<span class="text-danger"><i class="fa-solid fa-circle-xmark"></i> Incorrecto.</span> <span class="text-muted small d-block">Inténtalo de nuevo. Pista: Revisa bien los apuntes.</span>`;
+            } else {
+                cajaFeedback.innerHTML = `<span class="text-warning"><i class="fa-solid fa-triangle-exclamation"></i> Por favor, selecciona una opción primero.</span>`;
+            }
+        }
     </script>
 </body>
 </html>

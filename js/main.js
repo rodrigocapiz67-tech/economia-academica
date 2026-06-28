@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initReadingMode();
     initFilterButtons();
     initShareButtons();
-    initEjercicios();
+
     initSW();
 });
 
@@ -283,24 +283,6 @@ function initShareButtons() {
                 btn.textContent = '✅ Copiado';
                 setTimeout(() => { btn.textContent = orig; }, 2000);
             }
-        });
-    });
-}
-
-function initEjercicios() {
-    document.querySelectorAll('.btn-ejercicio').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const section = btn.closest('.ejercicios-section');
-            const preguntas = section.querySelectorAll('.pregunta');
-            preguntas.forEach(p => {
-                const selected = p.querySelector('input[type="radio"]:checked');
-                const correcta = p.dataset.correcta;
-                const feedback = p.querySelector('.feedback');
-                if (selected) {
-                    p.classList.remove('correcta', 'incorrecta');
-                    p.classList.add(selected.value === correcta ? 'correcta' : 'incorrecta');
-                }
-            });
         });
     });
 }

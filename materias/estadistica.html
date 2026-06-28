@@ -16,39 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .ejercicios-section {
-            margin: 3rem 0; padding: 2rem;
-            background: var(--bs-body-bg);
-            border-radius: 20px;
-            border: 2px solid var(--bs-border-color);
-        }
-        .ejercicios-section h3 { color: var(--bs-primary); margin-bottom: 1.5rem; }
-        .pregunta {
-            margin-bottom: 1.5rem; padding: 1.5rem;
-            background: var(--bs-tertiary-bg);
-            border-radius: 16px;
-            border: 1px solid var(--bs-border-color);
-        }
-        .pregunta p { font-weight: 600; margin-bottom: 1rem; }
-        .pregunta label {
-            display: block; padding: 0.75rem 1rem;
-            margin: 0.3rem 0; border-radius: 12px;
-            border: 2px solid var(--bs-border-color);
-            cursor: pointer; transition: all 0.3s;
-        }
-        .pregunta label:hover { border-color: #0d9488; background: rgba(13,148,136,0.05); }
-        .pregunta.correcta label.selected { border-color: #22c55e; background: rgba(34,197,94,0.1); }
-        .pregunta.incorrecta label.selected { border-color: #ef4444; background: rgba(239,68,68,0.1); }
-        .pregunta .feedback { margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 12px; display: none; font-weight: 500; }
-        .pregunta.correcta .feedback { display: block; background: rgba(34,197,94,0.1); color: #22c55e; }
-        .pregunta.incorrecta .feedback { display: block; background: rgba(239,68,68,0.1); color: #ef4444; }
-        .btn-ejercicio {
-            display: inline-flex; padding: 0.75rem 1.5rem;
-            background: #0d9488; color: white; border: none;
-            border-radius: 30px; font-weight: 600; cursor: pointer;
-            transition: all 0.3s;
-        }
-        .btn-ejercicio:hover { background: #0f766e; transform: translateY(-2px); }
         .reading-toggle {
             background: none; border: 2px solid var(--bs-border-color);
             color: var(--bs-body-color); padding: 0.5rem 1rem;
@@ -461,33 +428,78 @@
         </div>
 
         <div class="container">
-            <div class="ejercicios-section">
-                <h3><i class="fa-solid fa-pen-to-square me-2"></i> Practica lo aprendido</h3>
-                <div class="pregunta" data-correcta="c">
-                    <p>1. ¿Cuál es la medida de tendencia central más sensible a valores extremos?</p>
-                    <label><input type="radio" name="est1" value="a"> Mediana</label>
-                    <label><input type="radio" name="est1" value="b"> Moda</label>
-                    <label><input type="radio" name="est1" value="c"> Media aritmética</label>
-                    <label><input type="radio" name="est1" value="d"> Rango</label>
-                    <div class="feedback">La media aritmética se ve afectada por valores atípicos, a diferencia de la mediana.</div>
+            <div class="card shadow-sm border-0 mt-5 border-top border-primary border-4">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-primary"><i class="fa-solid fa-list-check me-2"></i>Ponte a prueba</h3>
+                    <p class="text-muted">Veamos qué tanto aprendiste sobre Estadística.</p>
+
+                    <div class="mb-4 p-3 bg-light rounded">
+                        <h5 class="fw-bold">1. ¿Cuál es la medida de tendencia central más sensible a valores extremos?</h5>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="est1" id="est1_a" value="incorrecto">
+                            <label class="form-check-label" for="est1_a">Mediana</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est1" id="est1_b" value="incorrecto">
+                            <label class="form-check-label" for="est1_b">Moda</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est1" id="est1_c" value="correcto">
+                            <label class="form-check-label" for="est1_c">Media aritmética</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est1" id="est1_d" value="incorrecto">
+                            <label class="form-check-label" for="est1_d">Rango</label>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3" onclick="verificarRespuesta('est1', 'feedbackEst1', 'La media aritmética se ve afectada por valores atípicos, a diferencia de la mediana.')">Comprobar</button>
+                        <div id="feedbackEst1" class="mt-2 fw-bold"></div>
+                    </div>
+
+                    <div class="mb-4 p-3 bg-light rounded">
+                        <h5 class="fw-bold">2. En una distribución normal, ¿qué porcentaje está a 1 desviación estándar de la media?</h5>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="est2" id="est2_a" value="incorrecto">
+                            <label class="form-check-label" for="est2_a">95%</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est2" id="est2_b" value="correcto">
+                            <label class="form-check-label" for="est2_b">68%</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est2" id="est2_c" value="incorrecto">
+                            <label class="form-check-label" for="est2_c">99%</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est2" id="est2_d" value="incorrecto">
+                            <label class="form-check-label" for="est2_d">50%</label>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3" onclick="verificarRespuesta('est2', 'feedbackEst2', 'Aproximadamente el 68% de los datos en una normal caen dentro de ±1σ.')">Comprobar</button>
+                        <div id="feedbackEst2" class="mt-2 fw-bold"></div>
+                    </div>
+
+                    <div class="mb-4 p-3 bg-light rounded">
+                        <h5 class="fw-bold">3. El coeficiente de correlación (r) mide:</h5>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" name="est3" id="est3_a" value="correcto">
+                            <label class="form-check-label" for="est3_a">La fuerza y dirección de la relación lineal entre dos variables</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est3" id="est3_b" value="incorrecto">
+                            <label class="form-check-label" for="est3_b">La pendiente de la regresión</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est3" id="est3_c" value="incorrecto">
+                            <label class="form-check-label" for="est3_c">La diferencia entre medias</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="est3" id="est3_d" value="incorrecto">
+                            <label class="form-check-label" for="est3_d">La varianza de los residuales</label>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-3" onclick="verificarRespuesta('est3', 'feedbackEst3', 'r varía entre -1 y 1, indicando correlación negativa perfecta a positiva perfecta.')">Comprobar</button>
+                        <div id="feedbackEst3" class="mt-2 fw-bold"></div>
+                    </div>
+
                 </div>
-                <div class="pregunta" data-correcta="b">
-                    <p>2. En una distribución normal, ¿qué porcentaje está a 1 desviación estándar de la media?</p>
-                    <label><input type="radio" name="est2" value="a"> 95%</label>
-                    <label><input type="radio" name="est2" value="b"> 68%</label>
-                    <label><input type="radio" name="est2" value="c"> 99%</label>
-                    <label><input type="radio" name="est2" value="d"> 50%</label>
-                    <div class="feedback">Aproximadamente el 68% de los datos en una normal caen dentro de ±1σ.</div>
-                </div>
-                <div class="pregunta" data-correcta="a">
-                    <p>3. El coeficiente de correlación (r) mide:</p>
-                    <label><input type="radio" name="est3" value="a"> La fuerza y dirección de la relación lineal entre dos variables</label>
-                    <label><input type="radio" name="est3" value="b"> La pendiente de la regresión</label>
-                    <label><input type="radio" name="est3" value="c"> La diferencia entre medias</label>
-                    <label><input type="radio" name="est3" value="d"> La varianza de los residuales</label>
-                    <div class="feedback">r varía entre -1 y 1, indicando correlación negativa perfecta a positiva perfecta.</div>
-                </div>
-                <button class="btn-ejercicio"><i class="fa-regular fa-circle-check me-1"></i> Verificar respuestas</button>
             </div>
         </div>
     </main>
@@ -508,6 +520,25 @@
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
         const initTheme = document.documentElement.getAttribute('data-theme');
         if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
+
+        function verificarRespuesta(nombreRadio, idFeedback, explicacion) {
+            let opciones = document.getElementsByName(nombreRadio);
+            let seleccionado = null;
+            let cajaFeedback = document.getElementById(idFeedback);
+            for(let i = 0; i < opciones.length; i++) {
+                if(opciones[i].checked) {
+                    seleccionado = opciones[i].value;
+                    break;
+                }
+            }
+            if(seleccionado === "correcto") {
+                cajaFeedback.innerHTML = `<span class="text-success"><i class="fa-solid fa-circle-check"></i> ¡Correcto!</span> <span class="text-muted small d-block">${explicacion}</span>`;
+            } else if (seleccionado === "incorrecto") {
+                cajaFeedback.innerHTML = `<span class="text-danger"><i class="fa-solid fa-circle-xmark"></i> Incorrecto.</span> <span class="text-muted small d-block">Inténtalo de nuevo. Pista: Revisa bien los apuntes.</span>`;
+            } else {
+                cajaFeedback.innerHTML = `<span class="text-warning"><i class="fa-solid fa-triangle-exclamation"></i> Por favor, selecciona una opción primero.</span>`;
+            }
+        }
     </script>
 </body>
 </html>
