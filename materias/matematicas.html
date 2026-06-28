@@ -30,29 +30,48 @@
         <section class="contenido">
             <article class="tema">
                 <div class="tema-header">
-                    <h3>1. Cálculo</h3>
+                    <h3>1. Límites y Derivadas</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
                     <ul>
-                        <li>Derivada: tasa de cambio de una función</li>
-                        <li>Regla de la cadena: derivar funciones compuestas</li>
-                        <li>Integral: área bajo una curva</li>
-                        <li>Aplicación: costo marginal, utilidad marginal</li>
+                        <li><strong>Límite:</strong> Valor al que se acerca una función</li>
+                        <li>• Ejemplo: lim(x→0) (sen x)/x = 1</li>
+                        <li><strong>Derivada:</strong> Tasa de cambio instantánea de una función</li>
+                        <li>• f'(x) = lim(h→0) [f(x+h) - f(x)] / h</li>
+                        <li><strong>Reglas de derivación:</strong></li>
+                        <li>• d/dx (xⁿ) = nxⁿ⁻¹</li>
+                        <li>• d/dx (eˣ) = eˣ</li>
+                        <li>• d/dx (ln x) = 1/x</li>
+                        <li>• Regla de la cadena: d/dx [f(g(x))] = f'(g(x)) × g'(x)</li>
+                        <li><strong>Aplicaciones económicas:</strong></li>
+                        <li>• Costo marginal = d/dq (Costo total)</li>
+                        <li>• Utilidad marginal = d/dx (Utilidad total)</li>
+                        <li>• Ingreso marginal = d/dq (Ingreso total)</li>
+                        <li><strong>Ejemplo:</strong> CT = 100 + 20q + 2q² → CM = 20 + 4q</li>
                     </ul>
                 </div>
             </article>
 
             <article class="tema">
                 <div class="tema-header">
-                    <h3>2. Álgebra Lineal</h3>
+                    <h3>2. Integrales</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
                     <ul>
-                        <li>Matrices: arreglos de números en filas y columnas</li>
-                        <li>Sistemas de ecuaciones: resolver múltiples incógnitas</li>
-                        <li>Valores propios: importantes en modelos econométricos</li>
+                        <li><strong>¿Qué es?</strong> Operación inversa de la derivada (área bajo la curva)</li>
+                        <li><strong>Reglas básicas:</strong></li>
+                        <li>• ∫xⁿ dx = xⁿ⁺¹/(n+1) + C</li>
+                        <li>• ∫eˣ dx = eˣ + C</li>
+                        <li>• ∫(1/x) dx = ln|x| + C</li>
+                        <li><strong>Integral definida:</strong> Área entre a y b</li>
+                        <li>• ∫[a,b] f(x) dx = F(b) - F(a)</li>
+                        <li><strong>Aplicaciones económicas:</strong></li>
+                        <li>• Ingreso total = ∫(Ingreso marginal) dq</li>
+                        <li>• Beneficio = ∫(Beneficio marginal) dq</li>
+                        <li>• Superávit del consumidor = área entre demanda y precio</li>
+                        <li><strong>Ejemplo:</strong> Si CM = 20 + 4q, CT = ∫(20+4q)dq = 20q + 2q² + C</li>
                     </ul>
                 </div>
             </article>
@@ -64,9 +83,102 @@
                 </div>
                 <div class="tema-content">
                     <ul>
-                        <li>Máximo y mínimo: puntos donde la derivada es cero</li>
-                        <li>Derivadas parciales: optimizar con múltiples variables</li>
-                        <li>Lagrange: optimizar con restricciones</li>
+                        <li><strong>¿Para qué?</strong> Encontrar máximos y mínimos (maximizar beneficios, minimizar costos)</li>
+                        <li><strong>Condiciones de primer orden:</strong></li>
+                        <li>• f'(x) = 0 (punto crítico)</li>
+                        <li><strong>Condiciones de segundo orden:</strong></li>
+                        <li>• f''(x) > 0 → mínimo</li>
+                        <li>• f''(x) < 0 → máximo</li>
+                        <li><strong>Ejemplo - Maximizar beneficio:</strong></li>
+                        <li>• Ingreso: R(q) = 100q - 2q²</li>
+                        <li>• Costo: C(q) = 50 + 20q</li>
+                        <li>• Beneficio: π(q) = 80q - 2q² - 50</li>
+                        <li>• π'(q) = 80 - 4q = 0 → q* = 20</li>
+                        <li>• π''(q) = -4 < 0 → es máximo</li>
+                        <li><strong>Método de Lagrange:</strong></li>
+                        <li>• Para optimizar con restricciones</li>
+                        <li>• L = f(x,y) + λ(g(x,y) - c)</li>
+                        <li>• Ejemplo: Maximizar utilidad con presupuesto limitado</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>4. Álgebra Lineal</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>Matrices:</strong> Arreglos de números en filas y columnas</li>
+                        <li><strong>Operaciones:</strong></li>
+                        <li>• Suma: elemento a elemento</li>
+                        <li>• Multiplicación: fila × columna</li>
+                        <li>• Inversa: A × A⁻¹ = I</li>
+                        <li><strong>Sistemas de ecuaciones:</strong></li>
+                        <li>• Ax = b → x = A⁻¹b</li>
+                        <li>• Ejemplo: 2x + y = 10, x + 3y = 15</li>
+                        <li><strong>Valores propios:</strong></li>
+                        <li>• Av = λv (escalar λ, vector v)</li>
+                        <li>• Importantes en modelos econométricos (PCA)</li>
+                        <li><strong>Aplicaciones económicas:</strong></li>
+                        <li>• Modelos de input-output de Leontief</li>
+                        <li>• Análisis de series de tiempo</li>
+                        <li>• Optimización de portafolios</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>5. Ecuaciones Diferenciales</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Qué son?</strong> Ecuaciones con derivadas de funciones desconocidas</li>
+                        <li><strong>EDO de primer orden:</strong></li>
+                        <li>• dy/dx = f(x,y)</li>
+                        <li>• Solución: y = ∫f(x,y)dx + C</li>
+                        <li><strong>Ejemplo - Crecimiento exponencial:</strong></li>
+                        <li>• dP/dt = rP (la tasa de crecimiento es proporcional al tamaño)</li>
+                        <li>• Solución: P(t) = P₀e^(rt)</li>
+                        <li>• P₀ = población inicial, r = tasa de crecimiento</li>
+                        <li><strong>Modelo de crecimiento de Solow:</strong></li>
+                        <li>• dk/dt = sf(k) - (n+δ)k</li>
+                        <li>• k = capital per cápita</li>
+                        <li>• s = tasa de ahorro</li>
+                        <li>• n = crecimiento poblacional</li>
+                        <li>• δ = depreciación</li>
+                        <li><strong>Aplicaciones:</strong></li>
+                        <li>• Modelos de crecimiento económico</li>
+                        <li>• Dinámica de mercados</li>
+                        <li>• Difusión de innovaciones</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>6. Análisis de Series de Tiempo</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Qué es?</strong> Datos ordenados cronológicamente (PIB mensual, inflación anual)</li>
+                        <li><strong>Componentes:</strong></li>
+                        <li>• Tendencia: dirección a largo plazo</li>
+                        <li>• Estacionalidad: patrones que se repiten</li>
+                        <li>• Ciclo: fluctuaciones alrededor de la tendencia</li>
+                        <li>• Ruido: variación aleatoria</li>
+                        <li><strong>Modelos comunes:</strong></li>
+                        <li>• Media móvil: promedio de los últimos k períodos</li>
+                        <li>• ARIMA: autoregresivo integrado de media móvil</li>
+                        <li>• Exponencial smoothing: más peso a datos recientes</li>
+                        <li><strong>Estacionariedad:</strong></li>
+                        <li>• Media y varianza constantes en el tiempo</li>
+                        <li>• Test de Dickey-Fuller para verificar</li>
+                        <li><strong>Ejemplo:</strong> Predecir ventas del próximo mes usando datos de los últimos 12 meses</li>
                     </ul>
                 </div>
             </article>

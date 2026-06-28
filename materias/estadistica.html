@@ -30,43 +30,185 @@
         <section class="contenido">
             <article class="tema">
                 <div class="tema-header">
-                    <h3>1. Estadística Descriptiva</h3>
+                    <h3>1. Medidas de Tendencia Central</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
                     <ul>
-                        <li>Media: promedio de los datos</li>
-                        <li>Mediana: valor central de los datos</li>
-                        <li>Moda: valor que más se repite</li>
-                        <li>Desviación estándar: qué tan dispersos están los datos</li>
+                        <li><strong>Media (promedio):</strong> Suma de todos los valores dividida entre la cantidad</li>
+                        <li>• Fórmula: μ = Σxi / n</li>
+                        <li>• Ejemplo: Notas 7, 8, 9, 10 → Media = (7+8+9+10)/4 = 8.5</li>
+                        <li><strong>Mediana:</strong> Valor central cuando los datos están ordenados</li>
+                        <li>• Datos 1, 3, 5, 7, 9 → Mediana = 5</li>
+                        <li>• Datos 1, 3, 5, 7 → Mediana = (3+5)/2 = 4</li>
+                        <li>• Más robusta que la media ante valores extremos</li>
+                        <li><strong>Moda:</strong> Valor que más se repite</li>
+                        <li>• Datos 2, 3, 3, 4, 5 → Moda = 3</li>
+                        <li>• Puede haber varias modas (bimodal, trimodal)</li>
+                        <li><strong>¿Cuándo usar cuál?</strong></li>
+                        <li>• Media: datos simétricos sin outliers</li>
+                        <li>• Mediana: datos con valores extremos (ingresos, precios de casas)</li>
+                        <li>• Moda: datos categóricos (color favorito)</li>
                     </ul>
                 </div>
             </article>
 
             <article class="tema">
                 <div class="tema-header">
-                    <h3>2. Probabilidad</h3>
+                    <h3>2. Medidas de Dispersión</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
                     <ul>
-                        <li>Probabilidad: posibilidad de que ocurra un evento</li>
-                        <li>Distribución normal: campana de Gauss</li>
-                        <li>Teorema de Bayes: actualizar probabilidades con nueva info</li>
+                        <li><strong>Rango:</strong> Diferencia entre el valor máximo y mínimo</li>
+                        <li>• Datos 2, 5, 8, 12 → Rango = 12 - 2 = 10</li>
+                        <li><strong>Varianza:</strong> Promedio de las desviaciones al cuadrado</li>
+                        <li>• Fórmula: σ² = Σ(xi - μ)² / n</li>
+                        <li><strong>Desviación estándar:</strong> Raíz cuadrada de la varianza</li>
+                        <li>• σ = √σ²</li>
+                        <li>• Misma unidad que los datos originales</li>
+                        <li><strong>Ejemplo:</strong> Ingresos mensuales: $2000, $2500, $3000, $3500, $4000</li>
+                        <li>• Media = $3000</li>
+                        <li>• Desviación estándar ≈ $707</li>
+                        <li><strong>Coeficiente de variación:</strong> CV = (σ/μ) × 100%</li>
+                        <li>• Permite comparar dispersión entre datasets diferentes</li>
+                        <li><strong>Regla empírica:</strong> En distribución normal:</li>
+                        <li>• 68% de datos dentro de μ ± σ</li>
+                        <li>• 95% dentro de μ ± 2σ</li>
+                        <li>• 99.7% dentro de μ ± 3σ</li>
                     </ul>
                 </div>
             </article>
 
             <article class="tema">
                 <div class="tema-header">
-                    <h3>3. Inferencia Estadística</h3>
+                    <h3>3. Probabilidad Básica</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
                     <ul>
-                        <li>Intervalos de confianza: rango donde está el valor real</li>
-                        <li>Pruebas de hipótesis: verificar afirmaciones con datos</li>
-                        <li>Regresión lineal: relación entre dos variables</li>
+                        <li><strong>¿Qué es?</strong> Posibilidad de que ocurra un evento (0 a 1, o 0% a 100%)</li>
+                        <li><strong>Axiomas:</strong></li>
+                        <li>• P(A) ≥ 0 siempre</li>
+                        <li>• P(espacio muestral) = 1</li>
+                        <li>• Eventos mutuamente excluyentes: P(A o B) = P(A) + P(B)</li>
+                        <li><strong>Probabilidad condicional:</strong></li>
+                        <li>• P(A|B) = P(A y B) / P(B)</li>
+                        <li>• "Probabilidad de A, dado que ocurrió B"</li>
+                        <li><strong>Teorema de Bayes:</strong></li>
+                        <li>• P(A|B) = P(B|A) × P(A) / P(B)</li>
+                        <li>• Actualiza probabilidades con nueva información</li>
+                        <li><strong>Ejemplo:</strong></li>
+                        <li>• 10% tiene enfermedad (P(E) = 0.1)</li>
+                        <li>• Test detecta 90% de enfermos (P(+|E) = 0.9)</li>
+                        <li>• 5% falsos positivos (P(+|no E) = 0.05)</li>
+                        <li>• Si test es positivo, ¿probabilidad real de estar enfermo?</li>
+                        <li>• P(E|+) = (0.9 × 0.1) / [(0.9×0.1) + (0.05×0.9)] = 67%</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>4. Distribuciones de Probabilidad</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>Distribución binomial:</strong> Éxitos en n ensayos independientes</li>
+                        <li>• P(X=k) = C(n,k) × p^k × (1-p)^(n-k)</li>
+                        <li>• Ejemplo: Lanzar moneda 10 veces, ¿cuántas caras?</li>
+                        <li><strong>Distribución normal (Gauss):</strong></li>
+                        <li>• Forma de campana simétrica</li>
+                        <li>• Definida por media (μ) y desviación estándar (σ)</li>
+                        <li>• Estándar: μ=0, σ=1</li>
+                        <li>• Muchos fenómenos naturales la siguen</li>
+                        <li><strong>Distribución de Poisson:</strong></li>
+                        <li>• Eventos raros en un intervalo de tiempo/espacio</li>
+                        <li>• P(X=k) = (λ^k × e^-λ) / k!</li>
+                        <li>• Ejemplo: Llamadas telefónicas por hora, accidentes por día</li>
+                        <li><strong>Distribución uniforme:</strong></li>
+                        <li>• Todos los valores igual de probables</li>
+                        <li>• Ejemplo: Dado justos, número aleatorio</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>5. Muestreo</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Por qué muestrear?</strong> Censar toda la población es costoso/imposible</li>
+                        <li><strong>Muestreo aleatorio simple:</strong> Cada individuo tiene igual probabilidad</li>
+                        <li><strong>Muestreo estratificado:</strong> Dividir en grupos (estratos) y muestrear cada uno</li>
+                        <li><strong>Muestreo por conglomerados:</strong> Muestrear grupos completos</li>
+                        <li><strong>Tamaño de muestra:</strong></li>
+                        <li>• n = (Z² × σ²) / E²</li>
+                        <li>• Z = valor Z para nivel de confianza (1.96 para 95%)</li>
+                        <li>• σ = desviación estándar</li>
+                        <li>• E = margen de error</li>
+                        <li><strong>Error de muestreo:</strong> Diferencia entre estadístico muestral y parámetro poblacional</li>
+                        <li><strong>Sesgo de selección:</strong> Muestra no representativa de la población</li>
+                        <li><strong>Ejemplo:</strong> Encuesta electoral: no preguntar solo a jóvenes (sesgo)</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>6. Inferencia Estadística</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Qué es?</strong> Hacer conclusiones sobre una población a partir de una muestra</li>
+                        <li><strong>Intervalos de confianza:</strong></li>
+                        <li>• Rango donde probablemente está el valor real</li>
+                        <li>• IC 95%: x̄ ± 1.96 × (σ/√n)</li>
+                        <li>• "Estamos 95% seguros de que la media real está aquí"</li>
+                        <li><strong>Pruebas de hipótesis:</strong></li>
+                        <li>• H₀: hipótesis nula (no hay efecto)</li>
+                        <li>• H₁: hipótesis alternativa (hay efecto)</li>
+                        <li>• p-valor: probabilidad de ver estos datos si H₀ es cierta</li>
+                        <li>• Si p < 0.05, rechazamos H₀</li>
+                        <li><strong>Errores tipo:</strong></li>
+                        <li>• Tipo I: Rechazar H₀ siendo cierta (falso positivo)</li>
+                        <li>• Tipo II: No rechazar H₀ siendo falsa (falso negativo)</li>
+                        <li><strong>Ejemplo:</strong> ¿El nuevo método de enseñanza es mejor?</li>
+                        <li>• H₀: no hay diferencia</li>
+                        <li>• Si p = 0.03, hay evidencia de que sí es mejor</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>7. Regresión Lineal</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Qué es?</strong> Modelar la relación entre dos variables</li>
+                        <li><strong>Fórmula:</strong> Y = β₀ + β₁X + ε</li>
+                        <li>• Y = variable dependiente (respuesta)</li>
+                        <li>• X = variable independiente (predictor)</li>
+                        <li>• β₀ = intercepto</li>
+                        <li>• β₁ = pendiente (cambia Y por unidad de X)</li>
+                        <li>• ε = error aleatorio</li>
+                        <li><strong>Mínimos cuadrados ordinarios (MCO):</strong></li>
+                        <li>• Minimiza la suma de errores al cuadrado</li>
+                        <li>• Encuentra la línea que mejor ajusta</li>
+                        <li><strong>R² (coeficiente de determinación):</strong></li>
+                        <li>• Proporción de varianza de Y explicada por X</li>
+                        <li>• Va de 0 a 1 (0% a 100%)</li>
+                        <li>• R² = 0.85 significa que X explica 85% de la variación en Y</li>
+                        <li><strong>Ejemplo:</strong> Relación entre educación (años) e ingresos:</li>
+                        <li>• Ingresos = 5000 + 2000 × Años_educación</li>
+                        <li>• Cada año extra → $2000 más de ingreso</li>
+                        <li><strong>Advertencia:</strong> Correlación no implica causalidad</li>
                     </ul>
                 </div>
             </article>
