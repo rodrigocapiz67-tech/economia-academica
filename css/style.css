@@ -720,6 +720,44 @@ footer p {
     box-shadow: 0 8px 25px rgba(13, 148, 136, 0.3);
 }
 
+.economist-inline {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.economist-inline-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    flex-shrink: 0;
+}
+
+.economist-inline-text {
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.economist-inline-text strong {
+    color: var(--primary);
+}
+
+.tema-content li.econ-item {
+    padding-left: 0;
+    list-style: none;
+}
+
+.tema-content li.econ-item::before {
+    display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;

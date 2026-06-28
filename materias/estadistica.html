@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadística - Economía para Principiantes</title>
+    <meta name="description" content="Curso completo de Estadística para economistas: medidas de tendencia central, dispersión, probabilidad, distribuciones, muestreo, inferencia estadística, regresión lineal y múltiple, series de tiempo.">
+    <meta property="og:title" content="Estadística - Economía para Principiantes">
+    <meta property="og:description" content="Curso completo de Estadística aplicada a la economía con ejemplos prácticos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/materias/estadistica.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +19,11 @@
 </head>
 <body>
     <header>
-        <h1><a href="../index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="../index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -27,13 +35,20 @@
             <p>Métodos estadísticos aplicados a la economía</p>
         </section>
 
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><span aria-current="page">Estadística</span></li>
+            </ol>
+        </nav>
+
         <section class="contenido">
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-tendencia-central">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-tendencia-central-content">
                     <h3>1. Medidas de Tendencia Central</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-tendencia-central-content" role="region">
                     <ul>
                         <li><strong>Media (promedio):</strong> Suma de todos los valores dividida entre la cantidad</li>
                         <li>• Fórmula: μ = Σxi / n</li>
@@ -49,16 +64,22 @@
                         <li>• Media: datos simétricos sin outliers</li>
                         <li>• Mediana: datos con valores extremos (ingresos, precios de casas)</li>
                         <li>• Moda: datos categóricos (color favorito)</li>
+                        <li><strong>Media ponderada:</strong> Cada valor tiene un peso distinto según su importancia</li>
+                        <li>• Fórmula: x̄ = Σ(wᵢ · xᵢ) / Σwᵢ</li>
+                        <li><strong>Media geométrica:</strong> Útil para tasas de crecimiento y rendimientos</li>
+                        <li>• Fórmula: G = (∏xᵢ)^(1/n)</li>
+                        <li><strong>Percentiles y cuartiles:</strong> Dividen los datos en 100 o 4 partes iguales</li>
+                        <li>• Q₂ coincide con la mediana; rango intercuartílico (IQR = Q₃ − Q₁) mide dispersión</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-dispersion">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-dispersion-content">
                     <h3>2. Medidas de Dispersión</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-dispersion-content" role="region">
                     <ul>
                         <li><strong>Rango:</strong> Diferencia entre el valor máximo y mínimo</li>
                         <li>• Datos 2, 5, 8, 12 → Rango = 12 - 2 = 10</li>
@@ -76,16 +97,23 @@
                         <li>• 68% de datos dentro de μ ± σ</li>
                         <li>• 95% dentro de μ ± 2σ</li>
                         <li>• 99.7% dentro de μ ± 3σ</li>
+                        <li><strong>Rango intercuartílico (IQR):</strong> Diferencia entre Q₃ y Q₁</li>
+                        <li>• Resistente a outliers; base del diagrama de caja y bigotes</li>
+                        <li><strong>Desviación media absoluta:</strong> MAD = Σ|xi − μ| / n</li>
+                        <li>• Menos sensible a valores extremos que la varianza</li>
+                        <li><strong>Asimetría y curtosis:</strong> Forma de la distribución</li>
+                        <li>• Asimetría positiva (cola derecha) vs negativa (cola izquierda)</li>
+                        <li>• Curtosis mide el grosor de las colas (leptocúrtica, platicúrtica)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-probabilidad">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-probabilidad-content">
                     <h3>3. Probabilidad Básica</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-probabilidad-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Posibilidad de que ocurra un evento (0 a 1, o 0% a 100%)</li>
                         <li><strong>Axiomas:</strong></li>
@@ -104,16 +132,24 @@
                         <li>• 5% falsos positivos (P(+|no E) = 0.05)</li>
                         <li>• Si test es positivo, ¿probabilidad real de estar enfermo?</li>
                         <li>• P(E|+) = (0.9 × 0.1) / [(0.9×0.1) + (0.05×0.9)] = 67%</li>
+                        <li><strong>Independencia estadística:</strong> P(A ∩ B) = P(A) × P(B)</li>
+                        <li>• Si se cumple, A y B son independientes; saber uno no informa sobre el otro</li>
+                        <li><strong>Ley de probabilidad total:</strong> Particionar el espacio muestral para calcular P(B)</li>
+                        <li>• P(B) = Σ P(B|Aᵢ) · P(Aᵢ)</li>
+                        <li><strong>Variable aleatoria:</strong> Función que asigna un número a cada resultado</li>
+                        <li>• Discreta vs continua; función de probabilidad (fmp) y densidad (fdp)</li>
+                        <li><strong>Valor esperado y varianza:</strong> E[X] = Σ x·P(x); Var(X) = E[(X−μ)²]</li>
+                        <li>• Propiedades de linealidad de la esperanza: E[aX+b] = aE[X]+b</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-distribuciones">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-distribuciones-content">
                     <h3>4. Distribuciones de Probabilidad</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-distribuciones-content" role="region">
                     <ul>
                         <li><strong>Distribución binomial:</strong> Éxitos en n ensayos independientes</li>
                         <li>• P(X=k) = C(n,k) × p^k × (1-p)^(n-k)</li>
@@ -130,16 +166,25 @@
                         <li><strong>Distribución uniforme:</strong></li>
                         <li>• Todos los valores igual de probables</li>
                         <li>• Ejemplo: Dado justos, número aleatorio</li>
+                        <li><strong>Distribución t de Student:</strong> Colas más anchas que la normal</li>
+                        <li>• Grados de libertad (gl); converge a normal cuando gl → ∞</li>
+                        <li>• Ideal para muestras pequeñas y varianza poblacional desconocida</li>
+                        <li><strong>Distribución chi-cuadrado (χ²):</strong> Suma de normales estándar al cuadrado</li>
+                        <li>• Usada en pruebas de independencia, bondad de ajuste, y varianza</li>
+                        <li><strong>Distribución F de Fisher:</strong> Cociente de dos chi-cuadrado independientes</li>
+                        <li>• Fundamental en ANOVA y comparación de varianzas entre grupos</li>
+                        <li><strong>Teorema del límite central:</strong> La media muestral tiende a normal aunque la población no lo sea</li>
+                        <li>• Justifica usar la normal para inferencia con muestras grandes (n ≥ 30)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-muestreo">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-muestreo-content">
                     <h3>5. Muestreo</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-muestreo-content" role="region">
                     <ul>
                         <li><strong>¿Por qué muestrear?</strong> Censar toda la población es costoso/imposible</li>
                         <li><strong>Muestreo aleatorio simple:</strong> Cada individuo tiene igual probabilidad</li>
@@ -153,16 +198,22 @@
                         <li><strong>Error de muestreo:</strong> Diferencia entre estadístico muestral y parámetro poblacional</li>
                         <li><strong>Sesgo de selección:</strong> Muestra no representativa de la población</li>
                         <li><strong>Ejemplo:</strong> Encuesta electoral: no preguntar solo a jóvenes (sesgo)</li>
+                        <li><strong>Muestreo sistemático:</strong> Seleccionar cada k-ésimo elemento tras un inicio aleatorio</li>
+                        <li>• Riesgo de periodicidad oculta en los datos</li>
+                        <li><strong>Muestreo por cuotas:</strong> No aleatorio; se fijan cuotas por subgrupo poblacional</li>
+                        <li>• Más barato pero no permite calcular error de muestreo teórico</li>
+                        <li><strong>Error no muestral:</strong> Sesgos por formulación, respuesta, o procesamiento de datos</li>
+                        <li>• Puede ser más grave que el error de muestreo mismo</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-inferencia">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-inferencia-content">
                     <h3>6. Inferencia Estadística</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-inferencia-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Hacer conclusiones sobre una población a partir de una muestra</li>
                         <li><strong>Intervalos de confianza:</strong></li>
@@ -180,16 +231,24 @@
                         <li><strong>Ejemplo:</strong> ¿El nuevo método de enseñanza es mejor?</li>
                         <li>• H₀: no hay diferencia</li>
                         <li>• Si p = 0.03, hay evidencia de que sí es mejor</li>
+                        <li><strong>Potencia estadística:</strong> Probabilidad de rechazar H₀ cuando es falsa (1 − β)</li>
+                        <li>• Depende de tamaño del efecto, tamaño muestral, y nivel de significancia α</li>
+                        <li><strong>Intervalo de confianza para diferencia de medias:</strong> Comparar dos grupos independientes</li>
+                        <li>• Prueba t de dos muestras: t = (x̄₁ − x̄₂) / EE</li>
+                        <li><strong>Teorema de límite central aplicado:</strong> La distribución muestral de x̄ es aproximadamente normal</li>
+                        <li>• Permite construir IC y pruebas sin asumir distribución poblacional específica</li>
+                        <li><strong>Valor crítico y región de rechazo:</strong> zα/2 define los límites de la zona de rechazo</li>
+                        <li>• Prueba unilateral vs bilateral según la dirección de H₁</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-regresion">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-regresion-content">
                     <h3>7. Regresión Lineal</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-regresion-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Modelar la relación entre dos variables</li>
                         <li><strong>Fórmula:</strong> Y = β₀ + β₁X + ε</li>
@@ -209,16 +268,22 @@
                         <li>• Ingresos = 5000 + 2000 × Años_educación</li>
                         <li>• Cada año extra → $2000 más de ingreso</li>
                         <li><strong>Advertencia:</strong> Correlación no implica causalidad</li>
+                        <li><strong>Supuestos de MCO:</strong> Linealidad, independencia, homocedasticidad, normalidad de errores</li>
+                        <li>• Violaciones graves pueden sesgar estimadores e inferencias</li>
+                        <li><strong>Prueba t para β₁:</strong> H₀: β₁ = 0; verificar si la relación es significativa</li>
+                        <li>• t = β̂₁ / EE(β̂₁); se compara con t crítico con n−2 gl</li>
+                        <li><strong>Intervalo de predicción:</strong> Rango para una nueva observación individual Y₀</li>
+                        <li>• Más amplio que el IC de la media porque incorpora el error aleatorio ε</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-regresion-multiple">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-regresion-multiple-content">
                     <h3>8. Regresión Múltiple</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-regresion-multiple-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Modelar Y con múltiples variables independientes</li>
                         <li><strong>Fórmula:</strong> Y = β₀ + β₁X₁ + β₂X₂ + ... + βₖXₖ + ε</li>
@@ -235,17 +300,23 @@
                         <li><strong>Selección de variables:</strong></li>
                         <li>• Stepwise, forward, backward selection</li>
                         <li>• Criterios: AIC, BIC, R² ajustado</li>
-                        <li><strong>En economía:</strong> Se usa para estimar-returnos a educación, efecto de política, etc.</li>
+                        <li><strong>En economía:</strong> Se usa para estimar returnos a educación, efecto de política, etc.</li>
+                        <li><strong>R² ajustado:</strong> Penaliza agregar variables irrelevantes; R̅² = 1 − (SSE/(n−k−1)) / (SST/(n−1))</li>
+                        <li>• Siempre menor o igual al R²; mejor para comparar modelos con distinto número de predictores</li>
+                        <li><strong>Prueba F global:</strong> H₀: β₁ = β₂ = ... = βₖ = 0</li>
+                        <li>• Evalúa si el modelo en conjunto tiene poder explicativo significativo</li>
+                        <li><strong>Interacción entre variables:</strong> Término βₖⱼ(Xₖ·Xⱼ) captura efectos sinérgicos</li>
+                        <li>• Ejemplo: el retorno a educación puede ser mayor si hay más experiencia laboral</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-series">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-series-content">
                     <h3>9. Series de Tiempo</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-series-content" role="region">
                     <ul>
                         <li><strong>¿Qué son?</strong> Datos ordenados cronológicamente (PIB mensual, inflación anual)</li>
                         <li><strong>Componentes:</strong></li>
@@ -265,10 +336,18 @@
                         <li>• Out-of-sample: reservar datos para validar</li>
                         <li>• RMSE, MAE para evaluar precisión</li>
                         <li><strong>Ejemplo:</strong> Predecir PIB del próximo trimestre usando datos históricos</li>
+                        <li><strong>Función de autocorrelación (ACF) y parcial (PACF):</strong> Identifican rezagos relevantes</li>
+                        <li>• ACF para identificar MA; PACF para identificar AR</li>
+                        <li><strong>Cointegración:</strong> Relación de equilibrio a largo plazo entre series no estacionarias</li>
+                        <li>• Ejemplo: consumo e ingreso nacional tienden a moverse juntos en el tiempo</li>
+                        <li><strong>Modelo ARCH/GARCH:</strong> La varianza del error no es constante (volatilidad financiera)</li>
+                        <li>• Esencial para modelar riesgos en mercados bursátiles y tasas de cambio</li>
                     </ul>
                 </div>
             </article>
         </section>
+
+        <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
     </main>
 
     <footer>

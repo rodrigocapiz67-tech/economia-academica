@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Economía Política - Economía para Principiantes</title>
+    <meta name="description" content="Curso completo de Economía Política: sistemas económicos, rol del Estado, comercio internacional, globalización, desarrollo económico, pobreza y desigualdad, sistema tributario e instituciones.">
+    <meta property="og:title" content="Economía Política - Economía para Principiantes">
+    <meta property="og:description" content="Curso completo de Economía Política con ejemplos prácticos: sistemas económicos, Estado, comercio, globalización y más.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/materias/economia-politica.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +19,11 @@
 </head>
 <body>
     <header>
-        <h1><a href="../index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="../index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -27,10 +35,17 @@
             <p>Sistemas económicos, regulación y desarrollo</p>
         </section>
 
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><span aria-current="page">Economía Política</span></li>
+            </ol>
+        </nav>
+
         <section class="contenido">
-            <article class="tema">
+            <article class="tema" id="tema-sistemas" role="region" aria-labelledby="tema-sistemas-title">
                 <div class="tema-header">
-                    <h3>1. Sistemas Económicos</h3>
+                    <h3 id="tema-sistemas-title">1. Sistemas Económicos</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -55,13 +70,16 @@
                         <li>• Sin propiedad privada</li>
                         <li>• "De cada quien según su capacidad, a cada quien según su necesidad"</li>
                         <li>• En la práctica: todos los intentos fallaron</li>
+                        <li>• Críticas al capitalismo: alienación, crisis cíclicas, explotación (Marx)</li>
+                        <li>• Socialismo de mercado: Yugoslavia, reformas chinas post-Mao</li>
+                        <li>• Economía ecológica: límites planetarios al crecimiento infinito</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-estado" role="region" aria-labelledby="tema-estado-title">
                 <div class="tema-header">
-                    <h3>2. Rol del Estado en la Economía</h3>
+                    <h3 id="tema-estado-title">2. Rol del Estado en la Economía</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -74,19 +92,22 @@
                         <li><strong>Funciones del Estado:</strong></li>
                         <li>• Protector: defensa, justicia, policía</li>
                         <li>• Productor: empresas estatales (petróleo, electricidad)</li>
-                        <li>• redistribuidor: impuestos progresivos, transferencias</li>
+                        <li>• Redistribuidor: impuestos progresivos, transferencias</li>
                         <li><strong>Debate:</strong></li>
                         <li>• Intervencionismo vs laissez-faire</li>
-                        <li>• too much government → ineficiencia</li>
-                        <li>• too little → desigualdad y fallos</li>
+                        <li>• demasiado gobierno → ineficiencia</li>
+                        <li>• muy poco → desigualdad y fallos</li>
                         <li><strong>Ejemplo:</strong> Países nórdicos (Suecia, Noruega): alta intervención + alta eficiencia</li>
+                        <li>• Teoría de la elección pública (Public Choice): los burócratas tienen sus propios incentivos</li>
+                        <li>• Captura regulatoria: las industrias terminan regulando a sus reguladores</li>
+                        <li>• Federalismo fiscal: qué nivel de gobierno debe proveer cada bien público</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-comercio" role="region" aria-labelledby="tema-comercio-title">
                 <div class="tema-header">
-                    <h3>3. Comercio Internacional</h3>
+                    <h3 id="tema-comercio-title">3. Comercio Internacional</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -106,13 +127,16 @@
                         <li>• Cuotas: límites a cantidades importadas</li>
                         <li>• Argumentos a favor: industria naciente, empleo</li>
                         <li>• Argumentos en contra: precios más altos, menos eficiencia</li>
+                        <li>• Dumping y medidas antidumping: vender por debajo del costo para eliminar competidores</li>
+                        <li>• Cadenas globales de valor: un producto se fabrica en múltiples países</li>
+                        <li>• Balanza comercial: déficit y superávit, ¿son realmente malos?</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-globalizacion" role="region" aria-labelledby="tema-globalizacion-title">
                 <div class="tema-header">
-                    <h3>4. Globalización</h3>
+                    <h3 id="tema-globalizacion-title">4. Globalización</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -132,18 +156,21 @@
                         <li>• Desigualdad entre y dentro de países</li>
                         <li>• Pérdida de empleos locales</li>
                         <li>• Dependencia externa</li>
-                        <li>• Degradeación ambiental</li>
+                        <li>• Degradación ambiental</li>
                         <li><strong>Organizaciones:</strong></li>
                         <li>• OMC: reglas del comercio mundial</li>
                         <li>• FMI: estabilidad monetaria internacional</li>
                         <li>• Banco Mundial: desarrollo económico</li>
+                        <li>• Curva del elefante (Milanovic): la globalización benefició a las élites y a la clase media asiática</li>
+                        <li>• Globalización financiera y crisis (2008): contagio instantáneo entre mercados</li>
+                        <li>• Movimientos antiglobalización: protestas, nacionalismo, proteccionismo reactivo</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-desarrollo" role="region" aria-labelledby="tema-desarrollo-title">
                 <div class="tema-header">
-                    <h3>5. Desarrollo Económico</h3>
+                    <h3 id="tema-desarrollo-title">5. Desarrollo Económico</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -166,13 +193,16 @@
                         <li>• Corea del Sur: de pobre a desarrollado en 40 años</li>
                         <li>• China: reformas de mercado + control estatal</li>
                         <li>• Singapur: inversión en educación y tecnología</li>
+                        <li>• Modelo Harrod-Domar: el ahorro como motor del crecimiento</li>
+                        <li>• La trampa del ingreso medio: países que crecen rápido y luego se estancan</li>
+                        <li>• Desarrollo sostenible y los Objetivos de Desarrollo Sostenible (ODS)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-bienestar" role="region" aria-labelledby="tema-bienestar-title">
                 <div class="tema-header">
-                    <h3>6. Economía del Bienestar</h3>
+                    <h3 id="tema-bienestar-title">6. Economía del Bienestar</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -193,13 +223,16 @@
                         <li><strong>Costo de oportunidad:</strong></li>
                         <li>• Lo que sacrificas al elegir una opción</li>
                         <li>• Ejemplo: ir a la universidad = perder ingresos de trabajar</li>
+                        <li>• Función de bienestar social (Bergson-Samuelson): cómo agregar preferencias individuales</li>
+                        <li>• Impuesto negativo a la renta y Renta Básica Universal (RBU)</li>
+                        <li>• Índice de Felicidad Nacional Bruta (Bután) vs PIB</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-pobreza" role="region" aria-labelledby="tema-pobreza-title">
                 <div class="tema-header">
-                    <h3>7. Pobreza y Desigualdad</h3>
+                    <h3 id="tema-pobreza-title">7. Pobreza y Desigualdad</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -223,13 +256,16 @@
                         <li>• Educación pública de calidad</li>
                         <li>• Programas sociales focalizados</li>
                         <li>• Salario mínimo</li>
+                        <li>• Movilidad social intergeneracional: ¿los hijos de pobres tienen oportunidad de ser ricos?</li>
+                        <li>• Captación de élites: cómo los ricos influyen en las reglas del juego</li>
+                        <li>• Desigualdad de oportunidades vs desigualdad de resultados</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-tributario" role="region" aria-labelledby="tema-tributario-title">
                 <div class="tema-header">
-                    <h3>8. Sistema Tributario</h3>
+                    <h3 id="tema-tributario-title">8. Sistema Tributario</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -250,13 +286,17 @@
                         <li>• Evasión: ilegal (no declarar ingresos)</li>
                         <li>• Elusión: legal pero éticamente cuestionable (vacíos legales)</li>
                         <li><strong>En Perú:</strong> SUNAT administra impuestos, IGV = 18%</li>
+                        <li>• Curva de Laffer: impuestos muy altos reducen la recaudación</li>
+                        <li>• Impuesto Tobin a transacciones financieras</li>
+                        <li>• Paraísos fiscales y erosión de la base imponible (BEPS)</li>
+                        <li>• Tributación ambiental: impuestos verdes al carbono y la contaminación</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-desarrollo2" role="region" aria-labelledby="tema-desarrollo2-title">
                 <div class="tema-header">
-                    <h3>9. Economía del Desarrollo</h3>
+                    <h3 id="tema-desarrollo2-title">9. Economía del Desarrollo</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -264,7 +304,7 @@
                         <li><strong>¿Qué estudia?</strong> Por qué algunos países son ricos y otros pobres, y cómo lograr el desarrollo</li>
                         <li><strong>Teorías del desarrollo:</strong></li>
                         <li>• <strong>Rostow:</strong> 5 etapas (tradicional → take-off → madurez → consumo masivo)</li>
-                        <li>• <strong>Structuralism (CEPAL):</strong> centro-periferia, industrialización por sustitución</li>
+                        <li>• <strong>Estructuralismo (CEPAL):</strong> centro-periferia, industrialización por sustitución</li>
                         <li>• <strong>Neoclásico:</strong> mercado libre, apertura comercial, instituciones</li>
                         <li><strong>Indicadores de desarrollo:</strong></li>
                         <li>• IDH (esperanza de vida + educación + ingreso)</li>
@@ -277,13 +317,17 @@
                         <li>• Crecimiento 2002-2013: boom de commodities</li>
                         <li>• Pobreza: 55% (2000) → 20% (2023)</li>
                         <li>• Desafíos: informalidad, desigualdad regional, educación</li>
+                        <li>• Teoría de la dependencia (Frank, Cardoso): el subdesarrollo como consecuencia del colonialismo</li>
+                        <li>• Big Push (Rosenstein-Rodan): inversiones coordinadas para salir del estancamiento</li>
+                        <li>• Path dependence: la historia importa, los países cargan con su pasado</li>
+                        <li>• Microcrédito y banca comunal (Muhammad Yunus, Grameen Bank)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
+            <article class="tema" id="tema-instituciones" role="region" aria-labelledby="tema-instituciones-title">
                 <div class="tema-header">
-                    <h3>10. Instituciones y Crecimiento</h3>
+                    <h3 id="tema-instituciones-title">10. Instituciones y Crecimiento</h3>
                     <span class="tema-icon">+</span>
                 </div>
                 <div class="tema-content">
@@ -304,10 +348,15 @@
                         <li>• Competencia de mercado</li>
                         <li>• Inversión en educación</li>
                         <li><strong>Ejemplo:</strong> Corea del Norte vs Corea del Sur: misma cultura, mismos recursos, instituciones diferentes → resultados opuestos</li>
+                        <li>• Douglass North: teoría del cambio institucional y path dependence</li>
+                        <li>• Clientelismo político: intercambio de favores por votos</li>
+                        <li>• Capital social (Putnam): confianza y redes como motor del desarrollo</li>
                     </ul>
                 </div>
             </article>
         </section>
+
+        <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
     </main>
 
     <footer>

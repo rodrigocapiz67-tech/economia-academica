@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microeconomía - Economía para Principiantes</title>
+    <meta name="description" content="Curso completo de Microeconomía: oferta y demanda, elasticidad, teoría del consumidor, costos de producción, estructuras de mercado, fallos de mercado y teoría de la empresa. Explicaciones claras con ejemplos prácticos.">
+    <meta property="og:title" content="Microeconomía - Economía para Principiantes">
+    <meta property="og:description" content="Curso completo de Microeconomía con ejemplos prácticos: oferta y demanda, elasticidad, utilidad, costos, mercados y más.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/materias/microeconomia.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +19,11 @@
 </head>
 <body>
     <header>
-        <h1><a href="../index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="../index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -27,13 +35,20 @@
             <p>Decisiones individuales y de empresas</p>
         </section>
 
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><span aria-current="page">Microeconomía</span></li>
+            </ol>
+        </nav>
+
         <section class="contenido">
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-oferta-demanda">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-oferta-demanda-content">
                     <h3>1. Ley de Oferta y Demanda</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-oferta-demanda-content" role="region">
                     <ul>
                         <li><strong>Ley de demanda:</strong> A mayor precio, menor cantidad demandada (y viceversa)</li>
                         <li><strong>Ley de oferta:</strong> A mayor precio, mayor cantidad ofrecida (y viceversa)</li>
@@ -49,16 +64,20 @@
                         <li>• Tecnología</li>
                         <li>• Número de vendedores</li>
                         <li>• Impuestos y subsidios</li>
+                        <li><strong>Precios máximos (price ceiling):</strong> Cuando el gobierno fija un precio por debajo del equilibrio, se genera escasez (exceso de demanda). Ejemplo: control de alquileres</li>
+                        <li><strong>Precios mínimos (price floor):</strong> Cuando el gobierno fija un precio por encima del equilibrio, se genera excedente o superávit (exceso de oferta). Ejemplo: salario mínimo, precios agrícolas</li>
+                        <li><strong>Escasez vs. Superávit:</strong> La escasez ocurre cuando la demanda supera la oferta al precio vigente; el superávit cuando la oferta supera la demanda</li>
+                        <li><strong>Cambios en el equilibrio:</strong> Un aumento en la demanda eleva precio y cantidad; un aumento en la oferta reduce precio pero eleva cantidad</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-elasticidad">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-elasticidad-content">
                     <h3>2. Elasticidad</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-elasticidad-content" role="region">
                     <ul>
                         <li><strong>¿Qué mide?</strong> Qué tanto responde la cantidad a cambios en precio o ingreso</li>
                         <li><strong>Elasticidad precio (Ed):</strong></li>
@@ -71,35 +90,54 @@
                         <li>• Si Ed > 1: bajar precio SUBE ingresos totales</li>
                         <li>• Si Ed < 1: subir precio SUBE ingresos totales</li>
                         <li><strong>Elasticidad ingreso:</strong> Mide cómo cambia la demanda con el ingreso</li>
+                        <li>• Bien normal: elasticidad ingreso positiva (Ej: ropa, electrodomésticos)</li>
+                        <li>• Bien inferior: elasticidad ingreso negativa (Ej: transporte público, fideos genéricos)</li>
+                        <li>• Bien de lujo: elasticidad ingreso > 1 (Ej: viajes al extranjero)</li>
+                        <li><strong>Elasticidad cruzada (Exy):</strong> Mide cómo cambia la demanda del bien X cuando cambia el precio del bien Y</li>
+                        <li>• Exy > 0: bienes sustitutos (si sube el café, aumenta la demanda de té)</li>
+                        <li>• Exy < 0: bienes complementos (si sube el café, cae la demanda de leche)</li>
+                        <li>• Exy = 0: bienes independientes</li>
+                        <li><strong>Determinantes de la elasticidad:</strong></li>
+                        <li>• Existencia de sustitutos cercanos (más sustitutos → más elástico)</li>
+                        <li>• Necesidad del bien (necesidades básicas son inelásticas)</li>
+                        <li>• Horizonte temporal (largo plazo más elástico que corto plazo)</li>
+                        <li>• Proporción del ingreso (bienes caros tienden a ser más elásticos)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-utilidad">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-utilidad-content">
                     <h3>3. Utilidad y Consumidor</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-utilidad-content" role="region">
                     <ul>
                         <li><strong>Utilidad:</strong> Satisfacción que obtienes de consumir un bien</li>
                         <li><strong>Utilidad marginal:</strong> Utilidad ADICIONAL de consumir una unidad más</li>
                         <li><strong>Ley de utilidad marginal decreciente:</strong> Cada unidad extra da MENOS satisfacción</li>
                         <li><strong>Ejemplo:</strong> La primera rebanada de pizza rica. La quinta ya no es tan buena. La décima, ¡nada de gracia!</li>
                         <li><strong>Curvas de indiferencia:</strong> Combinaciones de bienes que dan la misma utilidad</li>
-                        <li><strong>Restricción presupuestaria:</strong> Límite de lo que puedes gastar</li>
+                        <li>• Son convexas al origen (reflejan TMS decreciente)</li>
+                        <li>• Pendiente negativa (si reduces un bien, necesitas más del otro)</li>
+                        <li>• Cuanto más lejos del origen, mayor utilidad</li>
+                        <li><strong>Restricción presupuestaria:</strong> Px · X + Py · Y = I</li>
+                        <li>• Px = precio del bien X, Py = precio del bien Y, I = ingreso</li>
+                        <li>• La pendiente es -Px/Py (indica la tasa a la que puedes intercambiar bienes)</li>
+                        <li>• Cambios en ingreso desplazan la recta paralelamente</li>
+                        <li><strong>Tasa Marginal de Sustitución (TMS):</strong> Cuánto de Y estás dispuesto a sacrificar por una unidad más de X, manteniendo la utilidad constante</li>
                         <li><strong>Regla de optimización:</strong> Utilidad marginal por peso debe ser igual en todos los bienes</li>
                         <li>• Si la pizza da más "gusto por peso" que las hamburguesas, gasta más en pizza</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-costos">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-costos-content">
                     <h3>4. Costos de Producción</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-costos-content" role="region">
                     <ul>
                         <li><strong>Costos fijos:</strong> No cambian con la producción (alquiler, maquinaria)</li>
                         <li><strong>Costos variables:</strong> Cambian con la producción (materia prima, mano de obra)</li>
@@ -113,16 +151,20 @@
                         <li>• Crecientes: duplicar inputs → más del doble de output</li>
                         <li>• Constantes: duplicar inputs → doble de output</li>
                         <li>• Decrecientes: duplicar inputs → menos del doble</li>
+                        <li><strong>Economías de escala:</strong> Cuando el costo medio disminuye al aumentar la producción (especialización, descuentos por volumen, tecnología eficiente)</li>
+                        <li><strong>Deseconomías de escala:</strong> Cuando el costo medio aumenta al crecer demasiado (problemas de coordinación, burocracia)</li>
+                        <li><strong>Curva LRAC (Costo Medio de Largo Plazo):</strong> Envuelve todas las curvas de corto plazo; tiene forma de U y muestra el menor costo posible para cada nivel de producción</li>
+                        <li><strong>Condición de cierre:</strong> En el corto plazo, si el precio es menor al costo variable medio, la empresa debe cerrar temporalmente</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-mercados">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-mercados-content">
                     <h3>5. Estructuras de Mercado</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-mercados-content" role="region">
                     <ul>
                         <li><strong>Competencia perfecta:</strong></li>
                         <li>• Muchos compradores y vendedores</li>
@@ -143,16 +185,24 @@
                         <li>• Muchos vendedores</li>
                         <li>• Producto diferenciado (marca, calidad)</li>
                         <li>• Ejemplo: restaurantes, ropa, cafeterías</li>
+                        <li><strong>Barreras de entrada:</strong> Obstáculos que impiden la entrada de nuevos competidores</li>
+                        <li>• Barreras naturales: economías de escala, recursos escasos</li>
+                        <li>• Barreras legales: patentes, licencias, derechos de autor</li>
+                        <li>• Barreras estratégicas: guerra de precios, publicidad agresiva, control de insumos</li>
+                        <li><strong>Discriminación de precios:</strong> Vender el mismo producto a diferentes precios según la disposición a pagar</li>
+                        <li>• 1er grado: cada cliente paga su precio máximo (tarifa personalizada)</li>
+                        <li>• 2do grado: precio varía según cantidad o calidad (descuentos por volumen)</li>
+                        <li>• 3er grado: precio varía según segmento (estudiantes, tercera edad)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-fallos">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-fallos-content">
                     <h3>6. Fallos de Mercado</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-fallos-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Cuando el mercado libre no asigna recursos eficientemente</li>
                         <li><strong>Externalidades:</strong></li>
@@ -167,16 +217,20 @@
                         <li>• Adverse selection: antes del negocio (usados lemon problem)</li>
                         <li>• Moral hazard: después del negocio (seguros)</li>
                         <li><strong>Soluciones:</strong> Impuestos Pigouvianos, regulación, subsidios, bienes públicos</li>
+                        <li><strong>Teorema de Coase:</strong> Si los derechos de propiedad están bien definidos y no hay costos de transacción, las partes pueden negociar para resolver externalidades sin intervención del gobierno</li>
+                        <li><strong>Impuestos Pigouvianos:</strong> Impuesto sobre actividades con externalidades negativas para igualar el costo social con el privado. Ejemplo: impuesto al carbono</li>
+                        <li><strong>Subsidios Pigouvianos:</strong> Subsidio a actividades con externalidades positivas (educación, vacunación, energías renovables)</li>
+                        <li><strong>Tragedia de los comunes:</strong> Cuando un recurso compartido se sobreexplota porque cada individuo actúa en su propio interés. Ejemplo: sobrepesca, pastizales comunales</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-consumidor">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-consumidor-content">
                     <h3>7. Teoría del Consumidor</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-consumidor-content" role="region">
                     <ul>
                         <li><strong>Restricción presupuestaria:</strong> Px·X + Py·Y = I</li>
                         <li><strong>Ejemplo:</strong> Si tienes $100, las manzanas cuestan $10 y las peras $5:</li>
@@ -190,16 +244,22 @@
                         <li>• Disminuye a medida que tienes más de ese bien</li>
                         <li><strong>Equilibrio del consumidor:</strong> Donde la restricción presupuestaria es tangente a la curva de indiferencia</li>
                         <li><strong>Efecto sustitución vs ingreso:</strong> Cuando baja el precio, compras más porque es relativamente más barato Y porque tienes más poder adquisitivo</li>
+                        <li><strong>Ecuación de Slutsky:</strong> Descompone el cambio total en la demanda en efecto sustitución (cambio relativo de precios) + efecto ingreso (cambio en poder adquisitivo)</li>
+                        <li>• Efecto sustitución: el consumidor reemplaza bienes caros por baratos</li>
+                        <li>• Efecto ingreso: el consumidor se siente "más rico" o "más pobre"</li>
+                        <li><strong>Bienes Giffen:</strong> Bien inferior cuya demanda aumenta cuando sube su precio (viola la ley de demanda). Caso extremo donde el efecto ingreso domina al efecto sustitución. Ejemplo clásico: papas en la hambruna irlandesa</li>
+                        <li><strong>Bienes normales vs. inferiores:</strong> Un bien normal aumenta su demanda al subir el ingreso; un bien inferior la reduce</li>
+                        <li><strong>Curva de Engel:</strong> Relación entre ingreso y cantidad demandada de un bien (pendiente positiva para normales, negativa para inferiores)</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-empresa">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-empresa-content">
                     <h3>8. Teoría de la Empresa</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-empresa-content" role="region">
                     <ul>
                         <li><strong>Función de producción:</strong> Q = f(L, K)</li>
                         <li>• L = trabajo, K = capital</li>
@@ -221,16 +281,21 @@
                         <li>• Retornos crecientes: duplicar inputs → > doble output</li>
                         <li>• Retornos constantes: duplicar inputs → doble output</li>
                         <li>• Retornos decrecientes: duplicar inputs → < doble output</li>
+                        <li><strong>Isocuantas:</strong> Curvas que muestran todas las combinaciones de L y K que producen la misma cantidad de output. Análogas a las curvas de indiferencia del consumidor</li>
+                        <li><strong>TMST (Tasa Marginal de Sustitución Técnica):</strong> Cantidad de capital que se puede reducir al aumentar una unidad de trabajo, manteniendo la producción constante. TMST = -ΔK / ΔL = PMgL / PMgK</li>
+                        <li><strong>Isocosto:</strong> Recta que muestra todas las combinaciones de L y K que cuestan lo mismo (w·L + r·K = CT). Pendiente = -w/r</li>
+                        <li><strong>Optimización de la producción:</strong> La empresa minimiza costos donde la isocuanta es tangente a la recta de isocosto: PMgL / w = PMgK / r</li>
+                        <li><strong>Condiciones de beneficio cero en competencia perfecta:</strong> En el largo plazo, los beneficios económicos tienden a cero porque la libre entrada/salida elimina ganancias extraordinarias</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-factores">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-factores-content">
                     <h3>9. Mercados de Factores</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-factores-content" role="region">
                     <ul>
                         <li><strong>¿Qué son?</strong> Donde se determinan los precios de los factores de producción (trabajo, capital, tierra)</li>
                         <li><strong>Mercado de trabajo:</strong></li>
@@ -248,16 +313,21 @@
                         <li>• Oferta de trabajadores calificados</li>
                         <li>• Poder de negociación (sindicatos)</li>
                         <li>• Salario mínimo (regulación)</li>
+                        <li><strong>Monopsonio:</strong> Mercado con un solo comprador de trabajo (ej: empresa grande en pueblo pequeño). El monopsonio paga salarios menores al de competencia y contrata menos trabajadores</li>
+                        <li><strong>Sindicatos y negociación colectiva:</strong> Los sindicatos aumentan el poder de negociación de los trabajadores, pudiendo elevar salarios por encima del equilibrio. La negociación colectiva busca equilibrar el poder entre empleadores y empleados</li>
+                        <li><strong>Teoría del salario de eficiencia:</strong> Pagar salarios por encima del mercado puede aumentar la productividad (menor rotación, mayor esfuerzo, mejores trabajadores). Ayuda a explicar el desempleo involuntario</li>
+                        <li><strong>Monopsonio bilateral:</strong> Situación donde un solo comprador (monopsonio) enfrenta un solo vendedor (sindicato). El salario depende del poder de negociación de cada parte</li>
+                        <li><strong>Capital humano:</strong> Inversión en educación, formación y salud que aumenta la productividad del trabajador. Explica diferencias salariales entre trabajadores</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-bienestar">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-bienestar-content">
                     <h3>10. Bienestar y Eficiencia</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-bienestar-content" role="region">
                     <ul>
                         <li><strong>Excedente del consumidor:</strong></li>
                         <li>• Diferencia entre lo que el consumidor está dispuesto a pagar y lo que paga</li>
@@ -275,11 +345,18 @@
                         <li>• Los impuestos crean pérdida irrecuperable</li>
                         <li>• Cuanto más elástica la oferta/demanda, mayor la pérdida</li>
                         <li><strong>Ejemplo:</strong> Un impuesto al cigarette reduce consumo pero crea mercado negro y pérdida de eficiencia</li>
+                        <li><strong>Primer Teorema del Bienestar:</strong> Un equilibrio competitivo (bajo competencia perfecta, sin externalidades) es Pareto eficiente. El mercado asigna recursos de manera óptima sin intervención</li>
+                        <li><strong>Segundo Teorema del Bienestar:</strong> Cualquier asignación Pareto eficiente puede lograrse como un equilibrio competitivo, siempre que se redistribuyan los recursos iniciales adecuadamente (equidad vs. eficiencia)</li>
+                        <li><strong>Fallos de mercado como fallos del bienestar:</strong> Cuando hay externalidades, bienes públicos, poder de mercado o asimetrías de información, el mercado no logra eficiencia y se requiere intervención</li>
+                        <li><strong>Frontera de posibilidades de utilidad:</strong> Muestra todas las combinaciones de utilidad de los individuos que son Pareto eficientes. El punto que se elige depende de juicios de valor sobre equidad</li>
+                        <li><strong>Análisis costo-beneficio:</strong> Herramienta para evaluar proyectos y políticas públicas comparando los beneficios sociales totales con los costos sociales totales. Un proyecto es deseable si el beneficio neto es positivo</li>
                     </ul>
                 </div>
             </article>
         </section>
     </main>
+
+    <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
 
     <footer>
         <p>Economía para Principiantes</p>

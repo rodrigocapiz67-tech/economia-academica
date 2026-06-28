@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matemáticas - Economía para Principiantes</title>
+    <meta name="description" content="Curso completo de Matemáticas para economistas: límites, derivadas, integrales, optimización, álgebra lineal, ecuaciones diferenciales y series de tiempo. Fundamentos matemáticos del análisis económico.">
+    <meta property="og:title" content="Matemáticas - Economía para Principiantes">
+    <meta property="og:description" content="Curso completo de Matemáticas aplicadas a la economía con ejemplos prácticos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/materias/matematicas.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +19,11 @@
 </head>
 <body>
     <header>
-        <h1><a href="../index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="../index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -27,13 +35,20 @@
             <p>Herramientas matemáticas para el análisis económico</p>
         </section>
 
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><span aria-current="page">Matemáticas</span></li>
+            </ol>
+        </nav>
+
         <section class="contenido">
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-limites">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-limites-content">
                     <h3>1. Límites y Derivadas</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-limites-content" role="region">
                     <ul>
                         <li><strong>Límite:</strong> Valor al que se acerca una función</li>
                         <li>• Ejemplo: lim(x→0) (sen x)/x = 1</li>
@@ -49,16 +64,19 @@
                         <li>• Utilidad marginal = d/dx (Utilidad total)</li>
                         <li>• Ingreso marginal = d/dq (Ingreso total)</li>
                         <li><strong>Ejemplo:</strong> CT = 100 + 20q + 2q² → CM = 20 + 4q</li>
+                        <li><strong>Teorema de L'Hôpital:</strong> lim(f/g) = lim(f'/g') cuando hay indeterminación</li>
+                        <li><strong>Derivadas parciales:</strong> ∂f/∂x mide el cambio en f respecto a x manteniendo y constante</li>
+                        <li><strong>Diferencial total:</strong> df = (∂f/∂x)dx + (∂f/∂y)dy, fundamental para elasticidades</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-integrales">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-integrales-content">
                     <h3>2. Integrales</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-integrales-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Operación inversa de la derivada (área bajo la curva)</li>
                         <li><strong>Reglas básicas:</strong></li>
@@ -72,16 +90,19 @@
                         <li>• Beneficio = ∫(Beneficio marginal) dq</li>
                         <li>• Superávit del consumidor = área entre demanda y precio</li>
                         <li><strong>Ejemplo:</strong> Si CM = 20 + 4q, CT = ∫(20+4q)dq = 20q + 2q² + C</li>
+                        <li><strong>Integración por partes:</strong> ∫u dv = uv - ∫v du, útil en funciones logarítmicas</li>
+                        <li><strong>Integración por sustitución:</strong> Cambio de variable para integrales compuestas</li>
+                        <li><strong>Teorema del valor medio:</strong> Existe c tal que f(c) = (1/(b-a))∫[a,b] f(x) dx</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-optimizacion">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-optimizacion-content">
                     <h3>3. Optimización</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-optimizacion-content" role="region">
                     <ul>
                         <li><strong>¿Para qué?</strong> Encontrar máximos y mínimos (maximizar beneficios, minimizar costos)</li>
                         <li><strong>Condiciones de primer orden:</strong></li>
@@ -99,16 +120,19 @@
                         <li>• Para optimizar con restricciones</li>
                         <li>• L = f(x,y) + λ(g(x,y) - c)</li>
                         <li>• Ejemplo: Maximizar utilidad con presupuesto limitado</li>
+                        <li><strong>Matriz Hessiana:</strong> H = [[fxx, fxy], [fyx, fyy]] para clasificar puntos críticos en multivariable</li>
+                        <li><strong>Condiciones Kuhn-Tucker:</strong> Generalización de Lagrange con restricciones de desigualdad</li>
+                        <li><strong>Teorema del Envolvente:</strong> Cómo cambia el valor óptimo al cambiar parámetros exógenos</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-algebra">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-algebra-content">
                     <h3>4. Álgebra Lineal</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-algebra-content" role="region">
                     <ul>
                         <li><strong>Matrices:</strong> Arreglos de números en filas y columnas</li>
                         <li><strong>Operaciones:</strong></li>
@@ -125,16 +149,19 @@
                         <li>• Modelos de input-output de Leontief</li>
                         <li>• Análisis de series de tiempo</li>
                         <li>• Optimización de portafolios</li>
+                        <li><strong>Rango y nulidad:</strong> Dimensión del espacio columna y del espacio nulo de una matriz</li>
+                        <li><strong>Diagonalización:</strong> Si A = PDP⁻¹, permite calcular potencias A^k fácilmente</li>
+                        <li><strong>Formas cuadráticas:</strong> Q(x) = xᵀAx, clave para clasificar puntos críticos en optimización</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-ecuaciones">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-ecuaciones-content">
                     <h3>5. Ecuaciones Diferenciales</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-ecuaciones-content" role="region">
                     <ul>
                         <li><strong>¿Qué son?</strong> Ecuaciones con derivadas de funciones desconocidas</li>
                         <li><strong>EDO de primer orden:</strong></li>
@@ -154,16 +181,19 @@
                         <li>• Modelos de crecimiento económico</li>
                         <li>• Dinámica de mercados</li>
                         <li>• Difusión de innovaciones</li>
+                        <li><strong>EDO de segundo orden:</strong> d²y/dx² + a dy/dx + by = f(x), usada en ciclos económicos</li>
+                        <li><strong>Diagramas de fase:</strong> Representación gráfica de la dinámica del sistema económico</li>
+                        <li><strong>Análisis de estabilidad:</strong> Determina si el sistema converge a un equilibrio o diverge</li>
                     </ul>
                 </div>
             </article>
 
-            <article class="tema">
-                <div class="tema-header">
+            <article class="tema" id="tema-series">
+                <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-series-content">
                     <h3>6. Análisis de Series de Tiempo</h3>
-                    <span class="tema-icon">+</span>
+                    <span class="tema-icon" aria-hidden="true">+</span>
                 </div>
-                <div class="tema-content">
+                <div class="tema-content" id="tema-series-content" role="region">
                     <ul>
                         <li><strong>¿Qué es?</strong> Datos ordenados cronológicamente (PIB mensual, inflación anual)</li>
                         <li><strong>Componentes:</strong></li>
@@ -179,10 +209,15 @@
                         <li>• Media y varianza constantes en el tiempo</li>
                         <li>• Test de Dickey-Fuller para verificar</li>
                         <li><strong>Ejemplo:</strong> Predecir ventas del próximo mes usando datos de los últimos 12 meses</li>
+                        <li><strong>Cointegración:</strong> Relación de largo plazo entre dos o más series no estacionarias</li>
+                        <li><strong>Modelos GARCH:</strong> Capturan volatilidad cambiante en el tiempo (riesgo financiero)</li>
+                        <li><strong>Función de autocorrelación (ACF):</strong> Mide la correlación entre valores separados por k rezagos</li>
                     </ul>
                 </div>
             </article>
         </section>
+
+        <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
     </main>
 
     <footer>
