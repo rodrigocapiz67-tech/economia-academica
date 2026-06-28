@@ -210,14 +210,27 @@
             </ol>
         </nav>
 
+        <div style="display:flex;justify-content:flex-end;margin:1rem 2rem">
+            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        </div>
+
+        <div class="filtros">
+            <button class="btn-filtro active" data-school="todas">Todas</button>
+            <button class="btn-filtro" data-school="clasica">🏛️ Escuela Clásica</button>
+            <button class="btn-filtro" data-school="marxista">📕 Marxismo</button>
+            <button class="btn-filtro" data-school="keynesiana">📊 Keynesianismo</button>
+            <button class="btn-filtro" data-school="monetarista">💰 Monetarismo</button>
+            <button class="btn-filtro" data-school="neoclasica">📈 Neoclásico</button>
+        </div>
+
         <div class="economista-profile">
             <a href="index.html" class="back-btn">← Volver al inicio</a>
 
             <!-- Adam Smith -->
-            <div class="profile-card" id="adam-smith">
+            <div class="profile-card" id="adam-smith" data-school="clasica">
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/AdamSmith.jpg" alt="Adam Smith" class="profile-image" referrerpolicy="no-referrer" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/AdamSmith.jpg" alt="Adam Smith" class="profile-image" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AS</text></svg>'">
                         <div class="profile-school-badge">🏛️ Escuela Clásica</div>
                     </div>
                     <div class="profile-content">
@@ -249,15 +262,17 @@
                             <h4>📚 Obras Importantes</h4>
                             <p>"La Riqueza de las Naciones" (1776), "Teoría de los sentimientos morales" (1759)</p>
                         </div>
+
+                        <button class="share-btn" data-title="Adam Smith - Economía para Principiantes" data-text="Conoce a Adam Smith, padre de la economía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#adam-smith">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <!-- Karl Marx -->
-            <div class="profile-card" id="karl-marx">
+            <div class="profile-card" id="karl-marx" data-school="marxista">
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx" class="profile-image" referrerpolicy="no-referrer" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx" class="profile-image" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>KM</text></svg>'">
                         <div class="profile-school-badge">📕 Marxismo</div>
                     </div>
                     <div class="profile-content">
@@ -289,15 +304,17 @@
                             <h4>📚 Obras Importantes</h4>
                             <p>"El Capital" (1867), "Manifiesto del Partido Comunista" (1848), "Grundrisse" (1857-1858)</p>
                         </div>
+
+                        <button class="share-btn" data-title="Karl Marx - Economía para Principiantes" data-text="Conoce a Karl Marx, filósofo y economista alemán" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#karl-marx">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <!-- John Maynard Keynes -->
-            <div class="profile-card" id="keynes">
+            <div class="profile-card" id="keynes" data-school="keynesiana">
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="profile-image" referrerpolicy="no-referrer" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="profile-image" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>JK</text></svg>'">
                         <div class="profile-school-badge">📊 Keynesianismo</div>
                     </div>
                     <div class="profile-content">
@@ -329,15 +346,17 @@
                             <h4>📚 Obras Importantes</h4>
                             <p>"Teoría General del Empleo, el Interés y el Dinero" (1936), "Tratado sobre la moneda" (1930)</p>
                         </div>
+
+                        <button class="share-btn" data-title="John Maynard Keynes - Economía para Principiantes" data-text="Conoce a Keynes, fundador del keynesianismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#keynes">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <!-- Milton Friedman -->
-            <div class="profile-card" id="friedman">
+            <div class="profile-card" id="friedman" data-school="monetarista">
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Milton_Friedman.jpg" alt="Milton Friedman" class="profile-image" referrerpolicy="no-referrer" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Milton_Friedman.jpg" alt="Milton Friedman" class="profile-image" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>MF</text></svg>'">
                         <div class="profile-school-badge">💰 Monetarismo</div>
                     </div>
                     <div class="profile-content">
@@ -369,15 +388,17 @@
                             <h4>📚 Obras Importantes</h4>
                             <p>"Capitalismo y Libertad" (1962), "Una historia monetaria de Estados Unidos" (1963), "Libre para elegir" (1980)</p>
                         </div>
+
+                        <button class="share-btn" data-title="Milton Friedman - Economía para Principiantes" data-text="Conoce a Milton Friedman, líder del monetarismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#friedman">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <!-- David Ricardo -->
-            <div class="profile-card" id="ricardo">
+            <div class="profile-card" id="ricardo" data-school="clasica">
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Portrait_of_David_Ricardo_by_Thomas_Phillips.jpg" alt="David Ricardo" class="profile-image" referrerpolicy="no-referrer" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Portrait_of_David_Ricardo_by_Thomas_Phillips.jpg" alt="David Ricardo" class="profile-image" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>DR</text></svg>'">
                         <div class="profile-school-badge">🏛️ Escuela Clásica</div>
                     </div>
                     <div class="profile-content">
@@ -409,15 +430,17 @@
                             <h4>📚 Obras Importantes</h4>
                             <p>"Principios de Economía Política y Tributación" (1817)</p>
                         </div>
+
+                        <button class="share-btn" data-title="David Ricardo - Economía para Principiantes" data-text="Conoce a David Ricardo, economista clásico" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#ricardo">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <!-- Alfred Marshall -->
-            <div class="profile-card" id="marshall">
+            <div class="profile-card" id="marshall" data-school="neoclasica">
                 <div class="profile-header">
                     <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Alfred_Marshall.jpg" alt="Alfred Marshall" class="profile-image" referrerpolicy="no-referrer" loading="lazy">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Alfred_Marshall.jpg" alt="Alfred Marshall" class="profile-image" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AM</text></svg>'">
                         <div class="profile-school-badge">📈 Neoclásico</div>
                     </div>
                     <div class="profile-content">
@@ -449,6 +472,8 @@
                             <h4>📚 Obras Importantes</h4>
                             <p>"Principios de Economía" (1890)</p>
                         </div>
+
+                        <button class="share-btn" data-title="Alfred Marshall - Economía para Principiantes" data-text="Conoce a Alfred Marshall, padre de la microeconomía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#marshall">📤 Compartir</button>
                     </div>
                 </div>
             </div>

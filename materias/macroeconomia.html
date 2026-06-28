@@ -44,6 +44,9 @@
         </nav>
 
         <section class="contenido">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        </div>
             <article class="tema" id="tema-pib">
                 <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-pib-content">
                     <h3>1. Producto Interno Bruto (PIB)</h3>
@@ -368,7 +371,7 @@
                     <ul>
                         <li class="econ-item">
                             <div class="economist-inline">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="economist-inline-img" loading="lazy">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="economist-inline-img" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>JK</text></svg>'">
                                 <div class="economist-inline-text">
                                     <strong>Modelo Keynesiano (J.M. Keynes, 1936)</strong> — La demanda agregada determina el nivel de actividad económica. El gobierno debe intervenir con política fiscal para estabilizar la economía, especialmente en recesiones. Los mercados no se autorregulan automáticamente (especialmente el mercado laboral). Dio origen a la macroeconomía moderna.
                                 </div>
@@ -376,7 +379,7 @@
                         </li>
                         <li class="econ-item">
                             <div class="economist-inline">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/AdamSmith.jpg" alt="Adam Smith" class="economist-inline-img" loading="lazy">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/AdamSmith.jpg" alt="Adam Smith" class="economist-inline-img" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AS</text></svg>'">
                                 <div class="economist-inline-text">
                                     <strong>Modelo Clásico/Neoclásico (Smith, Say, Marshall)</strong> — Los mercados se autorregulan a largo plazo. La oferta crea su propia demanda (Ley de Say). El desempleo es voluntario o friccional. La intervención estatal es innecesaria y generalmente perjudicial. Los precios y salarios son flexibles y ajustan automáticamente.
                                 </div>
@@ -384,7 +387,7 @@
                         </li>
                         <li class="econ-item">
                             <div class="economist-inline">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Milton_Friedman.jpg" alt="Milton Friedman" class="economist-inline-img" loading="lazy">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Milton_Friedman.jpg" alt="Milton Friedman" class="economist-inline-img" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>MF</text></svg>'">
                                 <div class="economist-inline-text">
                                     <strong>Modelo Monetarista (M. Friedman, 1960s)</strong> — La inflación es siempre y en todas partes un fenómeno monetario. Propone una regla monetaria fija (crecimiento constante de la oferta monetaria, k%). La política fiscal es inefectiva a largo plazo. Critica la Curva de Phillips: a largo plazo no hay trade-off entre inflación y desempleo.
                                 </div>
@@ -392,7 +395,7 @@
                         </li>
                         <li class="econ-item">
                             <div class="economist-inline">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx" class="economist-inline-img" loading="lazy">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx" class="economist-inline-img" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>KM</text></svg>'">
                                 <div class="economist-inline-text">
                                     <strong>Modelo de Expectativas Racionales (Lucas, Sargent, 1970s)</strong> — La gente anticipa las políticas del gobierno usando toda la información disponible. Las políticas sistemáticas (predecibles) no tienen efecto real, solo inflacionario. Solo los shocks inesperados afectan el PIB real. Implicación: la política económica debe ser creíble y reglas claras.
                                 </div>
@@ -448,6 +451,34 @@
         </section>
 
         <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
+            <div class="ejercicios-section">
+                <h3>📝 Practica lo aprendido</h3>
+                <div class="pregunta" data-correcta="b">
+                    <p>1. ¿Qué mide el PIB?</p>
+                    <label><input type="radio" name="macro1" value="a"> El ingreso total del gobierno</label>
+                    <label><input type="radio" name="macro1" value="b"> El valor total de bienes y servicios finales producidos</label>
+                    <label><input type="radio" name="macro1" value="c"> La inflación acumulada</label>
+                    <label><input type="radio" name="macro1" value="d"> El desempleo del país</label>
+                    <div class="feedback">El PIB mide la producción total de bienes y servicios finales en un período.</div>
+                </div>
+                <div class="pregunta" data-correcta="a">
+                    <p>2. Cuando el banco central sube la tasa de interés, busca:</p>
+                    <label><input type="radio" name="macro2" value="a"> Reducir la inflación</label>
+                    <label><input type="radio" name="macro2" value="b"> Aumentar el empleo</label>
+                    <label><input type="radio" name="macro2" value="c"> Subir el PIB</label>
+                    <label><input type="radio" name="macro2" value="d"> Depreciar la moneda</label>
+                    <div class="feedback">Subir la tasa de interés encarece el crédito, reduce el consumo y frena la inflación.</div>
+                </div>
+                <div class="pregunta" data-correcta="c">
+                    <p>3. La curva de Phillips muestra la relación inversa entre:</p>
+                    <label><input type="radio" name="macro3" value="a"> PIB e inflación</label>
+                    <label><input type="radio" name="macro3" value="b"> Tipo de cambio y exportaciones</label>
+                    <label><input type="radio" name="macro3" value="c"> Desempleo e inflación</label>
+                    <label><input type="radio" name="macro3" value="d"> Ahorro e inversión</label>
+                    <div class="feedback">La curva de Phillips clásica muestra que menor desempleo se asocia con mayor inflación.</div>
+                </div>
+                <button class="btn-ejercicio">Verificar respuestas</button>
+            </div>
     </main>
 
     <footer>

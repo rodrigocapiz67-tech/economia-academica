@@ -44,6 +44,9 @@
         </nav>
 
         <section class="contenido">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        </div>
             <article class="tema" id="tema-tendencia-central">
                 <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-tendencia-central-content">
                     <h3>1. Medidas de Tendencia Central</h3>
@@ -349,6 +352,34 @@
         </section>
 
         <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
+            <div class="ejercicios-section">
+                <h3>📝 Practica lo aprendido</h3>
+                <div class="pregunta" data-correcta="c">
+                    <p>1. ¿Cuál es la medida de tendencia central más sensible a valores extremos?</p>
+                    <label><input type="radio" name="est1" value="a"> Mediana</label>
+                    <label><input type="radio" name="est1" value="b"> Moda</label>
+                    <label><input type="radio" name="est1" value="c"> Media aritmética</label>
+                    <label><input type="radio" name="est1" value="d"> Rango</label>
+                    <div class="feedback">La media aritmética se ve afectada por valores atípicos, a diferencia de la mediana.</div>
+                </div>
+                <div class="pregunta" data-correcta="b">
+                    <p>2. En una distribución normal, ¿qué porcentaje está a 1 desviación estándar de la media?</p>
+                    <label><input type="radio" name="est2" value="a"> 95%</label>
+                    <label><input type="radio" name="est2" value="b"> 68%</label>
+                    <label><input type="radio" name="est2" value="c"> 99%</label>
+                    <label><input type="radio" name="est2" value="d"> 50%</label>
+                    <div class="feedback">Aproximadamente el 68% de los datos en una normal caen dentro de ±1σ.</div>
+                </div>
+                <div class="pregunta" data-correcta="a">
+                    <p>3. El coeficiente de correlación (r) mide:</p>
+                    <label><input type="radio" name="est3" value="a"> La fuerza y dirección de la relación lineal entre dos variables</label>
+                    <label><input type="radio" name="est3" value="b"> La pendiente de la regresión</label>
+                    <label><input type="radio" name="est3" value="c"> La diferencia entre medias</label>
+                    <label><input type="radio" name="est3" value="d"> La varianza de los residuales</label>
+                    <div class="feedback">r varía entre -1 y 1, indicando correlación negativa perfecta a positiva perfecta.</div>
+                </div>
+                <button class="btn-ejercicio">Verificar respuestas</button>
+            </div>
     </main>
 
     <footer>

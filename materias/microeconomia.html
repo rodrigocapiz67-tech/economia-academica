@@ -43,6 +43,9 @@
             </ol>
         </nav>
 
+        <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        </div>
         <section class="contenido">
             <article class="tema" id="tema-oferta-demanda">
                 <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-oferta-demanda-content">
@@ -355,6 +358,36 @@
                 </div>
             </article>
         </section>
+
+            <div class="ejercicios-section">
+                <h3>📝 Practica lo aprendido</h3>
+                <div class="pregunta" data-correcta="b">
+                    <p>1. Si el precio de un bien sube y la cantidad demandada cae muy poco, decimos que la demanda es:</p>
+                    <label><input type="radio" name="micro1" value="a"> Elástica</label>
+                    <label><input type="radio" name="micro1" value="b"> Inelástica</label>
+                    <label><input type="radio" name="micro1" value="c"> Unitaria</label>
+                    <label><input type="radio" name="micro1" value="d"> Perfectamente elástica</label>
+                    <div class="feedback">La demanda inelástica significa que los consumidores responden poco a cambios de precio.</div>
+                </div>
+                <div class="pregunta" data-correcta="c">
+                    <p>2. ¿Qué estructura de mercado tiene un solo vendedor?</p>
+                    <label><input type="radio" name="micro2" value="a"> Competencia perfecta</label>
+                    <label><input type="radio" name="micro2" value="b"> Oligopolio</label>
+                    <label><input type="radio" name="micro2" value="c"> Monopolio</label>
+                    <label><input type="radio" name="micro2" value="d"> Competencia monopolística</label>
+                    <div class="feedback">El monopolio se caracteriza por un único vendedor y altas barreras de entrada.</div>
+                </div>
+                <div class="pregunta" data-correcta="a">
+                    <p>3. La utilidad marginal es:</p>
+                    <label><input type="radio" name="micro3" value="a"> La satisfacción adicional de consumir una unidad más</label>
+                    <label><input type="radio" name="micro3" value="b"> La satisfacción total de todo lo consumido</label>
+                    <label><input type="radio" name="micro3" value="c"> El precio que pagas por cada unidad</label>
+                    <label><input type="radio" name="micro3" value="d"> El costo de producir una unidad más</label>
+                    <div class="feedback">La utilidad marginal mide el cambio en la utilidad total al consumir una unidad adicional.</div>
+                </div>
+                <button class="btn-ejercicio">Verificar respuestas</button>
+            </div>
+
     </main>
 
     <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>

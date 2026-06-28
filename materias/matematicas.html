@@ -44,6 +44,9 @@
         </nav>
 
         <section class="contenido">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
+            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        </div>
             <article class="tema" id="tema-limites">
                 <div class="tema-header" role="button" tabindex="0" aria-expanded="false" aria-controls="tema-limites-content">
                     <h3>1. Límites y Derivadas</h3>
@@ -219,6 +222,34 @@
         </section>
 
         <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
+            <div class="ejercicios-section">
+                <h3>📝 Practica lo aprendido</h3>
+                <div class="pregunta" data-correcta="b">
+                    <p>1. La derivada de f(x) = 3x² es:</p>
+                    <label><input type="radio" name="mat1" value="a"> 3x</label>
+                    <label><input type="radio" name="mat1" value="b"> 6x</label>
+                    <label><input type="radio" name="mat1" value="c"> 6x²</label>
+                    <label><input type="radio" name="mat1" value="d"> 3</label>
+                    <div class="feedback">Aplicando la regla de la potencia: d/dx(3x²) = 3·2x = 6x.</div>
+                </div>
+                <div class="pregunta" data-correcta="a">
+                    <p>2. En optimización, el punto crítico se encuentra cuando:</p>
+                    <label><input type="radio" name="mat2" value="a"> La primera derivada es cero</label>
+                    <label><input type="radio" name="mat2" value="b"> La segunda derivada es cero</label>
+                    <label><input type="radio" name="mat2" value="c"> La función es cero</label>
+                    <label><input type="radio" name="mat2" value="d"> La integral es cero</label>
+                    <div class="feedback">Los puntos críticos ocurren donde f'(x) = 0 (o no existe).</div>
+                </div>
+                <div class="pregunta" data-correcta="c">
+                    <p>3. Si una matriz tiene determinante cero, se dice que es:</p>
+                    <label><input type="radio" name="mat3" value="a"> Invertible</label>
+                    <label><input type="radio" name="mat3" value="b"> Ortogonal</label>
+                    <label><input type="radio" name="mat3" value="c"> Singular</label>
+                    <label><input type="radio" name="mat3" value="d"> Simétrica</label>
+                    <div class="feedback">Una matriz singular no tiene inversa porque su determinante es 0.</div>
+                </div>
+                <button class="btn-ejercicio">Verificar respuestas</button>
+            </div>
     </main>
 
     <footer>

@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollEffects();
     initParallax();
     initHamburger();
+    initReadingMode();
+    initFilterButtons();
+    initShareButtons();
+    initEjercicios();
+    initSW();
 });
 
 function initSearch() {
@@ -164,7 +169,6 @@ function initScrollEffects() {
         observer.observe(el);
     });
 
-    // Stagger animation for grid items
     document.querySelectorAll('.materias-grid, .economistas-grid').forEach(grid => {
         const items = grid.children;
         Array.from(items).forEach((item, index) => {
@@ -184,7 +188,6 @@ function initParallax() {
         });
     }
 
-    // Smooth scroll for navigation
     document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -216,7 +219,6 @@ function initHamburger() {
     }
 }
 
-// Typing effect for hero
 function typeWriter(element, text, speed = 50) {
     let i = 0;
     element.textContent = '';
@@ -231,9 +233,80 @@ function typeWriter(element, text, speed = 50) {
     type();
 }
 
-// Initialize typing effect if on home page
 const heroTitle = document.querySelector('.hero-content h2');
 if (heroTitle && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/'))) {
     const originalText = heroTitle.textContent;
     typeWriter(heroTitle, originalText, 30);
+}
+
+function initReadingMode() {
+    const toggle = document.getElementById('reading-toggle');
+    const body = document.body;
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('reading-mode');
+            toggle.innerHTML = body.classList.contains('reading-mode') ? '📖 Normal' : '📖 Leer';
+        });
+    }
+}
+
+function initFilterButtons() {
+    const buttons = document.querySelectorAll('.btn-filtro');
+    const profiles = document.querySelectorAll('.profile-card');
+    if (buttons.length && profiles.length) {
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const school = btn.dataset.school;
+                profiles.forEach(p => {
+                    p.style.display = (school === 'todas' || p.dataset.school === school) ? 'block' : 'none';
+                });
+            });
+        });
+    }
+}
+
+function initShareButtons() {
+    document.querySelectorAll('.share-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const data = {
+                title: btn.dataset.title || 'Economía para Principiantes',
+                text: btn.dataset.text || 'Mira este contenido',
+                url: btn.dataset.url || window.location.href
+            };
+            if (navigator.share) {
+                try { await navigator.share(data); } catch {}
+            } else {
+                await navigator.clipboard.writeText(data.url);
+                const orig = btn.textContent;
+                btn.textContent = '✅ Copiado';
+                setTimeout(() => { btn.textContent = orig; }, 2000);
+            }
+        });
+    });
+}
+
+function initEjercicios() {
+    document.querySelectorAll('.btn-ejercicio').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const section = btn.closest('.ejercicios-section');
+            const preguntas = section.querySelectorAll('.pregunta');
+            preguntas.forEach(p => {
+                const selected = p.querySelector('input[type="radio"]:checked');
+                const correcta = p.dataset.correcta;
+                const feedback = p.querySelector('.feedback');
+                if (selected) {
+                    p.classList.remove('correcta', 'incorrecta');
+                    p.classList.add(selected.value === correcta ? 'correcta' : 'incorrecta');
+                }
+            });
+        });
+    });
+}
+
+function initSW() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/economia-academica/sw.js').catch(() => {});
+    }
 }

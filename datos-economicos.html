@@ -386,6 +386,10 @@
             </ol>
         </nav>
 
+        <div style="display:flex;justify-content:flex-end;max-width:1400px;margin:0 auto;padding:0 2rem">
+            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        </div>
+
         <div class="dashboard">
             <div class="dashboard-header">
                 <h2>Panel de Indicadores Económicos</h2>
@@ -471,13 +475,8 @@
                 <div class="chart-header">
                     <h3 class="chart-title">Crecimiento del PIB (Últimos 8 trimestres)</h3>
                 </div>
-                <div class="chart-container">
-                    <div class="chart-bars" id="pbi-chart">
-                        <!-- Barras generadas por JS -->
-                    </div>
-                    <div class="chart-labels" id="pbi-labels">
-                        <!-- Etiquetas generadas por JS -->
-                    </div>
+                <div class="chart-container" style="height:350px">
+                    <canvas id="pbiChartCanvas"></canvas>
                 </div>
             </div>
 
@@ -485,13 +484,8 @@
                 <div class="chart-header">
                     <h3 class="chart-title">Inflación Mensual (IPC %)</h3>
                 </div>
-                <div class="chart-container">
-                    <div class="chart-bars" id="ipc-chart">
-                        <!-- Barras generadas por JS -->
-                    </div>
-                    <div class="chart-labels" id="ipc-labels">
-                        <!-- Etiquetas generadas por JS -->
-                    </div>
+                <div class="chart-container" style="height:350px">
+                    <canvas id="ipcChartCanvas"></canvas>
                 </div>
             </div>
 
@@ -529,6 +523,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
     <script>
         // Datos de ejemplo (fallback si la API no está disponible)
         const demoData = {
@@ -610,9 +605,9 @@
                 card.classList.remove('loading');
             });
             
-            // Actualizar gráficos
-            updateChart('pbi-chart', 'pbi-labels', source.pbiTrimestres, ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2', 'Q3', 'Q4']);
-            updateChart('ipc-chart', 'ipc-labels', source.ipcMensual, ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']);
+            // Actualizar gráficos con Chart.js
+            updateChart('pbiChartCanvas', source.pbiTrimestres, ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2', 'Q3', 'Q4'], 'PIB %', '#0d9488');
+            updateChart('ipcChartCanvas', source.ipcMensual, ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'], 'IPC %', '#06b6d4');
             
             // Actualizar tabla
             updateTable(source.historico);
@@ -632,27 +627,62 @@
             }
         }
 
-        function updateChart(chartId, labelsId, data, labels) {
-            const maxValue = Math.max(...data) * 1.2;
-            const chartContainer = document.getElementById(chartId);
-            const labelsContainer = document.getElementById(labelsId);
-            
-            chartContainer.innerHTML = '';
-            labelsContainer.innerHTML = '';
-            
-            data.forEach((value, index) => {
-                const height = (value / maxValue) * 100;
-                const bar = document.createElement('div');
-                bar.className = 'chart-bar';
-                bar.style.height = `${height}%`;
-                bar.setAttribute('data-value', value + '%');
-                chartContainer.appendChild(bar);
-                
-                const label = document.createElement('div');
-                label.className = 'chart-label';
-                label.textContent = labels[index] || '';
-                labelsContainer.appendChild(label);
+        let pbiChartInstance = null;
+        let ipcChartInstance = null;
+
+        function getChartColors() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            return {
+                primary: '#0d9488',
+                accent: '#06b6d4',
+                grid: isDark ? '#334155' : '#e2e8f0',
+                text: isDark ? '#94a3b8' : '#64748b'
+            };
+        }
+
+        function updateChart(canvasId, data, labels, label, color) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const colors = getChartColors();
+
+            if (canvasId === 'pbiChartCanvas' && pbiChartInstance) pbiChartInstance.destroy();
+            if (canvasId === 'ipcChartCanvas' && ipcChartInstance) ipcChartInstance.destroy();
+
+            const instance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: data.map(v => v >= 0 ? 'rgba(13,148,136,0.7)' : 'rgba(239,68,68,0.7)'),
+                        borderColor: data.map(v => v >= 0 ? '#0d9488' : '#ef4444'),
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: colors.text } }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: colors.grid },
+                            ticks: { color: colors.text, callback: v => v + '%' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: colors.text }
+                        }
+                    }
+                }
             });
+
+            if (canvasId === 'pbiChartCanvas') pbiChartInstance = instance;
+            if (canvasId === 'ipcChartCanvas') ipcChartInstance = instance;
         }
 
         function updateTable(data) {
