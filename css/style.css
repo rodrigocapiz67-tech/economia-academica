@@ -18,7 +18,7 @@
     --card-bg: #ffffff;
     --header-bg: linear-gradient(135deg, #0d9488 0%, #06b6d4 100%);
     --shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.1);
-    --shadow-hover: 0 10px 25px -5px rgba(13, 148, 136, 0.2);
+    --shadow-hover: 0 20px 40px -10px rgba(13, 148, 136, 0.3);
 }
 
 [data-theme="dark"] {
@@ -35,7 +35,7 @@
     --card-bg: #1e293b;
     --header-bg: linear-gradient(135deg, #0f766e 0%, #0891b2 100%);
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --shadow-hover: 0 10px 25px -5px rgba(20, 184, 166, 0.3);
+    --shadow-hover: 0 20px 40px -10px rgba(20, 184, 166, 0.3);
 }
 
 body {
@@ -47,19 +47,30 @@ body {
 }
 
 header {
-    background: var(--header-bg);
-    color: white;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    color: var(--text-dark);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] header {
+    background: rgba(15, 23, 42, 0.95);
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 nav ul {
@@ -70,92 +81,136 @@ nav ul {
 }
 
 nav a {
-    color: white;
+    color: var(--text-dark);
     text-decoration: none;
     font-weight: 500;
-    transition: opacity 0.2s;
+    transition: color 0.2s;
 }
 
 nav a:hover {
-    opacity: 0.8;
+    color: var(--primary);
 }
 
 .theme-toggle {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    color: var(--text-dark);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .theme-toggle:hover {
-    background: rgba(255,255,255,0.3);
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
 
 #hero {
     text-align: center;
-    padding: 4rem 2rem;
-    background: var(--header-bg);
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #0d9488 0%, #0891b2 50%, #06b6d4 100%);
     color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+    background-size: cover;
 }
 
 #hero h2 {
-    font-size: 2.2rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
-    font-weight: 700;
+    font-weight: 800;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 #hero p {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: 1.2rem;
+    opacity: 0.95;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
 }
 
 #busqueda {
     max-width: 600px;
-    margin: -1.5rem auto 2rem;
+    margin: -2rem auto 2rem;
     padding: 0 2rem;
     position: relative;
+    z-index: 10;
 }
 
 #search-input {
     width: 100%;
-    padding: 1rem 1.5rem;
-    border: 2px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    border: none;
     border-radius: 50px;
     font-size: 1rem;
     background: var(--card-bg);
     color: var(--text-dark);
-    box-shadow: var(--shadow);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    transition: box-shadow 0.3s;
 }
 
 #search-input:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 10px 40px rgba(13, 148, 136, 0.3);
 }
 
 #search-results {
     background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 16px;
     margin-top: 0.5rem;
     display: none;
-    box-shadow: var(--shadow);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
     overflow: hidden;
 }
 
 #search-results.active {
     display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .search-result {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--border);
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .search-result:last-child {
@@ -164,6 +219,7 @@ nav a:hover {
 
 .search-result:hover {
     background: var(--bg);
+    padding-left: 2rem;
 }
 
 .search-result a {
@@ -172,48 +228,76 @@ nav a:hover {
     font-weight: 500;
 }
 
-.search-result a:hover {
-    text-decoration: underline;
-}
-
 #materias {
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 #materias h2 {
     text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
     font-weight: 700;
 }
 
 .materias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
 }
 
 .materia-card {
     background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.75rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
+    position: relative;
+}
+
+.materia-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.materia-card:hover::before {
+    transform: scaleX(1);
 }
 
 .materia-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-hover);
 }
 
+.materia-card-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.materia-card:hover .materia-card-img {
+    transform: scale(1.05);
+}
+
+.materia-card-content {
+    padding: 1.5rem;
+}
+
 .materia-card h3 {
-    color: var(--primary);
-    margin-bottom: 0.75rem;
-    font-size: 1.25rem;
-    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
 }
 
 .materia-card p {
@@ -237,39 +321,41 @@ nav a:hover {
 }
 
 .materia-header {
-    background: var(--header-bg);
+    background: linear-gradient(135deg, #0d9488 0%, #0891b2 50%, #06b6d4 100%);
     color: white;
-    padding: 3rem 2rem;
+    padding: 4rem 2rem;
     text-align: center;
+    position: relative;
 }
 
 .materia-header h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 0.5rem;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .materia-header p {
-    opacity: 0.9;
+    opacity: 0.95;
+    font-size: 1.1rem;
 }
 
 .contenido {
     max-width: 900px;
-    margin: 2rem auto;
+    margin: 3rem auto;
     padding: 0 2rem;
 }
 
 .tema {
     background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 16px;
     margin-bottom: 1rem;
     overflow: hidden;
-    transition: box-shadow 0.2s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s;
 }
 
 .tema:hover {
-    box-shadow: var(--shadow);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 .tema-header {
@@ -279,6 +365,11 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
     user-select: none;
+    transition: background 0.2s;
+}
+
+.tema-header:hover {
+    background: var(--bg);
 }
 
 .tema-header h3 {
@@ -291,6 +382,7 @@ nav a:hover {
     font-size: 1.5rem;
     color: var(--primary);
     transition: transform 0.3s;
+    font-weight: 300;
 }
 
 .tema.active .tema-icon {
@@ -300,7 +392,7 @@ nav a:hover {
 .tema-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.4s ease-out;
 }
 
 .tema.active .tema-content {
@@ -313,27 +405,43 @@ nav a:hover {
 }
 
 .tema-content li {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     padding: 0.25rem 0;
+    position: relative;
+}
+
+.tema-content li::before {
+    content: '→';
+    position: absolute;
+    left: -1.25rem;
+    color: var(--primary);
 }
 
 footer {
     background: var(--text-dark);
     color: white;
     text-align: center;
-    padding: 1.5rem;
-    margin-top: 3rem;
+    padding: 2rem;
+    margin-top: 4rem;
 }
 
-@media (max-width: 600px) {
+footer p {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
     header {
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem;
     }
     #hero h2 {
-        font-size: 1.6rem;
+        font-size: 2rem;
     }
     .materias-grid {
         grid-template-columns: 1fr;
+    }
+    .materia-card-img {
+        height: 140px;
     }
 }

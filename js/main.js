@@ -1,15 +1,16 @@
 const materias = [
-    { nombre: 'Macroeconomía', url: 'materias/macroeconomia.html', temas: ['inflación', 'desempleo', 'política monetaria', 'crecimiento', 'PIB'] },
+    { nombre: 'Macroeconomía', url: 'materias/macroeconomia.html', temas: ['PIB', 'inflación', 'desempleo', 'política monetaria', 'crecimiento'] },
     { nombre: 'Microeconomía', url: 'materias/microeconomia.html', temas: ['oferta', 'demanda', 'elasticidad', 'utilidad', 'costos', 'mercado'] },
     { nombre: 'Estadística', url: 'materias/estadistica.html', temas: ['probabilidad', 'regresión', 'hipótesis', 'distribuciones', 'muestreo'] },
     { nombre: 'Matemáticas', url: 'materias/matematicas.html', temas: ['cálculo', 'derivadas', 'integrales', 'álgebra', 'matrices', 'optimización'] },
-    { nombre: 'Economía Política', url: 'materias/economia-politica.html', temas: ['capitalismo', 'socialismo', 'mercado', 'regulación', 'desarrollo'] }
+    { nombre: 'Economía Política', url: 'materias/economia-politica.html', temas: ['capitalismo', 'socialismo', 'mercado', 'regulación', 'desarrollo', 'globalización'] }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initAccordion();
     initDarkMode();
+    initCardEffects();
 });
 
 function initSearch() {
@@ -93,4 +94,18 @@ function initDarkMode() {
             toggle.textContent = next === 'dark' ? '☀️' : '🌙';
         });
     }
+}
+
+function initCardEffects() {
+    const cards = document.querySelectorAll('.materia-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
 }
