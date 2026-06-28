@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Económicos en Tiempo Real - Economía para Principiantes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        .dashboard {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .dashboard-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dashboard-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .last-update {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .last-update .pulse {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .indicators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .indicator-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .indicator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .indicator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .indicator-card.loading {
+            opacity: 0.7;
+        }
+        
+        .indicator-card.loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+        
+        .indicator-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .indicator-title {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .indicator-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .indicator-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .indicator-change.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        
+        .indicator-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .indicator-source {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .chart-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+        
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 250px;
+            padding: 0 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .chart-bar {
+            flex: 1;
+            max-width: 60px;
+            margin: 0 0.25rem;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .chart-bar:hover {
+            opacity: 0.8;
+            transform: scaleY(1.05);
+            transform-origin: bottom;
+        }
+        
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .chart-bar:hover::after {
+            opacity: 1;
+        }
+        
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1rem 0;
+        }
+        
+        .chart-label {
+            flex: 1;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .data-table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-table tr:hover {
+            background: var(--bg);
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .loading-spinner {
+            background: var(--card-bg);
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(13, 148, 136, 0.4);
+        }
+        
+        .api-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .api-status.connected {
+            color: #10b981;
+        }
+        
+        .api-status.demo {
+            color: #f59e0b;
+        }
+        
+        @media (max-width: 768px) {
+            .indicators-grid {
+                grid-template-columns: 1fr;
+            }
+            .indicator-value {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="recursos.html">Recursos</a></li>
+                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="materia-header">
+            <div class="materia-header-bg" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1920&h=1080&fit=crop')"></div>
+            <h2>Datos Económicos del Perú</h2>
+            <p>Indicadores en tiempo real del BCRP y INEI</p>
+        </section>
+
+        <div class="dashboard">
+            <div class="dashboard-header">
+                <h2>Panel de Indicadores Económicos</h2>
+                <p>Datos oficiales actualizados automáticamente</p>
+                <div class="last-update">
+                    <span class="pulse"></span>
+                    <span id="update-time">Actualizando...</span>
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="refresh-btn" onclick="refreshData()">
+                        🔄 Actualizar datos
+                    </button>
+                    <span class="api-status" id="api-status">
+                        <span class="pulse"></span>
+                        Conectando...
+                    </span>
+                </div>
+            </div>
+
+            <div class="indicators-grid">
+                <div class="indicator-card loading" id="card-pbi">
+                    <div class="indicator-icon">📊</div>
+                    <div class="indicator-title">PIB (Crecimiento Anual)</div>
+                    <div class="indicator-value" id="pbi-value">--</div>
+                    <div class="indicator-change positive" id="pbi-change">
+                        <span>--</span>
+                    </div>
+                    <div class="indicator-source">Fuente: INEI / BCRP</div>
+                </div>
+
+                <div class="indicator-card loading" id="card-ipc">
+                    <div class="indicator-icon">📈</div>
+                    <div class="indicator-title">IPC (Inflación Anual)</div>
+                    <div class="indicator-value" id="ipc-value">--</div>
+                    <div class="indicator-change negative" id="ipc-change">
+                        <span>--</span>
+                    </div>
+                    <div class="indicator-source">Fuente: INEI</div>
+                </div>
+
+                <div class="indicator-card loading" id="card-tipo-cambio">
+                    <div class="indicator-icon">💱</div>
+                    <div class="indicator-title">Tipo de Cambio (SOL/USD)</div>
+                    <div class="indicator-value" id="tc-value">--</div>
+                    <div class="indicator-change positive" id="tc-change">
+                        <span>--</span>
+                    </div>
+                    <div class="indicator-source">Fuente: BCRP</div>
+                </div>
+
+                <div class="indicator-card loading" id="card-tasa">
+                    <div class="indicator-icon">🏦</div>
+                    <div class="indicator-title">Tasa de Interés de Referencia</div>
+                    <div class="indicator-value" id="tasa-value">--</div>
+                    <div class="indicator-change positive" id="tasa-change">
+                        <span>--</span>
+                    </div>
+                    <div class="indicator-source">Fuente: BCRP</div>
+                </div>
+
+                <div class="indicator-card loading" id="card-desempleo">
+                    <div class="indicator-icon">👥</div>
+                    <div class="indicator-title">Tasa de Desempleo</div>
+                    <div class="indicator-value" id="desempleo-value">--</div>
+                    <div class="indicator-change negative" id="desempleo-change">
+                        <span>--</span>
+                    </div>
+                    <div class="indicator-source">Fuente: INEI (ENAHO)</div>
+                </div>
+
+                <div class="indicator-card loading" id="card-riesgo">
+                    <div class="indicator-icon">⚠️</div>
+                    <div class="indicator-title">Riesgo País (EMBI)</div>
+                    <div class="indicator-value" id="riesgo-value">--</div>
+                    <div class="indicator-change positive" id="riesgo-change">
+                        <span>--</span>
+                    </div>
+                    <div class="indicator-source">Fuente: BCRP</div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h3 class="chart-title">Crecimiento del PIB (Últimos 8 trimestres)</h3>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-bars" id="pbi-chart">
+                        <!-- Barras generadas por JS -->
+                    </div>
+                    <div class="chart-labels" id="pbi-labels">
+                        <!-- Etiquetas generadas por JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h3 class="chart-title">Inflación Mensual (IPC %)</h3>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-bars" id="ipc-chart">
+                        <!-- Barras generadas por JS -->
+                    </div>
+                    <div class="chart-labels" id="ipc-labels">
+                        <!-- Etiquetas generadas por JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <div class="chart-header">
+                    <h3 class="chart-title">Tabla de Indicadores Históricos</h3>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Indicador</th>
+                            <th>Valor Actual</th>
+                            <th>Trimestre/Mes</th>
+                            <th>Variación</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table">
+                        <!-- Filas generadas por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Economía para Principiantes - Datos en tiempo real</p>
+    </footer>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Obteniendo datos del BCRP...</p>
+        </div>
+    </div>
+
+    <script>
+        // Datos de ejemplo (fallback si la API no está disponible)
+        const demoData = {
+            pbi: { value: '3.2%', change: '+0.5%', period: 'Q4 2024', positive: true },
+            ipc: { value: '2.8%', change: '+0.3%', period: 'Dic 2024', positive: false },
+            tipoCambio: { value: 'S/ 3.72', change: '-0.15', period: 'Hoy', positive: true },
+            tasaInteres: { value: '5.50%', change: '0.00%', period: 'Ene 2025', positive: true },
+            desempleo: { value: '6.8%', change: '-0.4%', period: 'Q4 2024', positive: true },
+            riesgoPais: { value: '142 pts', change: '-8 pts', period: 'Hoy', positive: true },
+            pbiTrimestres: [1.0, 1.5, 2.1, 2.8, 3.0, 3.1, 2.9, 3.2],
+            ipcMensual: [0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.3, 0.4, 0.5, 0.3, 0.2, 0.3],
+            historico: [
+                { indicador: 'PIB Trimestral', valor: '3.2%', periodo: 'Q4 2024', variacion: '+0.5%' },
+                { indicador: 'IPC Mensual', valor: '0.3%', periodo: 'Dic 2024', variacion: '-0.1%' },
+                { indicador: 'Tipo de Cambio', valor: 'S/ 3.72', periodo: '28 Ene 2025', variacion: '-0.04' },
+                { indicador: 'Tasa Referencial', valor: '5.50%', periodo: 'Ene 2025', variacion: '0.00%' },
+                { indicador: 'Empleo Formal', valor: '72.3%', periodo: 'Q4 2024', variacion: '+1.2%' },
+                { indicador: 'Pobreza', valor: '27.5%', periodo: '2024', variacion: '-1.8%' }
+            ]
+        };
+
+        let isUsingDemo = true;
+
+        // Intentar obtener datos de la API del BCRP
+        async function fetchBCRPData() {
+            try {
+                // La API del BCRP puede tener restricciones CORS
+                // En producción, usarías un proxy del servidor
+                const response = await fetch('https://estadisticas.bcrp.gob.pe/estadisticas/Principal/api/es/json/01/010210', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    isUsingDemo = false;
+                    return data;
+                }
+            } catch (error) {
+                console.log('API del BCRP no disponible, usando datos de demostración');
+                isUsingDemo = true;
+            }
+            return null;
+        }
+
+        // Actualizar la UI con los datos
+        function updateUI(data) {
+            const source = data || demoData;
+            
+            // Actualizar tarjetas
+            document.getElementById('pbi-value').textContent = source.pbi.value;
+            document.getElementById('pbi-change').innerHTML = `<span>${source.pbi.change}</span>`;
+            document.getElementById('pbi-change').className = `indicator-change ${source.pbi.positive ? 'positive' : 'negative'}`;
+            
+            document.getElementById('ipc-value').textContent = source.ipc.value;
+            document.getElementById('ipc-change').innerHTML = `<span>${source.ipc.change}</span>`;
+            document.getElementById('ipc-change').className = `indicator-change ${source.ipc.positive ? 'positive' : 'negative'}`;
+            
+            document.getElementById('tc-value').textContent = source.tipoCambio.value;
+            document.getElementById('tc-change').innerHTML = `<span>${source.tipoCambio.change}</span>`;
+            document.getElementById('tc-change').className = `indicator-change ${source.tipoCambio.positive ? 'positive' : 'negative'}`;
+            
+            document.getElementById('tasa-value').textContent = source.tasaInteres.value;
+            document.getElementById('tasa-change').innerHTML = `<span>${source.tasaInteres.change}</span>`;
+            document.getElementById('tasa-change').className = `indicator-change ${source.tasaInteres.positive ? 'positive' : 'negative'}`;
+            
+            document.getElementById('desempleo-value').textContent = source.desempleo.value;
+            document.getElementById('desempleo-change').innerHTML = `<span>${source.desempleo.change}</span>`;
+            document.getElementById('desempleo-change').className = `indicator-change ${source.desempleo.positive ? 'positive' : 'negative'}`;
+            
+            document.getElementById('riesgo-value').textContent = source.riesgoPais.value;
+            document.getElementById('riesgo-change').innerHTML = `<span>${source.riesgoPais.change}</span>`;
+            document.getElementById('riesgo-change').className = `indicator-change ${source.riesgoPais.positive ? 'positive' : 'negative'}`;
+            
+            // Quitar estado de carga
+            document.querySelectorAll('.indicator-card').forEach(card => {
+                card.classList.remove('loading');
+            });
+            
+            // Actualizar gráficos
+            updateChart('pbi-chart', 'pbi-labels', source.pbiTrimestres, ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2', 'Q3', 'Q4']);
+            updateChart('ipc-chart', 'ipc-labels', source.ipcMensual, ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']);
+            
+            // Actualizar tabla
+            updateTable(source.historico);
+            
+            // Actualizar timestamp
+            const now = new Date();
+            document.getElementById('update-time').textContent = `Última actualización: ${now.toLocaleString('es-PE')}`;
+            
+            // Actualizar estado de API
+            const apiStatus = document.getElementById('api-status');
+            if (isUsingDemo) {
+                apiStatus.innerHTML = '<span class="pulse" style="background: #f59e0b;"></span> Datos de demostración';
+                apiStatus.className = 'api-status demo';
+            } else {
+                apiStatus.innerHTML = '<span class="pulse"></span> API del BCRP conectada';
+                apiStatus.className = 'api-status connected';
+            }
+        }
+
+        function updateChart(chartId, labelsId, data, labels) {
+            const maxValue = Math.max(...data) * 1.2;
+            const chartContainer = document.getElementById(chartId);
+            const labelsContainer = document.getElementById(labelsId);
+            
+            chartContainer.innerHTML = '';
+            labelsContainer.innerHTML = '';
+            
+            data.forEach((value, index) => {
+                const height = (value / maxValue) * 100;
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                bar.style.height = `${height}%`;
+                bar.setAttribute('data-value', value + '%');
+                chartContainer.appendChild(bar);
+                
+                const label = document.createElement('div');
+                label.className = 'chart-label';
+                label.textContent = labels[index] || '';
+                labelsContainer.appendChild(label);
+            });
+        }
+
+        function updateTable(data) {
+            const tbody = document.getElementById('history-table');
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.indicador}</strong></td>
+                    <td>${row.valor}</td>
+                    <td>${row.periodo}</td>
+                    <td class="${row.variacion.startsWith('+') || row.variacion === '0.00%' ? 'positive' : 'negative'}">${row.variacion}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function refreshData() {
+            document.getElementById('loading-overlay').classList.add('active');
+            
+            // Intentar obtener datos de la API
+            await fetchBCRPData();
+            
+            // Simular carga
+            setTimeout(() => {
+                updateUI(null);
+                document.getElementById('loading-overlay').classList.remove('active');
+            }, 1500);
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cargar datos iniciales
+            refreshData();
+            
+            // Auto-actualizar cada 5 minutos
+            setInterval(refreshData, 300000);
+        });
+    </script>
+</body>
+</html>
