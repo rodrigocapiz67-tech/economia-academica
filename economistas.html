@@ -19,11 +19,8 @@
         .economista-profile { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
         .profile-card { background: var(--card-bg); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 3rem; border: 1px solid var(--border); transition: all 0.3s; }
         .profile-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
-        .profile-header { display: grid; grid-template-columns: 300px 1fr; gap: 0; }
-        .profile-image-container { position: relative; overflow: hidden; min-height: 400px; background: var(--primary); }
-        .profile-image { width: 100%; height: 100%; min-height: 400px; object-fit: cover; transition: transform 0.5s; display: block; }
-        .profile-card:hover .profile-image { transform: scale(1.05); }
-        .profile-school-badge { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); color: white; padding: 0.75rem 1.25rem; border-radius: 30px; font-weight: 600; font-size: 0.9rem; }
+        .profile-card:hover .foto-economista { transform: scale(1.05); }
+        .profile-school-badge { background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); color: white; padding: 0.5rem 1rem; border-radius: 30px; font-weight: 600; font-size: 0.85rem; display: inline-block; }
         .profile-content { padding: 2.5rem; }
         .profile-name { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; }
         .profile-years { color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 1.5rem; }
@@ -44,7 +41,7 @@
         .btn-filtro { padding: 0.6rem 1.25rem; border: 2px solid var(--border); border-radius: 30px; background: transparent; color: var(--text); cursor: pointer; font-weight: 500; transition: all 0.3s; font-size: 0.9rem; }
         .btn-filtro:hover { border-color: var(--primary); color: var(--primary); }
         .btn-filtro.active { background: var(--primary); border-color: var(--primary); color: white; }
-        @media (max-width: 900px) { .profile-header { grid-template-columns: 1fr; } .profile-image-container { height: 300px; } }
+
     </style>
 </head>
 <body>
@@ -100,217 +97,229 @@
             <a href="index.html" class="back-btn">← Volver al inicio</a>
 
             <div class="profile-card" id="adam-smith" data-school="clasica">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/AdamSmith.jpg" alt="Adam Smith" class="profile-image img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AS</text></svg>'">
-                        <div class="profile-school-badge">🏛️ Escuela Clásica</div>
+                <div class="row align-items-start my-4 g-0">
+                    <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/AdamSmith.jpg" alt="Adam Smith" class="img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AS</text></svg>'">
+                        <div class="profile-school-badge mt-2">🏛️ Escuela Clásica</div>
                     </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">Adam Smith</h3>
-                        <p class="profile-years">1723 - 1790 • Escocia</p>
-                        <div class="profile-quote">
-                            "No es de la benevolencia del carnicero, del cervecero o del panadero que esperamos obtener lo que necesitamos, sino de la consideración que tienen por su propio interés."
-                            <cite>— Adam Smith, La Riqueza de las Naciones</cite>
+                    <div class="col-md-8">
+                        <div class="profile-content">
+                            <h3 class="profile-name">Adam Smith</h3>
+                            <p class="profile-years">1723 - 1790 • Escocia</p>
+                            <div class="profile-quote">
+                                "No es de la benevolencia del carnicero, del cervecero o del panadero que esperamos obtener lo que necesitamos, sino de la consideración que tienen por su propio interés."
+                                <cite>— Adam Smith, La Riqueza de las Naciones</cite>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📝 Biografía</h4>
+                                <p>Adam Smith es considerado el padre de la economía moderna. Nacido en Kirkcaldy, Escocia, estudió en la Universidad de Glasgow y Oxford. Fue profesor de lógica y luego de filosofía moral. Su obra más importante, "Una investigación sobre la naturaleza y causas de la riqueza de las naciones" (1776), sentó las bases del liberalismo económico y la economía clásica.</p>
+                            </div>
+                            <div class="profile-section">
+                                <h4>💡 Aportes Principales</h4>
+                                <ul class="contributions-list">
+                                    <li>Teoría de la "mano invisible" del mercado</li>
+                                    <li>División del trabajo como fuente de productividad</li>
+                                    <li>Libre comercio y ventaja absoluta</li>
+                                    <li>Teoría del valor-trabajo</li>
+                                    <li>Capitalismo de laissez-faire</li>
+                                </ul>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📚 Obras Importantes</h4>
+                                <p>"La Riqueza de las Naciones" (1776), "Teoría de los sentimientos morales" (1759)</p>
+                            </div>
+                            <button class="share-btn" data-title="Adam Smith - Economía para Principiantes" data-text="Conoce a Adam Smith, padre de la economía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#adam-smith">📤 Compartir</button>
                         </div>
-                        <div class="profile-section">
-                            <h4>📝 Biografía</h4>
-                            <p>Adam Smith es considerado el padre de la economía moderna. Nacido en Kirkcaldy, Escocia, estudió en la Universidad de Glasgow y Oxford. Fue profesor de lógica y luego de filosofía moral. Su obra más importante, "Una investigación sobre la naturaleza y causas de la riqueza de las naciones" (1776), sentó las bases del liberalismo económico y la economía clásica.</p>
-                        </div>
-                        <div class="profile-section">
-                            <h4>💡 Aportes Principales</h4>
-                            <ul class="contributions-list">
-                                <li>Teoría de la "mano invisible" del mercado</li>
-                                <li>División del trabajo como fuente de productividad</li>
-                                <li>Libre comercio y ventaja absoluta</li>
-                                <li>Teoría del valor-trabajo</li>
-                                <li>Capitalismo de laissez-faire</li>
-                            </ul>
-                        </div>
-                        <div class="profile-section">
-                            <h4>📚 Obras Importantes</h4>
-                            <p>"La Riqueza de las Naciones" (1776), "Teoría de los sentimientos morales" (1759)</p>
-                        </div>
-                        <button class="share-btn" data-title="Adam Smith - Economía para Principiantes" data-text="Conoce a Adam Smith, padre de la economía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#adam-smith">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <div class="profile-card" id="karl-marx" data-school="marxista">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx" class="profile-image img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>KM</text></svg>'">
-                        <div class="profile-school-badge">📕 Marxismo</div>
+                <div class="row align-items-start my-4 g-0">
+                    <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx" class="img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2238%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>KM</text></svg>'">
+                        <div class="profile-school-badge mt-2">📕 Marxismo</div>
                     </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">Karl Marx</h3>
-                        <p class="profile-years">1818 - 1883 • Alemania</p>
-                        <div class="profile-quote">
-                            "Los filósofos se han limitado a interpretar el mundo de diferentes maneras; lo que importa es transformarlo."
-                            <cite>— Karl Marx, Tesis sobre Feuerbach</cite>
+                    <div class="col-md-8">
+                        <div class="profile-content">
+                            <h3 class="profile-name">Karl Marx</h3>
+                            <p class="profile-years">1818 - 1883 • Alemania</p>
+                            <div class="profile-quote">
+                                "Los filósofos se han limitado a interpretar el mundo de diferentes maneras; lo que importa es transformarlo."
+                                <cite>— Karl Marx, Tesis sobre Feuerbach</cite>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📝 Biografía</h4>
+                                <p>Karl Marx fue un filósofo, economista, sociólogo y revolucionario alemán. Estudió derecho y filosofía en Bonn y Berlín. Junto con Friedrich Engels, desarrolló la teoría del materialismo histórico y el comunismo. Su obra más influyente, "El Capital" (Das Kapital), analiza las contradicciones del sistema capitalista y la lucha de clases.</p>
+                            </div>
+                            <div class="profile-section">
+                                <h4>💡 Aportes Principales</h4>
+                                <ul class="contributions-list">
+                                    <li>Teoría del valor-trabajo y plusvalía</li>
+                                    <li>Análisis de las relaciones de producción capitalista</li>
+                                    <li>Materialismo histórico como método de análisis</li>
+                                    <li>Concepto de lucha de clases</li>
+                                    <li>Crítica a la acumulación de capital</li>
+                                </ul>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📚 Obras Importantes</h4>
+                                <p>"El Capital" (1867), "Manifiesto del Partido Comunista" (1848), "Grundrisse" (1857-1858)</p>
+                            </div>
+                            <button class="share-btn" data-title="Karl Marx - Economía para Principiantes" data-text="Conoce a Karl Marx, filósofo y economista alemán" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#karl-marx">📤 Compartir</button>
                         </div>
-                        <div class="profile-section">
-                            <h4>📝 Biografía</h4>
-                            <p>Karl Marx fue un filósofo, economista, sociólogo y revolucionario alemán. Estudió derecho y filosofía en Bonn y Berlín. Junto con Friedrich Engels, desarrolló la teoría del materialismo histórico y el comunismo. Su obra más influyente, "El Capital" (Das Kapital), analiza las contradicciones del sistema capitalista y la lucha de clases.</p>
-                        </div>
-                        <div class="profile-section">
-                            <h4>💡 Aportes Principales</h4>
-                            <ul class="contributions-list">
-                                <li>Teoría del valor-trabajo y plusvalía</li>
-                                <li>Análisis de las relaciones de producción capitalista</li>
-                                <li>Materialismo histórico como método de análisis</li>
-                                <li>Concepto de lucha de clases</li>
-                                <li>Crítica a la acumulación de capital</li>
-                            </ul>
-                        </div>
-                        <div class="profile-section">
-                            <h4>📚 Obras Importantes</h4>
-                            <p>"El Capital" (1867), "Manifiesto del Partido Comunista" (1848), "Grundrisse" (1857-1858)</p>
-                        </div>
-                        <button class="share-btn" data-title="Karl Marx - Economía para Principiantes" data-text="Conoce a Karl Marx, filósofo y economista alemán" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#karl-marx">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <div class="profile-card" id="keynes" data-school="keynesiana">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="profile-image img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>JK</text></svg>'">
-                        <div class="profile-school-badge">📊 Keynesianismo</div>
+                <div class="row align-items-start my-4 g-0">
+                    <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/John_Maynard_Keynes.jpg" alt="John Maynard Keynes" class="img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>JK</text></svg>'">
+                        <div class="profile-school-badge mt-2">📊 Keynesianismo</div>
                     </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">John Maynard Keynes</h3>
-                        <p class="profile-years">1883 - 1946 • Reino Unido</p>
-                        <div class="profile-quote">
-                            "En el largo plazo, todos estaremos muertos."
-                            <cite>— John Maynard Keynes</cite>
+                    <div class="col-md-8">
+                        <div class="profile-content">
+                            <h3 class="profile-name">John Maynard Keynes</h3>
+                            <p class="profile-years">1883 - 1946 • Reino Unido</p>
+                            <div class="profile-quote">
+                                "En el largo plazo, todos estaremos muertos."
+                                <cite>— John Maynard Keynes</cite>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📝 Biografía</h4>
+                                <p>John Maynard Keynes fue un economista británico que revolucionó la teoría económica y las políticas públicas. Estudió matemáticas en Cambridge y trabajó para el Tesoro Británico durante la Primera Guerra Mundial. Su obra "Teoría General del Empleo, el Interés y el Dinero" (1936) sentó las bases de la macroeconomía moderna y justificó la intervención del Estado para estabilizar la economía.</p>
+                            </div>
+                            <div class="profile-section">
+                                <h4>💡 Aportes Principales</h4>
+                                <ul class="contributions-list">
+                                    <li>Teoría de la demanda agregada</li>
+                                    <li>Justificación de la política fiscal expansiva</li>
+                                    <li>Concepto de "trampa de liquidez"</li>
+                                    <li>Modelo IS-LM (con Hicks)</li>
+                                    <li>Fundación del FMI y Banco Mundial</li>
+                                </ul>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📚 Obras Importantes</h4>
+                                <p>"Teoría General del Empleo, el Interés y el Dinero" (1936), "Tratado sobre la moneda" (1930)</p>
+                            </div>
+                            <button class="share-btn" data-title="John Maynard Keynes - Economía para Principiantes" data-text="Conoce a Keynes, fundador del keynesianismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#keynes">📤 Compartir</button>
                         </div>
-                        <div class="profile-section">
-                            <h4>📝 Biografía</h4>
-                            <p>John Maynard Keynes fue un economista británico que revolucionó la teoría económica y las políticas públicas. Estudió matemáticas en Cambridge y trabajó para el Tesoro Británico durante la Primera Guerra Mundial. Su obra "Teoría General del Empleo, el Interés y el Dinero" (1936) sentó las bases de la macroeconomía moderna y justificó la intervención del Estado para estabilizar la economía.</p>
-                        </div>
-                        <div class="profile-section">
-                            <h4>💡 Aportes Principales</h4>
-                            <ul class="contributions-list">
-                                <li>Teoría de la demanda agregada</li>
-                                <li>Justificación de la política fiscal expansiva</li>
-                                <li>Concepto de "trampa de liquidez"</li>
-                                <li>Modelo IS-LM (con Hicks)</li>
-                                <li>Fundación del FMI y Banco Mundial</li>
-                            </ul>
-                        </div>
-                        <div class="profile-section">
-                            <h4>📚 Obras Importantes</h4>
-                            <p>"Teoría General del Empleo, el Interés y el Dinero" (1936), "Tratado sobre la moneda" (1930)</p>
-                        </div>
-                        <button class="share-btn" data-title="John Maynard Keynes - Economía para Principiantes" data-text="Conoce a Keynes, fundador del keynesianismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#keynes">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <div class="profile-card" id="friedman" data-school="monetarista">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Milton_Friedman.jpg" alt="Milton Friedman" class="profile-image img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>MF</text></svg>'">
-                        <div class="profile-school-badge">💰 Monetarismo</div>
+                <div class="row align-items-start my-4 g-0">
+                    <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Milton_Friedman.jpg" alt="Milton Friedman" class="img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>MF</text></svg>'">
+                        <div class="profile-school-badge mt-2">💰 Monetarismo</div>
                     </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">Milton Friedman</h3>
-                        <p class="profile-years">1912 - 2006 • Estados Unidos</p>
-                        <div class="profile-quote">
-                            "La inflación es siempre y en todas partes un fenómeno monetario."
-                            <cite>— Milton Friedman</cite>
+                    <div class="col-md-8">
+                        <div class="profile-content">
+                            <h3 class="profile-name">Milton Friedman</h3>
+                            <p class="profile-years">1912 - 2006 • Estados Unidos</p>
+                            <div class="profile-quote">
+                                "La inflación es siempre y en todas partes un fenómeno monetario."
+                                <cite>— Milton Friedman</cite>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📝 Biografía</h4>
+                                <p>Milton Friedman fue un economista estadounidense y defensor del libre mercado. Obtuvo su doctorado en la Universidad de Chicago, donde fue profesor durante décadas. Ganó el Premio Nobel de Economía en 1976 por sus análisis del consumo, la historia monetaria y la complejidad de la estabilización política. Fue asesor de Ronald Reagan y Margaret Thatcher.</p>
+                            </div>
+                            <div class="profile-section">
+                                <h4>💡 Aportes Principales</h4>
+                                <ul class="contributions-list">
+                                    <li>Teoría monetarista de la inflación</li>
+                                    <li>Regla monetaria fija (k-percent rule)</li>
+                                    <li>Teoría del ingreso permanente</li>
+                                    <li>Crítica al keynesianismo</li>
+                                    <li>Voucher educativo y desregulación</li>
+                                </ul>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📚 Obras Importantes</h4>
+                                <p>"Capitalismo y Libertad" (1962), "Una historia monetaria de Estados Unidos" (1963), "Libre para elegir" (1980)</p>
+                            </div>
+                            <button class="share-btn" data-title="Milton Friedman - Economía para Principiantes" data-text="Conoce a Milton Friedman, líder del monetarismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#friedman">📤 Compartir</button>
                         </div>
-                        <div class="profile-section">
-                            <h4>📝 Biografía</h4>
-                            <p>Milton Friedman fue un economista estadounidense y defensor del libre mercado. Obtuvo su doctorado en la Universidad de Chicago, donde fue profesor durante décadas. Ganó el Premio Nobel de Economía en 1976 por sus análisis del consumo, la historia monetaria y la complejidad de la estabilización política. Fue asesor de Ronald Reagan y Margaret Thatcher.</p>
-                        </div>
-                        <div class="profile-section">
-                            <h4>💡 Aportes Principales</h4>
-                            <ul class="contributions-list">
-                                <li>Teoría monetarista de la inflación</li>
-                                <li>Regla monetaria fija (k-percent rule)</li>
-                                <li>Teoría del ingreso permanente</li>
-                                <li>Crítica al keynesianismo</li>
-                                <li>Voucher educativo y desregulación</li>
-                            </ul>
-                        </div>
-                        <div class="profile-section">
-                            <h4>📚 Obras Importantes</h4>
-                            <p>"Capitalismo y Libertad" (1962), "Una historia monetaria de Estados Unidos" (1963), "Libre para elegir" (1980)</p>
-                        </div>
-                        <button class="share-btn" data-title="Milton Friedman - Economía para Principiantes" data-text="Conoce a Milton Friedman, líder del monetarismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#friedman">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <div class="profile-card" id="ricardo" data-school="clasica">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Portrait_of_David_Ricardo_by_Thomas_Phillips.jpg" alt="David Ricardo" class="profile-image img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>DR</text></svg>'">
-                        <div class="profile-school-badge">🏛️ Escuela Clásica</div>
+                <div class="row align-items-start my-4 g-0">
+                    <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Portrait_of_David_Ricardo_by_Thomas_Phillips.jpg" alt="David Ricardo" class="img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>DR</text></svg>'">
+                        <div class="profile-school-badge mt-2">🏛️ Escuela Clásica</div>
                     </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">David Ricardo</h3>
-                        <p class="profile-years">1772 - 1823 • Reino Unido</p>
-                        <div class="profile-quote">
-                            "La utilidad no es la medida de los valores interchangeables, aunque sea absolutamente esencial para su existencia."
-                            <cite>— David Ricardo, Principios de Economía Política</cite>
+                    <div class="col-md-8">
+                        <div class="profile-content">
+                            <h3 class="profile-name">David Ricardo</h3>
+                            <p class="profile-years">1772 - 1823 • Reino Unido</p>
+                            <div class="profile-quote">
+                                "La utilidad no es la medida de los valores interchangeables, aunque sea absolutamente esencial para su existencia."
+                                <cite>— David Ricardo, Principios de Economía Política</cite>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📝 Biografía</h4>
+                                <p>David Ricardo fue un economista británico considerado uno de los padres de la economía clásica. Nacido en una familia judía de origen holandés, se hizo rico como agente de bolsa antes de dedicarse a la economía. Fue miembro del Parlamento británico. Su teoría de la ventaja comparativa sigue siendo fundamental en el comercio internacional.</p>
+                            </div>
+                            <div class="profile-section">
+                                <h4>💡 Aportes Principales</h4>
+                                <ul class="contributions-list">
+                                    <li>Teoría de la ventaja comparativa</li>
+                                    <li>Ley de rendimientos decrecientes</li>
+                                    <li>Teoría del valor-trabajo refinada</li>
+                                    <li>Análisis de la renta de la tierra</li>
+                                    <li>Principio de Say y flujo circular</li>
+                                </ul>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📚 Obras Importantes</h4>
+                                <p>"Principios de Economía Política y Tributación" (1817)</p>
+                            </div>
+                            <button class="share-btn" data-title="David Ricardo - Economía para Principiantes" data-text="Conoce a David Ricardo, economista clásico" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#ricardo">📤 Compartir</button>
                         </div>
-                        <div class="profile-section">
-                            <h4>📝 Biografía</h4>
-                            <p>David Ricardo fue un economista británico considerado uno de los padres de la economía clásica. Nacido en una familia judía de origen holandés, se hizo rico como agente de bolsa antes de dedicarse a la economía. Fue miembro del Parlamento británico. Su teoría de la ventaja comparativa sigue siendo fundamental en el comercio internacional.</p>
-                        </div>
-                        <div class="profile-section">
-                            <h4>💡 Aportes Principales</h4>
-                            <ul class="contributions-list">
-                                <li>Teoría de la ventaja comparativa</li>
-                                <li>Ley de rendimientos decrecientes</li>
-                                <li>Teoría del valor-trabajo refinada</li>
-                                <li>Análisis de la renta de la tierra</li>
-                                <li>Principio de Say y flujo circular</li>
-                            </ul>
-                        </div>
-                        <div class="profile-section">
-                            <h4>📚 Obras Importantes</h4>
-                            <p>"Principios de Economía Política y Tributación" (1817)</p>
-                        </div>
-                        <button class="share-btn" data-title="David Ricardo - Economía para Principiantes" data-text="Conoce a David Ricardo, economista clásico" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#ricardo">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
             <div class="profile-card" id="marshall" data-school="neoclasica">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Alfred_Marshall.jpg" alt="Alfred Marshall" class="profile-image img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AM</text></svg>'">
-                        <div class="profile-school-badge">📈 Neoclásico</div>
+                <div class="row align-items-start my-4 g-0">
+                    <div class="col-md-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Alfred_Marshall.jpg" alt="Alfred Marshall" class="img-fluid rounded shadow foto-economista" referrerpolicy="no-referrer" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%230d9488%22 width=%22100%22 height=%22100%22/><text fill=%22white%22 font-size=%2234%22 font-family=%22Inter%22 x=%2250%22 y=%2258%22 text-anchor=%22middle%22 font-weight=%22bold%22>AM</text></svg>'">
+                        <div class="profile-school-badge mt-2">📈 Neoclásico</div>
                     </div>
-                    <div class="profile-content">
-                        <h3 class="profile-name">Alfred Marshall</h3>
-                        <p class="profile-years">1842 - 1924 • Reino Unido</p>
-                        <div class="profile-quote">
-                            "Los economistas deben ser fríos como los cirujanos, aunque dispuestos, al fin, a derramar su sangre y sudor por la humanidad."
-                            <cite>— Alfred Marshall</cite>
+                    <div class="col-md-8">
+                        <div class="profile-content">
+                            <h3 class="profile-name">Alfred Marshall</h3>
+                            <p class="profile-years">1842 - 1924 • Reino Unido</p>
+                            <div class="profile-quote">
+                                "Los economistas deben ser fríos como los cirujanos, aunque dispuestos, al fin, a derramar su sangre y sudor por la humanidad."
+                                <cite>— Alfred Marshall</cite>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📝 Biografía</h4>
+                                <p>Alfred Marshall fue un economista británico y principal representante de la escuela neoclásica. Estudió matemáticas en Cambridge, donde fue profesor durante muchos años. Su obra "Principios de Economía" (1890) fue el texto de economía más utilizado durante décadas. Desarrolló el análisis de oferta y demanda que usamos hoy.</p>
+                            </div>
+                            <div class="profile-section">
+                                <h4>💡 Aportes Principales</h4>
+                                <ul class="contributions-list">
+                                    <li>Análisis moderno de oferta y demanda</li>
+                                    <li>Concepto de elasticidad</li>
+                                    <li>Excedente del productor y consumidor</li>
+                                    <li>Curvas de indiferencia (con Edgeworth)</li>
+                                    <li>Distinción entre corto y largo plazo</li>
+                                </ul>
+                            </div>
+                            <div class="profile-section">
+                                <h4>📚 Obras Importantes</h4>
+                                <p>"Principios de Economía" (1890)</p>
+                            </div>
+                            <button class="share-btn" data-title="Alfred Marshall - Economía para Principiantes" data-text="Conoce a Alfred Marshall, padre de la microeconomía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#marshall">📤 Compartir</button>
                         </div>
-                        <div class="profile-section">
-                            <h4>📝 Biografía</h4>
-                            <p>Alfred Marshall fue un economista británico y principal representante de la escuela neoclásica. Estudió matemáticas en Cambridge, donde fue profesor durante muchos años. Su obra "Principios de Economía" (1890) fue el texto de economía más utilizado durante décadas. Desarrolló el análisis de oferta y demanda que usamos hoy.</p>
-                        </div>
-                        <div class="profile-section">
-                            <h4>💡 Aportes Principales</h4>
-                            <ul class="contributions-list">
-                                <li>Análisis moderno de oferta y demanda</li>
-                                <li>Concepto de elasticidad</li>
-                                <li>Excedente del productor y consumidor</li>
-                                <li>Curvas de indiferencia (con Edgeworth)</li>
-                                <li>Distinción entre corto y largo plazo</li>
-                            </ul>
-                        </div>
-                        <div class="profile-section">
-                            <h4>📚 Obras Importantes</h4>
-                            <p>"Principios de Economía" (1890)</p>
-                        </div>
-                        <button class="share-btn" data-title="Alfred Marshall - Economía para Principiantes" data-text="Conoce a Alfred Marshall, padre de la microeconomía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#marshall">📤 Compartir</button>
                     </div>
                 </div>
             </div>
