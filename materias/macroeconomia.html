@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Macroeconomía - Economía Académica</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -12,6 +15,7 @@
         <nav>
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
+                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
             </ul>
         </nav>
     </header>
@@ -19,64 +23,38 @@
     <main>
         <section class="materia-header">
             <h2>Macroeconomía</h2>
-            <p>Conceptos fundamentales de economías a escala nacional y global</p>
+            <p>Economía a escala nacional y global</p>
         </section>
 
         <section class="contenido">
             <article class="tema">
-                <h3>1. Introducción a la Macroeconomía</h3>
-                <ul>
-                    <li>Objeto de estudio</li>
-                    <li>Diferencia con microeconomía</li>
-                    <li>Variables macroeconómicas principales</li>
-                </ul>
+                <div class="tema-header">
+                    <h3>1. Variables Macroeconómicas</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li>Producto Interno Bruto (PIB)</li>
+                        <li>Inflación y deflación</li>
+                        <li>Desempleo y empleo</li>
+                        <li>Tipo de cambio</li>
+                    </ul>
+                </div>
             </article>
 
             <article class="tema">
-                <h3>2. Producto Interno Bruto (PIB)</h3>
-                <ul>
-                    <li>Definición y medición</li>
-                    <li>Métodos de cálculo (gasto, producción, renta)</li>
-                    <li>PIB real vs nominal</li>
-                    <li>PIB per cápita</li>
-                </ul>
-            </article>
-
-            <article class="tema">
-                <h3>3. Inflación y Deflación</h3>
-                <ul>
-                    <li>Índices de precios (IPC, deflactor)</li>
-                    <li>Causas inflacionarias</li>
-                    <li>Consecuencias económicas</li>
-                    <li>Política monetaria y control de inflación</li>
-                </ul>
-            </article>
-
-            <article class="tema">
-                <h3>4. Desempleo</h3>
-                <ul>
-                    <li>Tipos: friccional, estructural, cíclico</li>
-                    <li>Tasa natural de desempleo</li>
-                    <li>Curva de Phillips</li>
-                </ul>
-            </article>
-
-            <article class="tema">
-                <h3>5. Política Fiscal y Monetaria</h3>
-                <ul>
-                    <li>Gasto público e impuestos</li>
-                    <li>Banco central y tasas de interés</li>
-                    <li>Multiplcador fiscal</li>
-                </ul>
-            </article>
-
-            <article class="tema">
-                <h3>6. Crecimiento Económico</h3>
-                <ul>
-                    <li>Modelo de Solow</li>
-                    <li>Factores de producción</li>
-                    <li>Progreso tecnológico</li>
-                </ul>
+                <div class="tema-header">
+                    <h3>2. Política Económica</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li>Política fiscal (gasto e impuestos)</li>
+                        <li>Política monetaria (tasas de interés)</li>
+                        <li>Banco central</li>
+                        <li>Multiplcador fiscal</li>
+                    </ul>
+                </div>
             </article>
         </section>
     </main>
@@ -84,5 +62,7 @@
     <footer>
         <p>Portal académico de economía</p>
     </footer>
+
+    <script src="../js/main.js"></script>
 </body>
 </html>
