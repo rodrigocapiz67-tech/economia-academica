@@ -1062,3 +1062,17 @@ footer p {
 [data-theme="dark"] .mi-menu a {
     color: #ffffff;
 }
+
+.foto-economista {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.grafico-eco {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    background-color: #ffffff;
+}
