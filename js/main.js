@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCardEffects();
     initScrollEffects();
     initParallax();
+    initHamburger();
 });
 
 function initSearch() {
@@ -196,6 +197,23 @@ function initParallax() {
             }
         });
     });
+}
+
+function initHamburger() {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('nav ul');
+    if (toggle && menu) {
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', menu.classList.contains('open'));
+        });
+        document.addEventListener('click', (e) => {
+            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 }
 
 // Typing effect for hero

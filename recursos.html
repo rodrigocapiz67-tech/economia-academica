@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recursos - Economía para Principiantes</title>
+    <meta name="description" content="Centro de recursos de economía: fuentes oficiales del Perú, encuestas para investigación, libros y textos recomendados, cursos online y herramientas de análisis.">
+    <meta property="og:title" content="Recursos - Economía para Principiantes">
+    <meta property="og:description" content="Todo lo que necesitas para estudiar economía: datos, libros, cursos y herramientas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/recursos.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -182,13 +190,14 @@
 </head>
 <body>
     <header>
-        <h1><a href="index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="economistas.html">Economistas</a></li>
                 <li><a href="datos-economicos.html">📊 Datos en Tiempo Real</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
+                <li><button class="nav-toggle" aria-label="Menú" aria-expanded="false">☰</button></li>
             </ul>
         </nav>
     </header>
@@ -199,6 +208,13 @@
             <h2>Centro de Recursos</h2>
             <p>Fuentes oficiales, herramientas y material de estudio</p>
         </section>
+
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="index.html">Inicio</a></li>
+                <li><span aria-current="page">Recursos</span></li>
+            </ol>
+        </nav>
 
         <div class="recursos-container">
             <div class="recursos-hero">
@@ -579,6 +595,8 @@
             </div>
         </div>
     </main>
+
+    <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
 
     <footer>
         <p>Economía para Principiantes - Centro de Recursos</p>

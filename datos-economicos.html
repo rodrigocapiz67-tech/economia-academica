@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos Económicos en Tiempo Real - Economía para Principiantes</title>
+    <meta name="description" content="Panel de indicadores económicos del Perú en tiempo real: PIB, inflación, tipo de cambio, tasa de interés, desempleo y riesgo país. Datos del BCRP e INEI.">
+    <meta property="og:title" content="Datos Económicos en Tiempo Real - Economía para Principiantes">
+    <meta property="og:description" content="Indicadores económicos del Perú actualizados: PIB, inflación, tipo de cambio y más.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rodrigocapiz67-tech.github.io/economia-academica/datos-economicos.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -354,12 +362,13 @@
 </head>
 <body>
     <header>
-        <h1><a href="index.html" style="text-decoration:none">Economía para Principiantes</a></h1>
+        <h1><a href="index.html" class="header-link">Economía para Principiantes</a></h1>
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="recursos.html">Recursos</a></li>
-                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
+                <li><button class="nav-toggle" aria-label="Menú" aria-expanded="false">☰</button></li>
             </ul>
         </nav>
     </header>
@@ -370,6 +379,12 @@
             <h2>Datos Económicos del Perú</h2>
             <p>Indicadores en tiempo real del BCRP y INEI</p>
         </section>
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+            <ol>
+                <li><a href="index.html">Inicio</a></li>
+                <li><span aria-current="page">Datos Económicos</span></li>
+            </ol>
+        </nav>
 
         <div class="dashboard">
             <div class="dashboard-header">
@@ -500,6 +515,8 @@
             </div>
         </div>
     </main>
+
+    <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
 
     <footer>
         <p>Economía para Principiantes - Datos en tiempo real</p>
