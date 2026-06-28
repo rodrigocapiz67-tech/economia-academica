@@ -212,6 +212,62 @@
                     </ul>
                 </div>
             </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>8. Regresión Múltiple</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Qué es?</strong> Modelar Y con múltiples variables independientes</li>
+                        <li><strong>Fórmula:</strong> Y = β₀ + β₁X₁ + β₂X₂ + ... + βₖXₖ + ε</li>
+                        <li><strong>Ejemplo:</strong> Ingresos = β₀ + β₁(Educación) + β₂(Experiencia) + β₃(Edad)</li>
+                        <li><strong>Coeficientes parciales:</strong></li>
+                        <li>• β₁ mide el efecto de X₁ manteniendo las demás constantes</li>
+                        <li><strong>Hipótesis sobre coeficientes:</strong></li>
+                        <li>• H₀: βⱼ = 0 (la variable no tiene efecto)</li>
+                        <li>• H₁: βⱼ ≠ 0 (la variable sí tiene efecto)</li>
+                        <li><strong>Problemas comunes:</strong></li>
+                        <li>• <strong>Multicolinealidad:</strong> variables correlacionadas entre sí</li>
+                        <li>• <strong>Heterocedasticidad:</strong> varianza del error no es constante</li>
+                        <li>• <strong>Omitted variable bias:</strong> dejar fuera variables relevantes</li>
+                        <li><strong>Selección de variables:</strong></li>
+                        <li>• Stepwise, forward, backward selection</li>
+                        <li>• Criterios: AIC, BIC, R² ajustado</li>
+                        <li><strong>En economía:</strong> Se usa para estimar-returnos a educación, efecto de política, etc.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="tema">
+                <div class="tema-header">
+                    <h3>9. Series de Tiempo</h3>
+                    <span class="tema-icon">+</span>
+                </div>
+                <div class="tema-content">
+                    <ul>
+                        <li><strong>¿Qué son?</strong> Datos ordenados cronológicamente (PIB mensual, inflación anual)</li>
+                        <li><strong>Componentes:</strong></li>
+                        <li>• <strong>Tendencia:</strong> dirección a largo plazo (crecimiento del PIB)</li>
+                        <li>• <strong>Estacionalidad:</strong> patrones que se repiten (ventas navideñas)</li>
+                        <li>• <strong>Ciclo:</strong> fluctuaciones alrededor de la tendencia (recesiones)</li>
+                        <li>• <strong>Ruido:</strong> variación aleatoria</li>
+                        <li><strong>Estacionariedad:</strong></li>
+                        <li>• Media y varianza constantes en el tiempo</li>
+                        <li>• Test de Dickey-Fuller para verificar</li>
+                        <li>• Si no es estacionaria → primeras diferencias</li>
+                        <li><strong>Modelos comunes:</strong></li>
+                        <li>• <strong>Media móvil (MA):</strong> promedio de los últimos k períodos</li>
+                        <li>• <strong>Autoregresivo (AR):</strong> Yt depende de valores pasados</li>
+                        <li>• <strong>ARIMA:</strong> combinación de AR + I (integración) + MA</li>
+                        <li><strong>Pronóstico:</strong></li>
+                        <li>• Out-of-sample: reservar datos para validar</li>
+                        <li>• RMSE, MAE para evaluar precisión</li>
+                        <li><strong>Ejemplo:</strong> Predecir PIB del próximo trimestre usando datos históricos</li>
+                    </ul>
+                </div>
+            </article>
         </section>
     </main>
 
