@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,189 +12,60 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1466442929976-97f336a657be?w=1200&h=630&fit=crop">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        .economista-profile {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-
-        .profile-card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .profile-card:hover {
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-
-        .profile-header {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 0;
-        }
-
-        .profile-image-container {
-            position: relative;
-            overflow: hidden;
-            min-height: 400px;
-            background: var(--primary);
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            min-height: 400px;
-            object-fit: cover;
-            transition: transform 0.5s;
-            display: block;
-        }
-
-        .profile-card:hover .profile-image {
-            transform: scale(1.05);
-        }
-
-        .profile-school-badge {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .profile-content {
-            padding: 2.5rem;
-        }
-
-        .profile-name {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-years {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .profile-quote {
-            background: linear-gradient(135deg, var(--bg) 0%, transparent 100%);
-            border-left: 4px solid var(--primary);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0 12px 12px 0;
-            font-style: italic;
-            color: var(--text-dark);
-            line-height: 1.8;
-        }
-
-        .profile-quote cite {
-            display: block;
-            margin-top: 0.75rem;
-            font-style: normal;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .profile-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .profile-section h4 {
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .profile-section p {
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        .contributions-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .contributions-list li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
-            color: var(--text-dark);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .contributions-list li:last-child {
-            border-bottom: none;
-        }
-
-        .contributions-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            transition: gap 0.2s;
-        }
-
-        .back-btn:hover {
-            gap: 0.75rem;
-        }
-
-        @media (max-width: 900px) {
-            .profile-header {
-                grid-template-columns: 1fr;
-            }
-            .profile-image-container {
-                height: 300px;
-            }
-        }
+        .economista-profile { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
+        .profile-card { background: var(--card-bg); border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); margin-bottom: 3rem; border: 1px solid var(--border); transition: all 0.3s; }
+        .profile-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .profile-header { display: grid; grid-template-columns: 300px 1fr; gap: 0; }
+        .profile-image-container { position: relative; overflow: hidden; min-height: 400px; background: var(--primary); }
+        .profile-image { width: 100%; height: 100%; min-height: 400px; object-fit: cover; transition: transform 0.5s; display: block; }
+        .profile-card:hover .profile-image { transform: scale(1.05); }
+        .profile-school-badge { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); color: white; padding: 0.75rem 1.25rem; border-radius: 30px; font-weight: 600; font-size: 0.9rem; }
+        .profile-content { padding: 2.5rem; }
+        .profile-name { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .profile-years { color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 1.5rem; }
+        .profile-quote { background: linear-gradient(135deg, var(--bg) 0%, transparent 100%); border-left: 4px solid var(--primary); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 0 12px 12px 0; font-style: italic; color: var(--text-dark); line-height: 1.8; }
+        .profile-quote cite { display: block; margin-top: 0.75rem; font-style: normal; font-weight: 600; color: var(--primary); }
+        .profile-section { margin-bottom: 1.5rem; }
+        .profile-section h4 { color: var(--text-dark); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .profile-section p { color: var(--text-muted); line-height: 1.8; }
+        .contributions-list { list-style: none; padding: 0; }
+        .contributions-list li { padding: 0.75rem 0; padding-left: 2rem; position: relative; color: var(--text-dark); border-bottom: 1px solid var(--border); }
+        .contributions-list li:last-child { border-bottom: none; }
+        .contributions-list li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: gap 0.2s; }
+        .back-btn:hover { gap: 0.75rem; }
+        .reading-toggle { background: none; border: 2px solid var(--border); color: var(--text-dark); padding: 0.5rem 1rem; border-radius: 25px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .reading-toggle:hover { border-color: var(--primary); color: var(--primary); }
+        .filtros { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin: 2rem 0; }
+        .btn-filtro { padding: 0.6rem 1.25rem; border: 2px solid var(--border); border-radius: 30px; background: transparent; color: var(--text); cursor: pointer; font-weight: 500; transition: all 0.3s; font-size: 0.9rem; }
+        .btn-filtro:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-filtro.active { background: var(--primary); border-color: var(--primary); color: white; }
+        @media (max-width: 900px) { .profile-header { grid-template-columns: 1fr; } .profile-image-container { height: 300px; } }
     </style>
 </head>
 <body>
-    <header>
-        <h1><a href="index.html" class="header-link">Economía para Principiantes</a></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="datos-economicos.html">📊 Datos en Tiempo Real</a></li>
-                <li><a href="recursos.html">Recursos</a></li>
-                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
-                <li><button class="nav-toggle" aria-label="Menú" aria-expanded="false">☰</button></li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg sticky-top" style="background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.05)">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html" style="background:linear-gradient(135deg,#0d9488,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+                <i class="fa-solid fa-chart-line me-2" style="-webkit-text-fill-color:#0d9488"></i>Economía para Principiantes
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="datos-economicos.html"><i class="fa-solid fa-chart-simple me-1"></i>Datos</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="recursos.html">Recursos</a></li>
+                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm ms-2" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <section class="materia-header">
@@ -203,15 +74,17 @@
             <p>Los pensadores que formaron la ciencia económica</p>
         </section>
 
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <ol>
-                <li><a href="index.html">Inicio</a></li>
-                <li><span aria-current="page">Economistas</span></li>
+        <nav aria-label="breadcrumb" class="container my-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Economistas</li>
             </ol>
         </nav>
 
-        <div style="display:flex;justify-content:flex-end;margin:1rem 2rem">
-            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        <div class="container">
+            <div class="d-flex justify-content-end mb-3">
+                <button id="reading-toggle" class="reading-toggle"><i class="fa-solid fa-book-open me-1"></i> Leer</button>
+            </div>
         </div>
 
         <div class="filtros">
@@ -226,7 +99,6 @@
         <div class="economista-profile">
             <a href="index.html" class="back-btn">← Volver al inicio</a>
 
-            <!-- Adam Smith -->
             <div class="profile-card" id="adam-smith" data-school="clasica">
                 <div class="profile-header">
                     <div class="profile-image-container">
@@ -236,17 +108,14 @@
                     <div class="profile-content">
                         <h3 class="profile-name">Adam Smith</h3>
                         <p class="profile-years">1723 - 1790 • Escocia</p>
-                        
                         <div class="profile-quote">
                             "No es de la benevolencia del carnicero, del cervecero o del panadero que esperamos obtener lo que necesitamos, sino de la consideración que tienen por su propio interés."
                             <cite>— Adam Smith, La Riqueza de las Naciones</cite>
                         </div>
-
                         <div class="profile-section">
                             <h4>📝 Biografía</h4>
                             <p>Adam Smith es considerado el padre de la economía moderna. Nacido en Kirkcaldy, Escocia, estudió en la Universidad de Glasgow y Oxford. Fue profesor de lógica y luego de filosofía moral. Su obra más importante, "Una investigación sobre la naturaleza y causas de la riqueza de las naciones" (1776), sentó las bases del liberalismo económico y la economía clásica.</p>
                         </div>
-
                         <div class="profile-section">
                             <h4>💡 Aportes Principales</h4>
                             <ul class="contributions-list">
@@ -257,18 +126,15 @@
                                 <li>Capitalismo de laissez-faire</li>
                             </ul>
                         </div>
-
                         <div class="profile-section">
                             <h4>📚 Obras Importantes</h4>
                             <p>"La Riqueza de las Naciones" (1776), "Teoría de los sentimientos morales" (1759)</p>
                         </div>
-
                         <button class="share-btn" data-title="Adam Smith - Economía para Principiantes" data-text="Conoce a Adam Smith, padre de la economía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#adam-smith">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Karl Marx -->
             <div class="profile-card" id="karl-marx" data-school="marxista">
                 <div class="profile-header">
                     <div class="profile-image-container">
@@ -278,17 +144,14 @@
                     <div class="profile-content">
                         <h3 class="profile-name">Karl Marx</h3>
                         <p class="profile-years">1818 - 1883 • Alemania</p>
-                        
                         <div class="profile-quote">
                             "Los filósofos se han limitado a interpretar el mundo de diferentes maneras; lo que importa es transformarlo."
                             <cite>— Karl Marx, Tesis sobre Feuerbach</cite>
                         </div>
-
                         <div class="profile-section">
                             <h4>📝 Biografía</h4>
                             <p>Karl Marx fue un filósofo, economista, sociólogo y revolucionario alemán. Estudió derecho y filosofía en Bonn y Berlín. Junto con Friedrich Engels, desarrolló la teoría del materialismo histórico y el comunismo. Su obra más influyente, "El Capital" (Das Kapital), analiza las contradicciones del sistema capitalista y la lucha de clases.</p>
                         </div>
-
                         <div class="profile-section">
                             <h4>💡 Aportes Principales</h4>
                             <ul class="contributions-list">
@@ -299,18 +162,15 @@
                                 <li>Crítica a la acumulación de capital</li>
                             </ul>
                         </div>
-
                         <div class="profile-section">
                             <h4>📚 Obras Importantes</h4>
                             <p>"El Capital" (1867), "Manifiesto del Partido Comunista" (1848), "Grundrisse" (1857-1858)</p>
                         </div>
-
                         <button class="share-btn" data-title="Karl Marx - Economía para Principiantes" data-text="Conoce a Karl Marx, filósofo y economista alemán" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#karl-marx">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
-            <!-- John Maynard Keynes -->
             <div class="profile-card" id="keynes" data-school="keynesiana">
                 <div class="profile-header">
                     <div class="profile-image-container">
@@ -320,17 +180,14 @@
                     <div class="profile-content">
                         <h3 class="profile-name">John Maynard Keynes</h3>
                         <p class="profile-years">1883 - 1946 • Reino Unido</p>
-                        
                         <div class="profile-quote">
                             "En el largo plazo, todos estaremos muertos."
                             <cite>— John Maynard Keynes</cite>
                         </div>
-
                         <div class="profile-section">
                             <h4>📝 Biografía</h4>
                             <p>John Maynard Keynes fue un economista británico que revolucionó la teoría económica y las políticas públicas. Estudió matemáticas en Cambridge y trabajó para el Tesoro Británico durante la Primera Guerra Mundial. Su obra "Teoría General del Empleo, el Interés y el Dinero" (1936) sentó las bases de la macroeconomía moderna y justificó la intervención del Estado para estabilizar la economía.</p>
                         </div>
-
                         <div class="profile-section">
                             <h4>💡 Aportes Principales</h4>
                             <ul class="contributions-list">
@@ -341,18 +198,15 @@
                                 <li>Fundación del FMI y Banco Mundial</li>
                             </ul>
                         </div>
-
                         <div class="profile-section">
                             <h4>📚 Obras Importantes</h4>
                             <p>"Teoría General del Empleo, el Interés y el Dinero" (1936), "Tratado sobre la moneda" (1930)</p>
                         </div>
-
                         <button class="share-btn" data-title="John Maynard Keynes - Economía para Principiantes" data-text="Conoce a Keynes, fundador del keynesianismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#keynes">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Milton Friedman -->
             <div class="profile-card" id="friedman" data-school="monetarista">
                 <div class="profile-header">
                     <div class="profile-image-container">
@@ -362,17 +216,14 @@
                     <div class="profile-content">
                         <h3 class="profile-name">Milton Friedman</h3>
                         <p class="profile-years">1912 - 2006 • Estados Unidos</p>
-                        
                         <div class="profile-quote">
                             "La inflación es siempre y en todas partes un fenómeno monetario."
                             <cite>— Milton Friedman</cite>
                         </div>
-
                         <div class="profile-section">
                             <h4>📝 Biografía</h4>
                             <p>Milton Friedman fue un economista estadounidense y defensor del libre mercado. Obtuvo su doctorado en la Universidad de Chicago, donde fue profesor durante décadas. Ganó el Premio Nobel de Economía en 1976 por sus análisis del consumo, la historia monetaria y la complejidad de la estabilización política. Fue asesor de Ronald Reagan y Margaret Thatcher.</p>
                         </div>
-
                         <div class="profile-section">
                             <h4>💡 Aportes Principales</h4>
                             <ul class="contributions-list">
@@ -383,18 +234,15 @@
                                 <li>Voucher educativo y desregulación</li>
                             </ul>
                         </div>
-
                         <div class="profile-section">
                             <h4>📚 Obras Importantes</h4>
                             <p>"Capitalismo y Libertad" (1962), "Una historia monetaria de Estados Unidos" (1963), "Libre para elegir" (1980)</p>
                         </div>
-
                         <button class="share-btn" data-title="Milton Friedman - Economía para Principiantes" data-text="Conoce a Milton Friedman, líder del monetarismo" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#friedman">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
-            <!-- David Ricardo -->
             <div class="profile-card" id="ricardo" data-school="clasica">
                 <div class="profile-header">
                     <div class="profile-image-container">
@@ -404,17 +252,14 @@
                     <div class="profile-content">
                         <h3 class="profile-name">David Ricardo</h3>
                         <p class="profile-years">1772 - 1823 • Reino Unido</p>
-                        
                         <div class="profile-quote">
                             "La utilidad no es la medida de los valores interchangeables, aunque sea absolutamente esencial para su existencia."
                             <cite>— David Ricardo, Principios de Economía Política</cite>
                         </div>
-
                         <div class="profile-section">
                             <h4>📝 Biografía</h4>
                             <p>David Ricardo fue un economista británico considerado uno de los padres de la economía clásica. Nacido en una familia judía de origen holandés, se hizo rico como agente de bolsa antes de dedicarse a la economía. Fue miembro del Parlamento británico. Su teoría de la ventaja comparativa sigue siendo fundamental en el comercio internacional.</p>
                         </div>
-
                         <div class="profile-section">
                             <h4>💡 Aportes Principales</h4>
                             <ul class="contributions-list">
@@ -425,18 +270,15 @@
                                 <li>Principio de Say y flujo circular</li>
                             </ul>
                         </div>
-
                         <div class="profile-section">
                             <h4>📚 Obras Importantes</h4>
                             <p>"Principios de Economía Política y Tributación" (1817)</p>
                         </div>
-
                         <button class="share-btn" data-title="David Ricardo - Economía para Principiantes" data-text="Conoce a David Ricardo, economista clásico" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#ricardo">📤 Compartir</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Alfred Marshall -->
             <div class="profile-card" id="marshall" data-school="neoclasica">
                 <div class="profile-header">
                     <div class="profile-image-container">
@@ -446,17 +288,14 @@
                     <div class="profile-content">
                         <h3 class="profile-name">Alfred Marshall</h3>
                         <p class="profile-years">1842 - 1924 • Reino Unido</p>
-                        
                         <div class="profile-quote">
                             "Los economistas deben ser fríos como los cirujanos, aunque dispuestos, al fin, a derramar su sangre y sudor por la humanidad."
                             <cite>— Alfred Marshall</cite>
                         </div>
-
                         <div class="profile-section">
                             <h4>📝 Biografía</h4>
                             <p>Alfred Marshall fue un economista británico y principal representante de la escuela neoclásica. Estudió matemáticas en Cambridge, donde fue profesor durante muchos años. Su obra "Principios de Economía" (1890) fue el texto de economía más utilizado durante décadas. Desarrolló el análisis de oferta y demanda que usamos hoy.</p>
                         </div>
-
                         <div class="profile-section">
                             <h4>💡 Aportes Principales</h4>
                             <ul class="contributions-list">
@@ -467,12 +306,10 @@
                                 <li>Distinción entre corto y largo plazo</li>
                             </ul>
                         </div>
-
                         <div class="profile-section">
                             <h4>📚 Obras Importantes</h4>
                             <p>"Principios de Economía" (1890)</p>
                         </div>
-
                         <button class="share-btn" data-title="Alfred Marshall - Economía para Principiantes" data-text="Conoce a Alfred Marshall, padre de la microeconomía moderna" data-url="https://rodrigocapiz67-tech.github.io/economia-academica/economistas.html#marshall">📤 Compartir</button>
                     </div>
                 </div>
@@ -482,10 +319,20 @@
 
     <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
 
-    <footer>
-        <p>Economía para Principiantes - Economistas destacados</p>
+    <footer class="text-center py-4" style="background:var(--bs-dark);color:white">
+        <p class="mb-0 opacity-75">Economía para Principiantes - Economistas destacados</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        const observer = new MutationObserver(() => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-bs-theme', theme === 'dark' ? 'dark' : 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        const initTheme = document.documentElement.getAttribute('data-theme');
+        if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
+    </script>
 </body>
 </html>

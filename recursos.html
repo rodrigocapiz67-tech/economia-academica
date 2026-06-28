@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,195 +12,62 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&h=630&fit=crop">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        .recursos-container {
-            max-width: 1400px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-
-        .recursos-hero {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .recursos-hero h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .recursos-hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .category-section {
-            margin-bottom: 4rem;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid var(--primary);
-        }
-
-        .category-icon {
-            font-size: 2.5rem;
-        }
-
-        .category-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .category-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .resource-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.75rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .resource-card-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .resource-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
+        .recursos-container { max-width: 1400px; margin: 3rem auto; padding: 0 2rem; }
+        .recursos-hero { text-align: center; margin-bottom: 4rem; }
+        .recursos-hero h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .recursos-hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+        .category-section { margin-bottom: 4rem; }
+        .category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 3px solid var(--primary); }
+        .category-icon { font-size: 2.5rem; }
+        .category-title { font-size: 1.8rem; font-weight: 700; color: var(--text-dark); }
+        .category-desc { color: var(--text-muted); font-size: 0.95rem; }
+        .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+        .resource-card { background: var(--card-bg); border-radius: 16px; padding: 1.75rem; border: 1px solid var(--border); transition: all 0.3s; display: flex; flex-direction: column; }
+        .resource-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .resource-card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+        .resource-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
         .resource-icon.blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
         .resource-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
         .resource-icon.purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
         .resource-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
         .resource-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
         .resource-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
-
-        .resource-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .resource-tag {
-            font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
-            background: var(--bg);
-            border-radius: 20px;
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .resource-description {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 1.25rem;
-            flex-grow: 1;
-        }
-
-        .resource-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: gap 0.2s;
-        }
-
-        .resource-link:hover {
-            gap: 0.75rem;
-        }
-
-        .data-highlight {
-            background: linear-gradient(135deg, var(--bg) 0%, transparent 100%);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .data-highlight-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
-        }
-
-        .data-highlight-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        @media (max-width: 768px) {
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-            .category-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-        }
+        .resource-title { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.25rem; }
+        .resource-tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; background: var(--bg); border-radius: 20px; color: var(--primary); font-weight: 500; }
+        .resource-description { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; flex-grow: 1; }
+        .resource-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; font-weight: 600; transition: gap 0.2s; }
+        .resource-link:hover { gap: 0.75rem; }
+        .data-highlight { background: linear-gradient(135deg, var(--bg) 0%, transparent 100%); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+        .data-highlight-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+        .data-highlight-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .reading-toggle { background: none; border: 2px solid var(--border); color: var(--text-dark); padding: 0.5rem 1rem; border-radius: 25px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .reading-toggle:hover { border-color: var(--primary); color: var(--primary); }
+        @media (max-width: 768px) { .resources-grid { grid-template-columns: 1fr; } .category-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; } }
     </style>
 </head>
 <body>
-    <header>
-        <h1><a href="index.html" class="header-link">Economía para Principiantes</a></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="economistas.html">Economistas</a></li>
-                <li><a href="datos-economicos.html">📊 Datos en Tiempo Real</a></li>
-                <li><button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button></li>
-                <li><button class="nav-toggle" aria-label="Menú" aria-expanded="false">☰</button></li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg sticky-top" style="background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.05)">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html" style="background:linear-gradient(135deg,#0d9488,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+                <i class="fa-solid fa-chart-line me-2" style="-webkit-text-fill-color:#0d9488"></i>Economía para Principiantes
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="economistas.html">Economistas</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="datos-economicos.html"><i class="fa-solid fa-chart-simple me-1"></i>Datos</a></li>
+                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm ms-2" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main>
         <section class="materia-header">
@@ -209,15 +76,17 @@
             <p>Fuentes oficiales, herramientas y material de estudio</p>
         </section>
 
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <ol>
-                <li><a href="index.html">Inicio</a></li>
-                <li><span aria-current="page">Recursos</span></li>
+        <nav aria-label="breadcrumb" class="container my-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Recursos</li>
             </ol>
         </nav>
 
-        <div style="display:flex;justify-content:flex-end;max-width:1400px;margin:0 auto;padding:0 2rem">
-            <button id="reading-toggle" class="reading-toggle">📖 Leer</button>
+        <div class="container">
+            <div class="d-flex justify-content-end mb-3">
+                <button id="reading-toggle" class="reading-toggle"><i class="fa-solid fa-book-open me-1"></i> Leer</button>
+            </div>
         </div>
 
         <div class="recursos-container">
@@ -226,7 +95,6 @@
                 <p>Todo lo que necesitas para tu carrera de economía en un solo lugar</p>
             </div>
 
-            <!-- Datos Oficiales del Perú -->
             <div class="category-section">
                 <div class="category-header">
                     <span class="category-icon">🏛️</span>
@@ -239,10 +107,7 @@
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon blue">📊</div>
-                            <div>
-                                <h4 class="resource-title">INEI</h4>
-                                <span class="resource-tag">Estadísticas</span>
-                            </div>
+                            <div><h4 class="resource-title">INEI</h4><span class="resource-tag">Estadísticas</span></div>
                         </div>
                         <p class="resource-description">Instituto Nacional de Estadística e Informática. Encuestas ENAHO, IPC, PBI, censos económicos y microdatos para investigación.</p>
                         <div class="data-highlight">
@@ -251,14 +116,10 @@
                         </div>
                         <a href="https://www.inei.gob.pe" target="_blank" class="resource-link">Visitar sitio →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon green">🏦</div>
-                            <div>
-                                <h4 class="resource-title">BCRP</h4>
-                                <span class="resource-tag">Monetario</span>
-                            </div>
+                            <div><h4 class="resource-title">BCRP</h4><span class="resource-tag">Monetario</span></div>
                         </div>
                         <p class="resource-description">Banco Central de Reserva del Perú. Reporte de inflación, tipo de cambio, tasas de interés, series temporales del PBI y más.</p>
                         <div class="data-highlight">
@@ -267,14 +128,10 @@
                         </div>
                         <a href="https://www.bcrp.gob.pe" target="_blank" class="resource-link">Visitar sitio →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon purple">💰</div>
-                            <div>
-                                <h4 class="resource-title">MEF</h4>
-                                <span class="resource-tag">Fiscal</span>
-                            </div>
+                            <div><h4 class="resource-title">MEF</h4><span class="resource-tag">Fiscal</span></div>
                         </div>
                         <p class="resource-description">Ministerio de Economía y Finanzas. Marco Macroeconómico Multianual, Presupuesto, Databook y datos fiscales.</p>
                         <div class="data-highlight">
@@ -283,26 +140,18 @@
                         </div>
                         <a href="https://www.mef.gob.pe" target="_blank" class="resource-link">Visitar sitio →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon orange">📈</div>
-                            <div>
-                                <h4 class="resource-title">SBS</h4>
-                                <span class="resource-tag">Financiero</span>
-                            </div>
+                            <div><h4 class="resource-title">SBS</h4><span class="resource-tag">Financiero</span></div>
                         </div>
                         <p class="resource-description">Superintendencia de Banca, Seguros y AFP. Estadísticas del sistema financiero, mercado de valores y aseguradoras.</p>
                         <a href="https://www.sbs.gob.pe" target="_blank" class="resource-link">Visitar sitio →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon teal">🌐</div>
-                            <div>
-                                <h4 class="resource-title">Sunat</h4>
-                                <span class="resource-tag">Tributario</span>
-                            </div>
+                            <div><h4 class="resource-title">Sunat</h4><span class="resource-tag">Tributario</span></div>
                         </div>
                         <p class="resource-description">Superintendencia Nacional de Aduanas y de Administración Tributaria. Datos de comercio exterior e impuestos.</p>
                         <a href="https://www.sunat.gob.pe" target="_blank" class="resource-link">Visitar sitio →</a>
@@ -310,7 +159,6 @@
                 </div>
             </div>
 
-            <!-- Encuestas para Investigación -->
             <div class="category-section">
                 <div class="category-header">
                     <span class="category-icon">📋</span>
@@ -323,46 +171,31 @@
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon blue">🏠</div>
-                            <div>
-                                <h4 class="resource-title">ENAHO</h4>
-                                <span class="resource-tag">Hogares</span>
-                            </div>
+                            <div><h4 class="resource-title">ENAHO</h4><span class="resource-tag">Hogares</span></div>
                         </div>
                         <p class="resource-description">Encuesta Nacional de Hogares. Mide pobreza, empleo, ingresos, gasto y condiciones de vida. Datos desde 1994.</p>
                         <a href="https://iinei.inei.gob.pe/microdatos" target="_blank" class="resource-link">Descargar microdatos →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon green">👶</div>
-                            <div>
-                                <h4 class="resource-title">ENADEF</h4>
-                                <span class="resource-tag">Demografía</span>
-                            </div>
+                            <div><h4 class="resource-title">ENADEF</h4><span class="resource-tag">Demografía</span></div>
                         </div>
                         <p class="resource-description">Encuesta Nacional de Demografía y Familia. Fecundidad, planificación familiar, salud reproductiva.</p>
                         <a href="https://iinei.inei.gob.pe/microdatos" target="_blank" class="resource-link">Descargar microdatos →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon purple">🏭</div>
-                            <div>
-                                <h4 class="resource-title">Encuesta Industrial</h4>
-                                <span class="resource-tag">Empresas</span>
-                            </div>
+                            <div><h4 class="resource-title">Encuesta Industrial</h4><span class="resource-tag">Empresas</span></div>
                         </div>
                         <p class="resource-description">Encuesta Industrial Mensual. Producción industrial, capacidad instalada, empleo manufacturero.</p>
                         <a href="https://www.inei.gob.pe" target="_blank" class="resource-link">Ver más →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon orange">💼</div>
-                            <div>
-                                <h4 class="resource-title">ENPOVE</h4>
-                                <span class="resource-tag">Pobreza</span>
-                            </div>
+                            <div><h4 class="resource-title">ENPOVE</h4><span class="resource-tag">Pobreza</span></div>
                         </div>
                         <p class="resource-description">Encuesta de Pobreza y Vulnerabilidad. Pobreza monetaria y no monetaria, acceso a servicios.</p>
                         <a href="https://iinei.inei.gob.pe/microdatos" target="_blank" class="resource-link">Descargar microdatos →</a>
@@ -370,7 +203,6 @@
                 </div>
             </div>
 
-            <!-- Libros y Textos -->
             <div class="category-section">
                 <div class="category-header">
                     <span class="category-icon">📚</span>
@@ -383,70 +215,47 @@
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon blue">📖</div>
-                            <div>
-                                <h4 class="resource-title">Principios de Economía (PDF)</h4>
-                                <span class="resource-tag">Introductorio</span>
-                            </div>
+                            <div><h4 class="resource-title">Principios de Economía (PDF)</h4><span class="resource-tag">Introductorio</span></div>
                         </div>
                         <p class="resource-description">N. Gregory Mankiw. El texto introductorio más utilizado en universidades del mundo. Cubre micro y macroeconomía con ejemplos actuales.</p>
                         <a href="https://archive.org/details/principios-de-economia-mankiw" target="_blank" class="resource-link">Buscar en Archive.org →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon green">📖</div>
-                            <div>
-                                <h4 class="resource-title">La Riqueza de las Naciones (Gratis)</h4>
-                                <span class="resource-tag">Clásico</span>
-                            </div>
+                            <div><h4 class="resource-title">La Riqueza de las Naciones (Gratis)</h4><span class="resource-tag">Clásico</span></div>
                         </div>
                         <p class="resource-description">Adam Smith. La obra fundacional de la economía moderna. Libre mercado, división del trabajo y mano invisible. Disponible gratis por ser obra de dominio público.</p>
                         <a href="https://www.filosofia.org/cla/ads/ric00.htm" target="_blank" class="resource-link">Leer gratis en español →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon purple">📖</div>
-                            <div>
-                                <h4 class="resource-title">OpenStax - Economía (Gratis)</h4>
-                                <span class="resource-tag">Gratuito</span>
-                            </div>
+                            <div><h4 class="resource-title">OpenStax - Economía (Gratis)</h4><span class="resource-tag">Gratuito</span></div>
                         </div>
                         <p class="resource-description">Texto universitario gratuito en español. Cubre principios de micro y macroeconomía. Incluye ejercicios y casos.</p>
                         <a href="https://openstax.org/details/books/economia-principios-1edicion" target="_blank" class="resource-link">Descargar gratis →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon orange">📖</div>
-                            <div>
-                                <h4 class="resource-title">Principios de Microeconomía</h4>
-                                <span class="resource-tag">Intermedio</span>
-                            </div>
+                            <div><h4 class="resource-title">Principios de Microeconomía</h4><span class="resource-tag">Intermedio</span></div>
                         </div>
                         <p class="resource-description">Mankiw. Análisis de oferta y demanda, mercados, consumidores, productores y fallos de mercado.</p>
                         <a href="https://openstax.org/details/books/principios-de-microeconomia-4edicion" target="_blank" class="resource-link">Descargar gratis →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon teal">📖</div>
-                            <div>
-                                <h4 class="resource-title">Principios de Macroeconomía</h4>
-                                <span class="resource-tag">Intermedio</span>
-                            </div>
+                            <div><h4 class="resource-title">Principios de Macroeconomía</h4><span class="resource-tag">Intermedio</span></div>
                         </div>
                         <p class="resource-description">Mankiw. PIB, inflación, desempleo, política fiscal y monetaria. Texto completo y actualizado.</p>
                         <a href="https://openstax.org/details/books/principios-de-macroeconomia-4edicion" target="_blank" class="resource-link">Descargar gratis →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon red">📖</div>
-                            <div>
-                                <h4 class="resource-title">Introducción a la Econometría</h4>
-                                <span class="resource-tag">Avanzado</span>
-                            </div>
+                            <div><h4 class="resource-title">Introducción a la Econometría</h4><span class="resource-tag">Avanzado</span></div>
                         </div>
                         <p class="resource-description">Wooldridge. Regresión, panel de datos, variables instrumentales. El estándar para cursos de econometría.</p>
                         <a href="https://www.cengage.com/search/?q=wooldridge+econometria" target="_blank" class="resource-link">Ver opciones →</a>
@@ -454,7 +263,6 @@
                 </div>
             </div>
 
-            <!-- Cursos y Plataformas -->
             <div class="category-section">
                 <div class="category-header">
                     <span class="category-icon">🎓</span>
@@ -467,46 +275,31 @@
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon green">🟢</div>
-                            <div>
-                                <h4 class="resource-title">Khan Academy</h4>
-                                <span class="resource-tag">Gratuito</span>
-                            </div>
+                            <div><h4 class="resource-title">Khan Academy</h4><span class="resource-tag">Gratuito</span></div>
                         </div>
                         <p class="resource-description">Cursos completos de micro y macroeconomía. Ejercicios interactivos y videos explicativos.</p>
                         <a href="https://www.khanacademy.org/economics-finance-domain" target="_blank" class="resource-link">Empezar curso →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon blue">🔵</div>
-                            <div>
-                                <h4 class="resource-title">Coursera</h4>
-                                <span class="resource-tag">Certificado</span>
-                            </div>
+                            <div><h4 class="resource-title">Coursera</h4><span class="resource-tag">Certificado</span></div>
                         </div>
                         <p class="resource-description">Cursos de universidades como Yale, Chicago, IMF. Certificados verificables.</p>
                         <a href="https://www.coursera.org/browse/business/economics" target="_blank" class="resource-link">Ver cursos →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon red">🔴</div>
-                            <div>
-                                <h4 class="resource-title">edX</h4>
-                                <span class="resource-tag">Universitario</span>
-                            </div>
+                            <div><h4 class="resource-title">edX</h4><span class="resource-tag">Universitario</span></div>
                         </div>
                         <p class="resource-description">Cursos de MIT, Harvard y otras universidades. Economía básica y avanzada.</p>
                         <a href="https://www.edx.org/learn/economics" target="_blank" class="resource-link">Explorar →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon purple">🎥</div>
-                            <div>
-                                <h4 class="resource-title">MIT OpenCourseWare</h4>
-                                <span class="resource-tag">Gratuito</span>
-                            </div>
+                            <div><h4 class="resource-title">MIT OpenCourseWare</h4><span class="resource-tag">Gratuito</span></div>
                         </div>
                         <p class="resource-description">Material completo del MIT. Lecturas, tareas, exámenes y videos.</p>
                         <a href="https://ocw.mit.edu/courses/economics/" target="_blank" class="resource-link">Acceder →</a>
@@ -514,7 +307,6 @@
                 </div>
             </div>
 
-            <!-- Herramientas -->
             <div class="category-section">
                 <div class="category-header">
                     <span class="category-icon">🛠️</span>
@@ -527,70 +319,47 @@
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon blue">📊</div>
-                            <div>
-                                <h4 class="resource-title">Stata</h4>
-                                <span class="resource-tag">Estadístico</span>
-                            </div>
+                            <div><h4 class="resource-title">Stata</h4><span class="resource-tag">Estadístico</span></div>
                         </div>
                         <p class="resource-description">Estándar en investigación económica. Regresión, paneles, series de tiempo, econometría.</p>
                         <a href="https://www.stata.com" target="_blank" class="resource-link">Descargar →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon green">📈</div>
-                            <div>
-                                <h4 class="resource-title">R / RStudio</h4>
-                                <span class="resource-tag">Gratuito</span>
-                            </div>
+                            <div><h4 class="resource-title">R / RStudio</h4><span class="resource-tag">Gratuito</span></div>
                         </div>
                         <p class="resource-description">Lenguaje de programación estadística. Paquetes: econometrics, plm, AER.</p>
                         <a href="https://posit.co/download/rstudio-desktop/" target="_blank" class="resource-link">Descargar gratis →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon purple">🐍</div>
-                            <div>
-                                <h4 class="resource-title">Python</h4>
-                                <span class="resource-tag">Gratuito</span>
-                            </div>
+                            <div><h4 class="resource-title">Python</h4><span class="resource-tag">Gratuito</span></div>
                         </div>
                         <p class="resource-description">Con pandas, numpy, statsmodels, linearmodels. Ideal para big data y machine learning.</p>
                         <a href="https://www.python.org" target="_blank" class="resource-link">Descargar →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon orange">🔬</div>
-                            <div>
-                                <h4 class="resource-title">Google Scholar</h4>
-                                <span class="resource-tag">Académico</span>
-                            </div>
+                            <div><h4 class="resource-title">Google Scholar</h4><span class="resource-tag">Académico</span></div>
                         </div>
                         <p class="resource-description">Buscador de papers académicos. Acceso a artículos, tesis y libros de investigación.</p>
                         <a href="https://scholar.google.com" target="_blank" class="resource-link">Buscar papers →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon teal">🌐</div>
-                            <div>
-                                <h4 class="resource-title">Banco Mundial</h4>
-                                <span class="resource-tag">Datos Globales</span>
-                            </div>
+                            <div><h4 class="resource-title">Banco Mundial</h4><span class="resource-tag">Datos Globales</span></div>
                         </div>
                         <p class="resource-description">Indicadores de 200+ países. PIB, inflación, pobreza, educación, salud, comercio.</p>
                         <a href="https://data.worldbank.org" target="_blank" class="resource-link">Explorar datos →</a>
                     </div>
-
                     <div class="resource-card">
                         <div class="resource-card-header">
                             <div class="resource-icon red">🏛️</div>
-                            <div>
-                                <h4 class="resource-title">FMI</h4>
-                                <span class="resource-tag">Internacional</span>
-                            </div>
+                            <div><h4 class="resource-title">FMI</h4><span class="resource-tag">Internacional</span></div>
                         </div>
                         <p class="resource-description">Fondo Monetario Internacional. World Economic Outlook, datos financieros, proyecciones.</p>
                         <a href="https://www.imf.org/en/Data" target="_blank" class="resource-link">Acceder →</a>
@@ -602,10 +371,20 @@
 
     <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
 
-    <footer>
-        <p>Economía para Principiantes - Centro de Recursos</p>
+    <footer class="text-center py-4" style="background:var(--bs-dark);color:white">
+        <p class="mb-0 opacity-75">Economía para Principiantes - Centro de Recursos</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        const observer = new MutationObserver(() => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-bs-theme', theme === 'dark' ? 'dark' : 'light');
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        const initTheme = document.documentElement.getAttribute('data-theme');
+        if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
+    </script>
 </body>
 </html>
