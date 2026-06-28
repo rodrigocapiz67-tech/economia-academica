@@ -512,6 +512,41 @@
 
                 </div>
             </div>
+
+            <div class="card shadow border-0 mt-5">
+                <div class="card-header bg-dark text-white p-3">
+                    <h3 class="mb-0"><i class="fa-solid fa-chart-line me-2"></i> Simulador de Mercado: Oferta y Demanda</h3>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-muted">Desplaza las barras para simular choques en el mercado (ej. un aumento en el ingreso de los consumidores o un impuesto a los productores) y observa cómo cambia el equilibrio.</p>
+                    
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="mb-4 p-3 bg-light rounded border border-primary border-opacity-25">
+                                <label class="form-label fw-bold text-primary">Desplazar Demanda: <span id="valDemanda">0</span></label>
+                                <input type="range" class="form-range" id="slideDemanda" min="-40" max="40" value="0">
+                                <small class="text-muted d-block mt-1">Mueve a la derecha para un aumento en la demanda.</small>
+                            </div>
+
+                            <div class="mb-4 p-3 bg-light rounded border border-success border-opacity-25">
+                                <label class="form-label fw-bold text-success">Desplazar Oferta: <span id="valOferta">0</span></label>
+                                <input type="range" class="form-range" id="slideOferta" min="-40" max="40" value="0">
+                                <small class="text-muted d-block mt-1">Mueve a la derecha para un aumento en la oferta.</small>
+                            </div>
+
+                            <div class="mt-4 p-3 bg-dark text-white rounded text-center shadow-sm">
+                                <h5 class="text-uppercase text-muted small mb-3">Punto de Equilibrio</h5>
+                                <h4 class="mb-1">Precio (P*): <span id="precioEq" class="text-warning fw-bold">50</span></h4>
+                                <h4>Cantidad (Q*): <span id="cantidadEq" class="text-info fw-bold">50</span></h4>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-7 mt-4 mt-md-0">
+                            <canvas id="graficoMercado"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -522,6 +557,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
     <script src="../js/main.js"></script>
     <script>
         const observer = new MutationObserver(() => {
@@ -531,6 +567,97 @@
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
         const initTheme = document.documentElement.getAttribute('data-theme');
         if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
+
+        let ctxMercado = document.getElementById('graficoMercado').getContext('2d');
+        let chartMercado;
+
+        function actualizarMercado() {
+            let shiftD = parseInt(document.getElementById('slideDemanda').value);
+            let shiftS = parseInt(document.getElementById('slideOferta').value);
+
+            document.getElementById('valDemanda').innerText = shiftD > 0 ? "+" + shiftD : shiftD;
+            document.getElementById('valOferta').innerText = shiftS > 0 ? "+" + shiftS : shiftS;
+
+            let qEq = (100 + shiftD + shiftS) / 2;
+            let pEq = qEq - shiftS;
+
+            document.getElementById('precioEq').innerText = pEq.toFixed(1);
+            document.getElementById('cantidadEq').innerText = qEq.toFixed(1);
+
+            let dataDemanda = [];
+            let dataOferta = [];
+            for(let q = 0; q <= 100; q += 10) {
+                dataDemanda.push({x: q, y: 100 - q + shiftD});
+                dataOferta.push({x: q, y: q - shiftS});
+            }
+
+            if (chartMercado) {
+                chartMercado.destroy();
+            }
+
+            chartMercado = new Chart(ctxMercado, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Demanda',
+                            data: dataDemanda,
+                            borderColor: '#0d6efd',
+                            backgroundColor: '#0d6efd',
+                            showLine: true,
+                            borderWidth: 3,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Oferta',
+                            data: dataOferta,
+                            borderColor: '#198754',
+                            backgroundColor: '#198754',
+                            showLine: true,
+                            borderWidth: 3,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Equilibrio',
+                            data: [{x: qEq, y: pEq}],
+                            backgroundColor: '#ffc107',
+                            borderColor: '#000',
+                            borderWidth: 2,
+                            pointRadius: 8,
+                            pointHoverRadius: 10
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Cantidad (Q)', font: {size: 14, weight: 'bold'} },
+                            min: 0,
+                            max: 120
+                        },
+                        y: {
+                            title: { display: true, text: 'Precio (P)', font: {size: 14, weight: 'bold'} },
+                            min: 0,
+                            max: 120
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': (Q: ' + context.parsed.x.toFixed(1) + ', P: ' + context.parsed.y.toFixed(1) + ')';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('slideDemanda').addEventListener('input', actualizarMercado);
+        document.getElementById('slideOferta').addEventListener('input', actualizarMercado);
+        actualizarMercado();
 
         function verificarRespuesta(nombreRadio, idFeedback, explicacion) {
             let opciones = document.getElementsByName(nombreRadio);
