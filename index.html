@@ -124,12 +124,8 @@
                                 
                                 <ul class="list-group list-group-flush border-top border-secondary border-opacity-25">
                                     <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-body">
-                                        Tipo de Cambio (Compra)
-                                        <span class="fw-bold text-success">S/ 3.75</span>
-                                    </li>
-                                    <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-body">
-                                        Tipo de Cambio (Venta)
-                                        <span class="fw-bold text-danger">S/ 3.78</span>
+                                        Tipo de Cambio (USD)
+                                        <span id="valor-dolar" class="fw-bold text-success">Cargando... <i class="fa-solid fa-spinner fa-spin ms-1"></i></span>
                                     </li>
                                     <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-body">
                                         Tasa de Referencia BCRP
@@ -141,7 +137,7 @@
                                     </li>
                                 </ul>
                                 <div class="mt-3 text-center">
-                                    <small class="text-muted">Actualizado: Junio 2026</small>
+                                    <small id="fecha-actualizacion" class="text-muted">Conectando con el mercado...</small>
                                 </div>
                             </div>
                         </div>
@@ -267,6 +263,23 @@
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
         const initTheme = document.documentElement.getAttribute('data-theme');
         if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
+
+        async function cargarTipoCambio() {
+            const spanValor = document.getElementById('valor-dolar');
+            const spanFecha = document.getElementById('fecha-actualizacion');
+            try {
+                let res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                if (!res.ok) throw new Error('Error ' + res.status);
+                let data = await res.json();
+                let pen = data.rates.PEN;
+                spanValor.innerHTML = `S/ ${pen.toFixed(2)}`;
+                spanFecha.textContent = 'Actualizado: ' + new Date().toLocaleString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            } catch {
+                spanValor.innerHTML = 'No disponible';
+                spanFecha.textContent = 'No se pudo conectar con el mercado';
+            }
+        }
+        cargarTipoCambio();
     </script>
 </body>
 </html>
