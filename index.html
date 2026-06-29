@@ -264,22 +264,23 @@
         const initTheme = document.documentElement.getAttribute('data-theme');
         if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
 
-        async function cargarTipoCambio() {
-            const spanValor = document.getElementById('valor-dolar');
-            const spanFecha = document.getElementById('fecha-actualizacion');
+        async function obtenerTipoDeCambio() {
             try {
-                let res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-                if (!res.ok) throw new Error('Error ' + res.status);
-                let data = await res.json();
-                let pen = data.rates.PEN;
-                spanValor.innerHTML = `S/ ${pen.toFixed(2)}`;
-                spanFecha.textContent = 'Actualizado: ' + new Date().toLocaleString('es-PE', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-            } catch {
-                spanValor.innerHTML = 'No disponible';
-                spanFecha.textContent = 'No se pudo conectar con el mercado';
+                const respuesta = await fetch('https://open.er-api.com/v6/latest/USD');
+                const datos = await respuesta.json();
+                const valorPEN = datos.rates.PEN;
+                document.getElementById('valor-dolar').innerHTML = 'S/ ' + valorPEN.toFixed(3);
+                const fechaHoy = new Date().toLocaleDateString('es-PE', { 
+                    day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' 
+                });
+                document.getElementById('fecha-actualizacion').innerText = 'Actualizado: ' + fechaHoy;
+            } catch (error) {
+                console.error("No se pudo conectar al mercado:", error);
+                document.getElementById('valor-dolar').innerHTML = '<span class="text-danger">Error de red</span>';
+                document.getElementById('fecha-actualizacion').innerText = 'Actualización manual requerida';
             }
         }
-        cargarTipoCambio();
+        document.addEventListener('DOMContentLoaded', obtenerTipoDeCambio);
     </script>
 </body>
 </html>
