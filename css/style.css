@@ -18,8 +18,40 @@
     --border: #99f6e4;
     --card-bg: #ffffff;
     --header-bg: linear-gradient(135deg, #0d9488 0%, #06b6d4 100%);
-    --shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.1);
-    --shadow-hover: 0 25px 50px -12px rgba(13, 148, 136, 0.35);
+
+    /* Elevation tokens (consistent shadow scale) */
+    --elevation-0: none;
+    --elevation-1: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    --elevation-2: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+    --elevation-3: 0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.05);
+    --elevation-4: 0 20px 25px rgba(0,0,0,0.1), 0 8px 10px rgba(0,0,0,0.04);
+    --elevation-5: 0 25px 50px rgba(0,0,0,0.15);
+    --shadow: var(--elevation-2);
+    --shadow-hover: var(--elevation-4);
+
+    /* Type scale (modular, rem-based) */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 2rem;
+    --text-4xl: 2.5rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+
+    /* Spacing scale (4px base) */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
 }
 
 [data-theme="dark"] {
@@ -36,17 +68,25 @@
     --border: #334155;
     --card-bg: #1e293b;
     --header-bg: linear-gradient(135deg, #0f766e 0%, #0891b2 100%);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --shadow-hover: 0 25px 50px -12px rgba(20, 184, 166, 0.35);
+    --elevation-1: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+    --elevation-2: 0 4px 6px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.15);
+    --elevation-3: 0 10px 15px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.15);
+    --elevation-4: 0 20px 25px rgba(0,0,0,0.35), 0 8px 10px rgba(0,0,0,0.15);
+    --elevation-5: 0 25px 50px rgba(0,0,0,0.4);
+    --shadow: var(--elevation-2);
+    --shadow-hover: var(--elevation-4);
 }
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     color: var(--text-dark);
-    line-height: 1.6;
+    font-size: var(--text-base);
+    line-height: 1.65;
     transition: background 0.3s, color 0.3s;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Bootstrap navbar used instead of custom header */
@@ -1074,6 +1114,41 @@ body.reading-mode .accordion-body {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+}
+
+/* Touch action: eliminate 300ms tap delay */
+a, button, input, select, textarea, .materia-card, .economista-card {
+    touch-action: manipulation;
+}
+
+/* Nav active state: highlight current page */
+.navbar-nav .nav-link.active {
+    color: var(--primary) !important;
+    position: relative;
+}
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* Keyboard accessible cards */
+.materia-card[tabindex],
+.economista-card[tabindex] {
+    cursor: pointer;
+}
+.materia-card:focus-visible,
+.economista-card:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+    transform: translateY(-4px);
+    box-shadow: var(--elevation-3);
 }
 
 /* Form label visibility */

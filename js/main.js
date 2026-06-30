@@ -180,6 +180,12 @@ const AnimationsUI = {
     },
     _cardHover() {
         document.querySelectorAll('.materia-card, .economista-card').forEach(card => {
+            // Keyboard accessibility
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'link');
+            const link = card.querySelector('a');
+            if (link) card.setAttribute('aria-label', link.textContent.trim() + ' - ' + (card.querySelector('p')?.textContent?.trim() || ''));
+
             card.addEventListener('mousemove', function(e) {
                 const r = this.getBoundingClientRect();
                 const x = (e.clientX - r.left - r.width / 2) / 20;
@@ -187,6 +193,13 @@ const AnimationsUI = {
                 this.style.transform = `perspective(1000px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-12px)`;
             });
             card.addEventListener('mouseleave', function() { this.style.transform = ''; });
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const link = this.querySelector('a');
+                    if (link) link.click();
+                }
+            });
         });
     }
 };
