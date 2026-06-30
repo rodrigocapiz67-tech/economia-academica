@@ -16,42 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .reading-toggle {
-            background: none; border: 2px solid var(--bs-border-color);
-            color: var(--bs-body-color); padding: 0.5rem 1rem;
-            border-radius: 25px; cursor: pointer; font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-        .reading-toggle:hover { border-color: #0d9488; color: #0d9488; }
-        body.reading-mode .accordion-body {
-            font-size: 1.2rem;
-            line-height: 2;
-        }
-        .accordion-button:not(.collapsed) {
-            background: linear-gradient(90deg, rgba(13,148,136,0.1), transparent);
-            color: var(--bs-primary);
-            font-weight: 700;
-        }
-        .accordion-button:focus { box-shadow: none; border-color: rgba(13,148,136,0.3); }
-        .accordion-item {
-            border: 1px solid var(--bs-border-color);
-            margin-bottom: 0.5rem;
-            border-radius: 12px !important;
-            overflow: hidden;
-        }
-        .accordion-item:first-of-type, .accordion-item:last-of-type { border-radius: 12px !important; }
-        [data-theme="dark"] .accordion-button { background-color: var(--bs-body-bg); }
-        [data-theme="dark"] .accordion-button:not(.collapsed) { background: linear-gradient(90deg, rgba(20,184,166,0.15), transparent); }
-        .back-to-top {
-            position: fixed; bottom: 2rem; right: 2rem;
-            width: 48px; height: 48px; border-radius: 50%;
-            background: linear-gradient(135deg, #0d9488, #06b6d4);
-            color: white; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(13,148,136,0.3);
-            transition: all 0.3s; z-index: 999; border: none;
-        }
-        .back-to-top:hover { transform: translateY(-4px); color: white; }
+        /* page-specific styles only */
     </style>
 </head>
 <body>
@@ -64,9 +29,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
                     <li class="nav-item"><a class="nav-link fw-semibold" href="../index.html">Inicio</a></li>
-                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm ms-2" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="../economistas.html">Economistas</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="../datos-economicos.html"><i class="fa-solid fa-chart-simple me-1"></i>Datos</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="../recursos.html">Recursos</a></li>
+                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
                 </ul>
             </div>
         </div>
@@ -515,33 +483,54 @@
             </div>
 
             <div class="card shadow border-0 mt-5" id="simulador-mercado">
-                <div class="card-header bg-dark text-white p-3">
+                <div class="card-header text-white p-3" style="background:linear-gradient(135deg,#0d9488,#06b6d4)">
                     <h3 class="mb-0"><i class="fa-solid fa-chart-line me-2"></i> Simulador de Mercado: Oferta y Demanda</h3>
                 </div>
                 <div class="card-body p-4">
-                    <p class="text-muted">Desplaza las barras para simular choques en el mercado (ej. un aumento en el ingreso de los consumidores o un impuesto a los productores) y observa cómo cambia el equilibrio.</p>
-                    
+                    <p class="text-muted mb-3">Desplaza las barras o elige un escenario para ver cómo cambia el equilibrio de mercado.</p>
+
+                    <div class="mb-3 d-flex gap-2 flex-wrap">
+                        <span class="fw-bold me-1 align-self-center">Escenarios:</span>
+                        <button class="btn btn-sm btn-outline-primary" onclick="cargarEscenarioMD('cosecha')">🌾 Cosecha abundante</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="cargarEscenarioMD('impuesto')">🏷️ Impuesto</button>
+                        <button class="btn btn-sm btn-outline-success" onclick="cargarEscenarioMD('boom')">🎉 Boom económico</button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="cargarEscenarioMD('crisis')">⚠️ Crisis</button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="cargarEscenarioMD('reset')">🔄 Reset</button>
+                    </div>
+
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <div class="mb-4 p-3 bg-light rounded border border-primary border-opacity-25">
-                                <label class="form-label fw-bold text-primary">Desplazar Demanda: <span id="valDemanda">0</span></label>
+                            <div class="mb-4 p-3 rounded border border-primary border-opacity-25" style="background:var(--bg)">
+                                <label class="form-label fw-bold text-primary"><i class="fa-solid fa-arrow-right me-1"></i>Desplazar Demanda: <span id="valDemanda">0</span></label>
                                 <input type="range" class="form-range" id="slideDemanda" min="-40" max="40" value="0">
-                                <small class="text-muted d-block mt-1">Mueve a la derecha para un aumento en la demanda.</small>
+                                <small class="text-muted d-block mt-1">Derecha = más demanda (ingreso, preferencias). Izquierda = menos.</small>
                             </div>
 
-                            <div class="mb-4 p-3 bg-light rounded border border-success border-opacity-25">
-                                <label class="form-label fw-bold text-success">Desplazar Oferta: <span id="valOferta">0</span></label>
+                            <div class="mb-4 p-3 rounded border border-success border-opacity-25" style="background:var(--bg)">
+                                <label class="form-label fw-bold text-success"><i class="fa-solid fa-arrow-right me-1"></i>Desplazar Oferta: <span id="valOferta">0</span></label>
                                 <input type="range" class="form-range" id="slideOferta" min="-40" max="40" value="0">
-                                <small class="text-muted d-block mt-1">Mueve a la derecha para un aumento en la oferta.</small>
+                                <small class="text-muted d-block mt-1">Derecha = más oferta (tecnología, menos costos). Izquierda = menos.</small>
                             </div>
 
-                            <div class="mt-4 p-3 bg-dark text-white rounded text-center shadow-sm">
-                                <h5 class="text-uppercase text-muted small mb-3">Punto de Equilibrio</h5>
+                            <div class="mb-3 p-3 rounded" style="background:var(--bg);border:1px dashed var(--border)">
+                                <label class="form-label fw-bold"><i class="fa-solid fa-ruler-horizontal me-1 text-warning"></i>Control de Precio (opcional):</label>
+                                <select id="tipoControl" class="form-select form-select-sm mb-2" onchange="actualizarMercado()">
+                                    <option value="ninguno">Sin control</option>
+                                    <option value="techo">Precio Máximo (Techo)</option>
+                                    <option value="piso">Precio Mínimo (Piso)</option>
+                                </select>
+                                <input type="range" class="form-range" id="slideControl" min="10" max="90" value="50" oninput="actualizarMercado()">
+                                <small class="text-muted">Precio control: <span id="valControl">50</span></small>
+                            </div>
+
+                            <div class="mt-3 p-3 text-white rounded text-center shadow-sm" style="background:linear-gradient(135deg,#0f172a,#1e293b)">
+                                <h6 class="text-uppercase text-muted small mb-3">Punto de Equilibrio</h6>
                                 <h4 class="mb-1">Precio (P*): <span id="precioEq" class="text-warning fw-bold">50</span></h4>
                                 <h4>Cantidad (Q*): <span id="cantidadEq" class="text-info fw-bold">50</span></h4>
                             </div>
+                            <div id="infoMercado" class="mt-2 small" style="display:none"></div>
                         </div>
-                        
+
                         <div class="col-md-7 mt-4 mt-md-0">
                             <canvas id="graficoMercado"></canvas>
                         </div>
@@ -572,12 +561,33 @@
         let ctxMercado = document.getElementById('graficoMercado').getContext('2d');
         let chartMercado;
 
+        const escenariosMD = {
+            reset:    { d: 0, s: 0, control: 'ninguno', val: 50 },
+            cosecha:  { d: 0, s: 25, control: 'ninguno', val: 50 },
+            impuesto: { d: 0, s: -20, control: 'ninguno', val: 50 },
+            boom:     { d: 30, s: 15, control: 'ninguno', val: 50 },
+            crisis:   { d: -25, s: -15, control: 'ninguno', val: 50 }
+        };
+
+        function cargarEscenarioMD(nombre) {
+            const s = escenariosMD[nombre];
+            if (!s) return;
+            document.getElementById('slideDemanda').value = s.d;
+            document.getElementById('slideOferta').value = s.s;
+            document.getElementById('tipoControl').value = s.control;
+            document.getElementById('slideControl').value = s.val;
+            actualizarMercado();
+        }
+
         function actualizarMercado() {
             let shiftD = parseInt(document.getElementById('slideDemanda').value);
             let shiftS = parseInt(document.getElementById('slideOferta').value);
+            let control = document.getElementById('tipoControl').value;
+            let controlVal = parseInt(document.getElementById('slideControl').value);
 
             document.getElementById('valDemanda').innerText = shiftD > 0 ? "+" + shiftD : shiftD;
             document.getElementById('valOferta').innerText = shiftS > 0 ? "+" + shiftS : shiftS;
+            document.getElementById('valControl').innerText = controlVal;
 
             let qEq = (100 + shiftD + shiftS) / 2;
             let pEq = qEq - shiftS;
@@ -587,63 +597,111 @@
 
             let dataDemanda = [];
             let dataOferta = [];
-            for(let q = 0; q <= 100; q += 10) {
+            for(let q = 0; q <= 110; q += 5) {
                 dataDemanda.push({x: q, y: 100 - q + shiftD});
                 dataOferta.push({x: q, y: q - shiftS});
             }
 
-            if (chartMercado) {
-                chartMercado.destroy();
+            // Info about price control
+            let infoBox = document.getElementById('infoMercado');
+            if (control !== 'ninguno') {
+                infoBox.style.display = 'block';
+                let qDemandada = 100 - controlVal + shiftD;
+                let qOfrecida = controlVal + shiftS;
+                let diff = qDemandada - qOfrecida;
+                if (control === 'techo' && controlVal < pEq) {
+                    let escasez = Math.abs(diff).toFixed(0);
+                    infoBox.className = 'mt-2 small text-danger';
+                    infoBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation me-1"></i><strong>Escasez:</strong> Se demandan ' + escasez + ' unidades más de las que se ofrecen al precio control.';
+                } else if (control === 'piso' && controlVal > pEq) {
+                    let excedente = Math.abs(diff).toFixed(0);
+                    infoBox.className = 'mt-2 small text-warning';
+                    infoBox.innerHTML = '<i class="fa-solid fa-box-open me-1"></i><strong>Excedente:</strong> Se ofrecen ' + excedente + ' unidades más de las que se demandan al precio control.';
+                } else {
+                    infoBox.className = 'mt-2 small text-muted';
+                    infoBox.innerHTML = '<i class="fa-solid fa-circle-info me-1"></i>El precio control está fuera del rango que afecta el mercado.';
+                }
+            } else {
+                infoBox.style.display = 'block';
+                infoBox.className = 'mt-2 small text-muted';
+                let explicacion = '';
+                if (shiftD > 10 && shiftS > 10) explicacion = 'Boom: sube la cantidad, el precio puede subir o bajar según la magnitud.';
+                else if (shiftD > 10) explicacion = 'Mayor demanda: sube precio y cantidad en el equilibrio.';
+                else if (shiftS > 10) explicacion = 'Mayor oferta: baja precio y sube cantidad en el equilibrio.';
+                else if (shiftD < -10 && shiftS < -10) explicacion = 'Crisis: caen demanda y oferta. El efecto en precio depende de cuál cae más.';
+                else if (shiftD < -10) explicacion = 'Menor demanda: baja precio y cantidad en el equilibrio.';
+                else if (shiftS < -10) explicacion = 'Menor oferta: sube precio y baja cantidad (ej: impuesto, sequía).';
+                else explicacion = 'Mercado en equilibrio. Mueve los controles o elige un escenario.';
+                infoBox.innerHTML = '<i class="fa-solid fa-lightbulb me-1"></i>' + explicacion;
             }
+
+            // Build datasets
+            let datasets = [
+                {
+                    label: 'Demanda (D)',
+                    data: dataDemanda,
+                    borderColor: '#0d6efd',
+                    backgroundColor: 'rgba(13,110,253,0.05)',
+                    showLine: true,
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    fill: false
+                },
+                {
+                    label: 'Oferta (S)',
+                    data: dataOferta,
+                    borderColor: '#198754',
+                    backgroundColor: 'rgba(25,135,84,0.05)',
+                    showLine: true,
+                    borderWidth: 3,
+                    pointRadius: 0,
+                    fill: false
+                },
+                {
+                    label: 'Equilibrio',
+                    data: [{x: qEq, y: pEq}],
+                    backgroundColor: '#ffc107',
+                    borderColor: '#000',
+                    borderWidth: 2,
+                    pointRadius: 8,
+                    pointHoverRadius: 10
+                }
+            ];
+
+            // Add price control line
+            if (control !== 'ninguno') {
+                let controlColor = control === 'techo' ? '#dc3545' : '#fd7e14';
+                let controlLabel = control === 'techo' ? 'Precio Máximo' : 'Precio Mínimo';
+                datasets.push({
+                    label: controlLabel,
+                    data: [{x: 0, y: controlVal}, {x: 110, y: controlVal}],
+                    borderColor: controlColor,
+                    borderWidth: 2,
+                    borderDash: [8, 4],
+                    pointRadius: 0,
+                    showLine: true,
+                    fill: false
+                });
+            }
+
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
+
+            if (chartMercado) chartMercado.destroy();
 
             chartMercado = new Chart(ctxMercado, {
                 type: 'scatter',
-                data: {
-                    datasets: [
-                        {
-                            label: 'Demanda',
-                            data: dataDemanda,
-                            borderColor: '#0d6efd',
-                            backgroundColor: '#0d6efd',
-                            showLine: true,
-                            borderWidth: 3,
-                            pointRadius: 0
-                        },
-                        {
-                            label: 'Oferta',
-                            data: dataOferta,
-                            borderColor: '#198754',
-                            backgroundColor: '#198754',
-                            showLine: true,
-                            borderWidth: 3,
-                            pointRadius: 0
-                        },
-                        {
-                            label: 'Equilibrio',
-                            data: [{x: qEq, y: pEq}],
-                            backgroundColor: '#ffc107',
-                            borderColor: '#000',
-                            borderWidth: 2,
-                            pointRadius: 8,
-                            pointHoverRadius: 10
-                        }
-                    ]
-                },
+                data: { datasets: datasets },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            title: { display: true, text: 'Cantidad (Q)', font: {size: 14, weight: 'bold'} },
-                            min: 0,
-                            max: 120
-                        },
-                        y: {
-                            title: { display: true, text: 'Precio (P)', font: {size: 14, weight: 'bold'} },
-                            min: 0,
-                            max: 120
-                        }
+                        x: { title: { display: true, text: 'Cantidad (Q)', font: {size: 14, weight: 'bold'}, color: textColor }, min: 0, max: 120, grid: { color: gridColor }, ticks: { color: textColor } },
+                        y: { title: { display: true, text: 'Precio (P)', font: {size: 14, weight: 'bold'}, color: textColor }, min: 0, max: 120, grid: { color: gridColor }, ticks: { color: textColor } }
                     },
                     plugins: {
+                        legend: { position: 'bottom', labels: { color: isDark ? '#e2e8f0' : undefined } },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {

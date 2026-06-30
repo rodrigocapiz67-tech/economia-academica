@@ -70,10 +70,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
                     <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="economistas.html">Economistas</a></li>
                     <li class="nav-item"><a class="nav-link fw-semibold" href="recursos.html">Recursos</a></li>
-                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm ms-2" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
+                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
                 </ul>
             </div>
         </div>
@@ -220,25 +221,45 @@
         if (initTheme) document.documentElement.setAttribute('data-bs-theme', initTheme === 'dark' ? 'dark' : 'light');
 
         const demoData = {
-            pbi: { value: '3.2%', change: '+0.5%', period: 'Q4 2024', positive: true },
-            ipc: { value: '2.8%', change: '+0.3%', period: 'Dic 2024', positive: false },
-            tipoCambio: { value: 'S/ 3.72', change: '-0.15', period: 'Hoy', positive: true },
-            tasaInteres: { value: '5.50%', change: '0.00%', period: 'Ene 2025', positive: true },
-            desempleo: { value: '6.8%', change: '-0.4%', period: 'Q4 2024', positive: true },
-            riesgoPais: { value: '142 pts', change: '-8 pts', period: 'Hoy', positive: true },
-            pbiTrimestres: [1.0, 1.5, 2.1, 2.8, 3.0, 3.1, 2.9, 3.2],
-            ipcMensual: [0.2, 0.3, 0.4, 0.3, 0.2, 0.1, 0.3, 0.4, 0.5, 0.3, 0.2, 0.3],
+            pbi: { value: '3.1%', change: '+0.3%', period: 'Q1 2026', positive: true },
+            ipc: { value: '2.3%', change: '-0.2%', period: 'Jun 2026', positive: false },
+            tipoCambio: { value: 'S/ ...', change: '--', period: 'Hoy', positive: true },
+            tasaInteres: { value: '4.75%', change: '-0.25%', period: 'Jun 2026', positive: true },
+            desempleo: { value: '6.2%', change: '-0.3%', period: 'Q1 2026', positive: true },
+            riesgoPais: { value: '128 pts', change: '-5 pts', period: 'Hoy', positive: true },
+            pbiTrimestres: [2.5, 2.8, 3.0, 3.2, 2.9, 3.1, 3.0, 3.1],
+            ipcMensual: [0.3, 0.2, 0.4, 0.3, 0.2, 0.3, 0.2, 0.3, 0.4, 0.3, 0.2, 0.3],
             historico: [
-                { indicador: 'PIB Trimestral', valor: '3.2%', periodo: 'Q4 2024', variacion: '+0.5%' },
-                { indicador: 'IPC Mensual', valor: '0.3%', periodo: 'Dic 2024', variacion: '-0.1%' },
-                { indicador: 'Tipo de Cambio', valor: 'S/ 3.72', periodo: '28 Ene 2025', variacion: '-0.04' },
-                { indicador: 'Tasa Referencial', valor: '5.50%', periodo: 'Ene 2025', variacion: '0.00%' },
-                { indicador: 'Empleo Formal', valor: '72.3%', periodo: 'Q4 2024', variacion: '+1.2%' },
-                { indicador: 'Pobreza', valor: '27.5%', periodo: '2024', variacion: '-1.8%' }
+                { indicador: 'PIB Trimestral', valor: '3.1%', periodo: 'Q1 2026', variacion: '+0.3%' },
+                { indicador: 'IPC Mensual', valor: '0.3%', periodo: 'Jun 2026', variacion: '-0.1%' },
+                { indicador: 'Tipo de Cambio', valor: 'S/ ...', periodo: 'Hoy', variacion: '--' },
+                { indicador: 'Tasa Referencial', valor: '4.75%', periodo: 'Jun 2026', variacion: '-0.25%' },
+                { indicador: 'Empleo Formal', valor: '73.8%', periodo: 'Q1 2026', variacion: '+1.5%' },
+                { indicador: 'Pobreza', valor: '25.8%', periodo: '2025', variacion: '-1.7%' }
             ]
         };
 
         let isUsingDemo = true;
+
+        async function fetchTipoCambio() {
+            try {
+                const resp = await fetch('https://open.er-api.com/v6/latest/USD');
+                const data = await resp.json();
+                const pen = data.rates.PEN;
+                demoData.tipoCambio.value = 'S/ ' + pen.toFixed(3);
+                const prevPen = 3.75;
+                const diff = (pen - prevPen).toFixed(3);
+                demoData.tipoCambio.change = (diff >= 0 ? '+' : '') + diff;
+                demoData.tipoCambio.positive = diff <= 0;
+                demoData.historico[2].valor = 'S/ ' + pen.toFixed(3);
+                demoData.historico[2].variacion = demoData.tipoCambio.change;
+                return true;
+            } catch (e) {
+                console.log('No se pudo obtener tipo de cambio:', e);
+                demoData.tipoCambio.value = 'S/ 3.750';
+                return false;
+            }
+        }
 
         async function fetchBCRPData() {
             try {
@@ -348,6 +369,7 @@
 
         async function refreshData() {
             document.getElementById('loading-overlay').classList.add('active');
+            await fetchTipoCambio();
             await fetchBCRPData();
             setTimeout(() => {
                 updateUI(null);

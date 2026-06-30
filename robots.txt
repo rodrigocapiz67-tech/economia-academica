@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rodrigocapiz67-tech.github.io/economia-academica/sitemap.xml

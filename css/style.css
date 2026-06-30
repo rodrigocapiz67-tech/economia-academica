@@ -49,69 +49,7 @@ body {
     overflow-x: hidden;
 }
 
-header {
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    color: var(--text-dark);
-    padding: 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 1px 30px rgba(0,0,0,0.05);
-}
-
-[data-theme="dark"] header {
-    background: rgba(15, 23, 42, 0.9);
-}
-
-header h1 {
-    font-size: 1.4rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
-}
-
-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    align-items: center;
-}
-
-nav a {
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-    position: relative;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: width 0.3s;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-nav a:hover {
-    color: var(--primary);
-}
+/* Bootstrap navbar used instead of custom header */
 
 .theme-toggle {
     background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -991,49 +929,7 @@ footer p {
     }
 }
 
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-dark);
-    padding: 0.5rem;
-    line-height: 1;
-}
-
 @media (max-width: 768px) {
-    header {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        padding: 0.75rem 1rem;
-    }
-    header h1 {
-        font-size: 1.1rem;
-    }
-    .nav-toggle {
-        display: block;
-    }
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        gap: 0.5rem;
-        padding: 1rem 0;
-    }
-    nav ul.open {
-        display: flex;
-    }
-    nav ul li {
-        width: 100%;
-    }
-    nav ul li a,
-    nav ul li button {
-        display: block;
-        width: 100%;
-        text-align: center;
-    }
     .hero-content h2 {
         font-size: 2.5rem;
     }
@@ -1075,4 +971,54 @@ footer p {
     max-height: 400px;
     object-fit: contain;
     background-color: #ffffff;
+}
+
+/* Formula box */
+.formula-box {
+    background-color: var(--bg-secondary, #e2e3e5);
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+    color: var(--text-dark, #052c65);
+}
+
+/* Bootstrap accordion overrides */
+.accordion-button:not(.collapsed) {
+    background: linear-gradient(90deg, rgba(13,148,136,0.1), transparent);
+    color: var(--bs-primary);
+    font-weight: 700;
+}
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(13,148,136,0.3);
+}
+.accordion-item {
+    border: 1px solid var(--bs-border-color);
+    margin-bottom: 0.5rem;
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+.accordion-item:first-of-type,
+.accordion-item:last-of-type {
+    border-radius: 12px !important;
+}
+[data-theme="dark"] .accordion-button {
+    background-color: var(--bs-body-bg);
+}
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+    background: linear-gradient(90deg, rgba(20,184,166,0.15), transparent);
+}
+
+/* Reading mode */
+body.reading-mode .accordion-body {
+    font-size: 1.2rem;
+    line-height: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .formula-box { transition: none; }
 }

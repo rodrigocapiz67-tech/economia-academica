@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador 3D: Flujos Económicos - Economía para Principiantes</title>
+    <meta name="description" content="Visualización 3D interactiva del flujo circular de la economía. Observa cómo el dinero fluye entre hogares, empresas, gobierno y sector externo.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #canvas-container {
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        #canvas-container canvas {
+            display: block;
+        }
+        .controls-panel {
+            background: rgba(15,23,42,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .flow-control {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            transition: background 0.2s;
+        }
+        .flow-control:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .flow-control label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+            color: #e2e8f0;
+        }
+        .flow-control .flow-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+        .flow-control input[type="range"] {
+            width: 100%;
+            accent-color: var(--flow-color, #0d9488);
+        }
+        .flow-value {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--flow-color, #0d9488);
+            text-align: right;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+        .stat-card .stat-label {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .node-label {
+            position: absolute;
+            background: rgba(15,23,42,0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            pointer-events: none;
+            white-space: nowrap;
+            border: 2px solid;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        .info-tooltip {
+            position: absolute;
+            background: rgba(15,23,42,0.95);
+            color: white;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            pointer-events: none;
+            max-width: 250px;
+            z-index: 20;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: none;
+        }
+        .scenario-btn {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: white;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .scenario-btn:hover, .scenario-btn.active {
+            background: rgba(13,148,136,0.3);
+            border-color: #0d9488;
+        }
+        @media (max-width: 768px) {
+            #canvas-container { height: 50vh; min-height: 350px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top mi-menu" style="border-bottom:1px solid rgba(0,0,0,0.05)">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html" style="background:linear-gradient(135deg,#0d9488,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+                <i class="fa-solid fa-chart-line me-2" style="-webkit-text-fill-color:#0d9488"></i>Economía para Principiantes
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="economistas.html">Economistas</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="datos-economicos.html"><i class="fa-solid fa-chart-simple me-1"></i>Datos</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="recursos.html">Recursos</a></li>
+                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Simulador 3D de Flujos</li>
+            </ol>
+        </nav>
+
+        <div class="row mb-4">
+            <div class="col">
+                <h1 class="fw-bold" style="background:linear-gradient(135deg,#0d9488,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+                    <i class="fa-solid fa-globe me-2"></i>Simulador 3D: Flujo Circular de la Economía
+                </h1>
+                <p class="text-muted lead">Visualiza cómo el dinero fluye entre los sectores económicos. Arrastra para rotar, scroll para zoom.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div id="canvas-container">
+                    <!-- Three.js canvas injected here -->
+                </div>
+                <div class="legend mt-3">
+                    <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div> Consumo</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div> Salarios</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> Impuestos</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> Gasto Público</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div> Exportaciones</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#ec4899"></div> Importaciones</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:#14b8a6"></div> Transferencias</div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="controls-panel">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-sliders me-2"></i>Controles de Flujo</h5>
+
+                    <div class="mb-2 d-flex gap-2 flex-wrap">
+                        <button class="scenario-btn active" onclick="cargarScenario('normal')">Normal</button>
+                        <button class="scenario-btn" onclick="cargarScenario('recesion')">Recesión</button>
+                        <button class="scenario-btn" onclick="cargarScenario('boom')">Boom</button>
+                        <button class="scenario-btn" onclick="cargarScenario('crisis')">Crisis Fiscal</button>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #3b82f6">
+                        <label><span style="color:#3b82f6">●</span> Consumo (Hogares → Empresas)</label>
+                        <div class="flow-desc">Gasto de familias en bienes y servicios</div>
+                        <input type="range" id="flow-consumo" min="0" max="100" value="65" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-consumo">65</div>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #10b981">
+                        <label><span style="color:#10b981">●</span> Salarios (Empresas → Hogares)</label>
+                        <div class="flow-desc">Pago por trabajo y servicios</div>
+                        <input type="range" id="flow-salarios" min="0" max="100" value="55" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-salarios">55</div>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #ef4444">
+                        <label><span style="color:#ef4444">●</span> Impuestos (Hogares → Gobierno)</label>
+                        <div class="flow-desc">Impuesto a la renta, IGV, etc.</div>
+                        <input type="range" id="flow-impuestos" min="0" max="50" value="18" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-impuestos">18</div>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #f59e0b">
+                        <label><span style="color:#f59e0b">●</span> Gasto Público (Gobierno → Empresas)</label>
+                        <div class="flow-desc">Infraestructura, servicios, compras</div>
+                        <input type="range" id="flow-gasto" min="0" max="50" value="15" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-gasto">15</div>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #8b5cf6">
+                        <label><span style="color:#8b5cf6">●</span> Exportaciones (Ext. → Empresas)</label>
+                        <div class="flow-desc">Venta de productos al exterior</div>
+                        <input type="range" id="flow-export" min="0" max="50" value="20" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-export">20</div>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #ec4899">
+                        <label><span style="color:#ec4899">●</span> Importaciones (Empresas → Ext.)</label>
+                        <div class="flow-desc">Compra de productos del exterior</div>
+                        <input type="range" id="flow-import" min="0" max="50" value="22" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-import">22</div>
+                    </div>
+
+                    <div class="flow-control" style="--flow-color: #14b8a6">
+                        <label><span style="color:#14b8a6">●</span> Transferencias (Gob. → Hogares)</label>
+                        <div class="flow-desc">Bonos, subsidios, pensiones</div>
+                        <input type="range" id="flow-transfer" min="0" max="30" value="8" oninput="actualizarFlujos()">
+                        <div class="flow-value" id="val-transfer">8</div>
+                    </div>
+                </div>
+
+                <div class="controls-panel mt-3">
+                    <h6 class="fw-bold mb-2"><i class="fa-solid fa-chart-pie me-2"></i>Indicadores</h6>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value text-primary" id="stat-pib">100</div>
+                            <div class="stat-label">PIB Aprox.</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value text-warning" id="stat-ahorro">32</div>
+                            <div class="stat-label">Ahorro</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value text-danger" id="stat-fiscal">-3</div>
+                            <div class="stat-label">Balance Fiscal</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value text-info" id="stat-comercial">-2</div>
+                            <div class="stat-label">Bal. Comercial</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-3"><i class="fa-solid fa-lightbulb text-warning me-2"></i>¿Qué estás viendo?</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <h6 class="fw-bold text-primary">El Flujo Circular</h6>
+                                <p class="text-muted small">En una economía, el dinero circula constantemente. Los hogares pagan por productos (consumo), las empresas pagan salarios, el gobierno recauda impuestos y gasta en servicios, y el comercio internacional conecta todo.</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h6 class="fw-bold text-success">Interacción</h6>
+                                <p class="text-muted small">Arrastra el mouse para rotar la visualización 3D. Usa la rueda para acercar/alejar. Modifica los controles deslizantes para simular cambios en la economía y observa cómo afectan los indicadores.</p>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <h6 class="fw-bold text-warning">Escenarios</h6>
+                                <p class="text-muted small">Prueba los escenarios predefinidos: "Recesión" reduce consumo e inversión. "Boom" aumenta todo. "Crisis Fiscal" muestra un gobierno que gasta más de lo que recauda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="back-to-top" aria-label="Volver arriba">↑</a>
+
+    <footer class="text-center py-4" style="background:var(--bs-dark);color:white">
+        <p class="mb-0 opacity-75">Economía para Principiantes - Simulador 3D Interactivo</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Three.js Scene Setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x0f172a, 1);
+        container.appendChild(renderer.domElement);
+
+        // Orbit Controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.enablePan = false;
+        controls.minDistance = 8;
+        controls.maxDistance = 25;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+
+        camera.position.set(12, 8, 12);
+        controls.update();
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404060, 0.6);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x0d9488, 1.5, 50);
+        pointLight.position.set(10, 15, 10);
+        scene.add(pointLight);
+        const pointLight2 = new THREE.PointLight(0x06b6d4, 1, 40);
+        pointLight2.position.set(-10, -5, -10);
+        scene.add(pointLight2);
+
+        // Starfield background
+        const starsGeometry = new THREE.BufferGeometry();
+        const starsCount = 1500;
+        const starsPositions = new Float32Array(starsCount * 3);
+        for (let i = 0; i < starsCount * 3; i++) {
+            starsPositions[i] = (Math.random() - 0.5) * 100;
+        }
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.08 });
+        const starField = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(starField);
+
+        // Node definitions
+        const nodeData = [
+            { name: 'Hogares', icon: '🏠', color: 0x3b82f6, pos: [0, 0, 4] },
+            { name: 'Empresas', icon: '🏭', color: 0x10b981, pos: [4, 0, 0] },
+            { name: 'Gobierno', icon: '🏛️', color: 0xef4444, pos: [0, 0, -4] },
+            { name: 'Sector Externo', icon: '🌐', color: 0x8b5cf6, pos: [-4, 0, 0] }
+        ];
+
+        // Create nodes (spheres)
+        const nodes = [];
+        const nodeMeshes = [];
+
+        nodeData.forEach((data, i) => {
+            const geometry = new THREE.SphereGeometry(0.8, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                color: data.color,
+                emissive: data.color,
+                emissiveIntensity: 0.3,
+                shininess: 100
+            });
+            const sphere = new THREE.Mesh(geometry, material);
+            sphere.position.set(...data.pos);
+            scene.add(sphere);
+
+            // Glow ring
+            const ringGeo = new THREE.RingGeometry(0.9, 1.1, 32);
+            const ringMat = new THREE.MeshBasicMaterial({ color: data.color, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.position.copy(sphere.position);
+            ring.rotation.x = Math.PI / 2;
+            scene.add(ring);
+
+            nodes.push({ mesh: sphere, ring: ring, data: data });
+            nodeMeshes.push(sphere);
+        });
+
+        // Flow definitions: [fromNodeIndex, toNodeIndex, color, flowId]
+        const flowDefs = [
+            { from: 0, to: 1, color: 0x3b82f6, id: 'consumo', label: 'Consumo' },
+            { from: 1, to: 0, color: 0x10b981, id: 'salarios', label: 'Salarios' },
+            { from: 0, to: 2, color: 0xef4444, id: 'impuestos', label: 'Impuestos' },
+            { from: 2, to: 1, color: 0xf59e0b, id: 'gasto', label: 'Gasto Público' },
+            { from: 3, to: 1, color: 0x8b5cf6, id: 'export', label: 'Exportaciones' },
+            { from: 1, to: 3, color: 0xec4899, id: 'import', label: 'Importaciones' },
+            { from: 2, to: 0, color: 0x14b8a6, id: 'transfer', label: 'Transferencias' }
+        ];
+
+        // Particle system for each flow
+        const particleSystems = [];
+
+        flowDefs.forEach(flow => {
+            const fromPos = new THREE.Vector3(...nodeData[flow.from].pos);
+            const toPos = new THREE.Vector3(...nodeData[flow.to].pos);
+            const count = 80;
+            const positions = new Float32Array(count * 3);
+            const offsets = new Float32Array(count);
+
+            for (let i = 0; i < count; i++) {
+                offsets[i] = Math.random();
+                const t = offsets[i];
+                const mid = fromPos.clone().lerp(toPos, 0.5);
+                mid.y += 1.5;
+                const p = new THREE.Vector3();
+                p.lerpVectors(fromPos, toPos, t);
+                p.y += Math.sin(t * Math.PI) * 1.5;
+                positions[i * 3] = p.x;
+                positions[i * 3 + 1] = p.y;
+                positions[i * 3 + 2] = p.z;
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                color: flow.color,
+                size: 0.12,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            const points = new THREE.Points(geometry, material);
+            scene.add(points);
+
+            particleSystems.push({
+                mesh: points,
+                flow: flow,
+                offsets: offsets,
+                fromPos: fromPos,
+                toPos: toPos,
+                speed: 0.005
+            });
+        });
+
+        // Curved line paths for flows
+        flowDefs.forEach(flow => {
+            const fromPos = new THREE.Vector3(...nodeData[flow.from].pos);
+            const toPos = new THREE.Vector3(...nodeData[flow.to].pos);
+            const mid = fromPos.clone().lerp(toPos, 0.5);
+            mid.y += 1.5;
+
+            const curve = new THREE.QuadraticBezierCurve3(fromPos, mid, toPos);
+            const points = curve.getPoints(50);
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const material = new THREE.LineBasicMaterial({ color: flow.color, transparent: true, opacity: 0.15 });
+            const line = new THREE.Line(geometry, material);
+            scene.add(line);
+        });
+
+        // Scenarios
+        const scenarios = {
+            normal:   { consumo: 65, salarios: 55, impuestos: 18, gasto: 15, export: 20, import: 22, transfer: 8 },
+            recesion: { consumo: 35, salarios: 30, impuestos: 12, gasto: 20, export: 15, import: 18, transfer: 12 },
+            boom:     { consumo: 85, salarios: 75, impuestos: 25, gasto: 22, export: 30, import: 28, transfer: 10 },
+            crisis:   { consumo: 50, salarios: 40, impuestos: 10, gasto: 30, export: 18, import: 25, transfer: 15 }
+        };
+
+        function cargarScenario(nombre) {
+            const s = scenarios[nombre];
+            if (!s) return;
+            Object.keys(s).forEach(key => {
+                const el = document.getElementById('flow-' + key);
+                if (el) el.value = s[key];
+            });
+            document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            actualizarFlujos();
+        }
+
+        function actualizarFlujos() {
+            const values = {};
+            flowDefs.forEach(flow => {
+                const el = document.getElementById('flow-' + flow.id);
+                const val = parseInt(el.value);
+                values[flow.id] = val;
+                document.getElementById('val-' + flow.id).textContent = val;
+            });
+
+            // Update particle speeds based on flow values
+            particleSystems.forEach(ps => {
+                const val = values[ps.flow.id];
+                ps.speed = 0.002 + (val / 100) * 0.012;
+                ps.mesh.material.size = 0.06 + (val / 100) * 0.15;
+                ps.mesh.material.opacity = 0.3 + (val / 100) * 0.7;
+            });
+
+            // Update stats
+            const consumo = values.consumo;
+            const salarios = values.salarios;
+            const impuestos = values.impuestos;
+            const gasto = values.gasto;
+            const exp = values.export;
+            const imp = values.import;
+            const transfer = values.transfer;
+
+            const pib = consumo + gasto + (exp - imp);
+            const ahorro = salarios - consumo - impuestos + transfer;
+            const balanceFiscal = impuestos - gasto - transfer;
+            const balanceComercial = exp - imp;
+
+            document.getElementById('stat-pib').textContent = pib;
+            document.getElementById('stat-ahorro').textContent = ahorro;
+            document.getElementById('stat-fiscal').textContent = (balanceFiscal >= 0 ? '+' : '') + balanceFiscal;
+            document.getElementById('stat-comercial').textContent = (balanceComercial >= 0 ? '+' : '') + balanceComercial;
+
+            // Color code stats
+            document.getElementById('stat-fiscal').className = 'stat-value ' + (balanceFiscal >= 0 ? 'text-success' : 'text-danger');
+            document.getElementById('stat-comercial').className = 'stat-value ' + (balanceComercial >= 0 ? 'text-success' : 'text-danger');
+            document.getElementById('stat-ahorro').className = 'stat-value ' + (ahorro >= 0 ? 'text-success' : 'text-warning');
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.001;
+
+            // Animate particles along paths
+            particleSystems.forEach(ps => {
+                const positions = ps.mesh.geometry.attributes.position.array;
+                const count = positions.length / 3;
+
+                for (let i = 0; i < count; i++) {
+                    ps.offsets[i] += ps.speed;
+                    if (ps.offsets[i] > 1) ps.offsets[i] -= 1;
+
+                    const t = ps.offsets[i];
+                    const fromPos = ps.fromPos;
+                    const toPos = ps.toPos;
+
+                    // Bezier curve interpolation
+                    const midY = Math.max(fromPos.y, toPos.y) + 1.5;
+                    const mt = 1 - t;
+
+                    positions[i * 3] = mt * mt * fromPos.x + 2 * mt * t * ((fromPos.x + toPos.x) / 2) + t * t * toPos.x;
+                    positions[i * 3 + 1] = mt * mt * fromPos.y + 2 * mt * t * midY + t * t * toPos.y;
+                    positions[i * 3 + 2] = mt * mt * fromPos.z + 2 * mt * t * ((fromPos.z + toPos.z) / 2) + t * t * toPos.z;
+                }
+
+                ps.mesh.geometry.attributes.position.needsUpdate = true;
+            });
+
+            // Animate node rings
+            nodes.forEach((node, i) => {
+                node.ring.rotation.z = time * 0.5;
+                node.mesh.position.y = node.data.pos[1] + Math.sin(time + i) * 0.1;
+                node.ring.position.y = node.mesh.position.y;
+            });
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+
+        // Initialize
+        actualizarFlujos();
+        animate();
+
+        // Click on nodes to highlight
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        renderer.domElement.addEventListener('click', (event) => {
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(nodeMeshes);
+
+            if (intersects.length > 0) {
+                const clickedNode = nodes.find(n => n.mesh === intersects[0].object);
+                if (clickedNode) {
+                    // Pulse effect
+                    clickedNode.mesh.material.emissiveIntensity = 1;
+                    setTimeout(() => { clickedNode.mesh.material.emissiveIntensity = 0.3; }, 500);
+
+                    // Show info
+                    const info = {
+                        'Hogares': 'Los hogares consumen bienes, pagan impuestos y reciben salarios y transferencias. Su ahorro = ingresos - gastos - impuestos.',
+                        'Empresas': 'Las empresas producen bienes y servicios, pagan salarios, exportan e importan. El PIB se mide por su producción.',
+                        'Gobierno': 'El gobierno recauda impuestos, gasta en servicios públicos y hace transferencias. Su balance = impuestos - gasto - transferencias.',
+                        'Sector Externo': 'El comercio internacional. Exportaciones (dinero que entra) e importaciones (dinero que sale). Balance = X - M.'
+                    };
+                    alert(clickedNode.data.name + '\n\n' + info[clickedNode.data.name]);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -16,96 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .formula-box {
-            background-color: var(--bg-secondary, #e2e3e5);
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.3rem;
-            text-align: center;
-            margin: 15px 0;
-            font-weight: bold;
-            color: var(--text-dark, #052c65);
-        }
-        body.reading-mode .accordion-body {
-            font-size: 1.2rem;
-            line-height: 2;
-        }
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0d9488, #06b6d4);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
-            transition: all 0.3s;
-            z-index: 999;
-            border: none;
-        }
-        .back-to-top:hover {
-            transform: translateY(-4px);
-            color: white;
-        }
-        .navbar-brand {
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-        .accordion-button:not(.collapsed) {
-            background: linear-gradient(90deg, rgba(13,148,136,0.1), transparent);
-            color: var(--bs-primary);
-            font-weight: 700;
-        }
-        .accordion-button:focus {
-            box-shadow: none;
-            border-color: rgba(13,148,136,0.3);
-        }
-        .accordion-item {
-            border: 1px solid var(--bs-border-color);
-            margin-bottom: 0.5rem;
-            border-radius: 12px !important;
-            overflow: hidden;
-        }
-        .accordion-item:first-of-type, .accordion-item:last-of-type {
-            border-radius: 12px !important;
-        }
-        [data-theme="dark"] .accordion-button {
-            background-color: var(--bs-body-bg);
-        }
-        [data-theme="dark"] .accordion-button:not(.collapsed) {
-            background: linear-gradient(90deg, rgba(20,184,166,0.15), transparent);
-        }
-        .simulador-card {
-            border: none;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .simulador-card .card-header {
-            background: linear-gradient(135deg, #0d9488, #06b6d4);
-        }
-        .pib-total {
-            font-size: 2.5rem;
-            font-weight: 800;
-        }
-        .reading-toggle {
-            background: none; border: 2px solid var(--bs-border-color);
-            color: var(--bs-body-color); padding: 0.5rem 1rem;
-            border-radius: 25px; cursor: pointer; font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-        .reading-toggle:hover { border-color: #0d9488; color: #0d9488; }
-        @media (max-width: 768px) {
-            .pib-total { font-size: 1.8rem; }
-            .formula-box { font-size: 1rem; }
-        }
+        .simulador-card { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .simulador-card .card-header { background: linear-gradient(135deg, #0d9488, #06b6d4); }
+        .pib-total { font-size: 2.5rem; font-weight: 800; }
+        @media (max-width: 768px) { .pib-total { font-size: 1.8rem; } .formula-box { font-size: 1rem; } }
     </style>
 </head>
 <body>
@@ -118,9 +32,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
                     <li class="nav-item"><a class="nav-link fw-semibold" href="../index.html">Inicio</a></li>
-                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm ms-2" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="../economistas.html">Economistas</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="../datos-economicos.html"><i class="fa-solid fa-chart-simple me-1"></i>Datos</a></li>
+                    <li class="nav-item"><a class="nav-link fw-semibold" href="../recursos.html">Recursos</a></li>
+                    <li class="nav-item"><button id="theme-toggle" class="btn btn-sm" style="background:linear-gradient(135deg,#0d9488,#06b6d4);color:white;border:none;border-radius:25px;padding:0.5rem 1rem">🌙</button></li>
                 </ul>
             </div>
         </div>
@@ -414,23 +331,35 @@
                 <h3 class="mb-0"><i class="fa-solid fa-calculator me-2"></i> Simulador: Calcula el PIB</h3>
             </div>
             <div class="card-body p-4">
-                <p>Mueve los controles para ver cómo cambian los componentes del PIB por el método del gasto.</p>
+                <p class="text-muted mb-3">Mueve los controles o elige un escenario para ver cómo cambian los componentes del PIB por el método del gasto.</p>
+
+                <div class="mb-3 d-flex gap-2 flex-wrap">
+                    <span class="fw-bold me-1 align-self-center">Escenarios:</span>
+                    <button class="btn btn-sm btn-outline-primary" onclick="cargarEscenario('peru')">🇵🇪 Perú (real)</button>
+                    <button class="btn btn-sm btn-outline-success" onclick="cargarEscenario('auge')">📈 Auge</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="cargarEscenario('recesion')">📉 Recesión</button>
+                    <button class="btn btn-sm btn-outline-warning" onclick="cargarEscenario('crisis')">⚠️ Crisis</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="cargarEscenario('reset')">🔄 Reset</button>
+                </div>
+
                 <div class="row">
                     <div class="col-md-5">
-                        <label class="form-label fw-bold">Consumo (C): <span id="valC" class="text-primary">60</span></label>
+                        <label class="form-label fw-bold"><i class="fa-solid fa-cart-shopping me-1 text-primary"></i>Consumo (C): <span id="valC" class="text-primary">60</span></label>
                         <input type="range" class="form-range" id="slideC" min="0" max="200" value="60">
-                        <label class="form-label fw-bold mt-2">Inversión (I): <span id="valI" class="text-success">20</span></label>
+                        <label class="form-label fw-bold mt-2"><i class="fa-solid fa-industry me-1 text-success"></i>Inversión (I): <span id="valI" class="text-success">20</span></label>
                         <input type="range" class="form-range" id="slideI" min="0" max="100" value="20">
-                        <label class="form-label fw-bold mt-2">Gasto Público (G): <span id="valG" class="text-info">15</span></label>
+                        <label class="form-label fw-bold mt-2"><i class="fa-solid fa-landmark me-1 text-info"></i>Gasto Público (G): <span id="valG" class="text-info">15</span></label>
                         <input type="range" class="form-range" id="slideG" min="0" max="100" value="15">
-                        <label class="form-label fw-bold mt-2">Exportaciones (X): <span id="valX" class="text-warning">25</span></label>
+                        <label class="form-label fw-bold mt-2"><i class="fa-solid fa-plane-departure me-1 text-warning"></i>Exportaciones (X): <span id="valX" class="text-warning">25</span></label>
                         <input type="range" class="form-range" id="slideX" min="0" max="100" value="25">
-                        <label class="form-label fw-bold mt-2">Importaciones (M): <span id="valM" class="text-danger">20</span></label>
+                        <label class="form-label fw-bold mt-2"><i class="fa-solid fa-plane-arrival me-1 text-danger"></i>Importaciones (M): <span id="valM" class="text-danger">20</span></label>
                         <input type="range" class="form-range" id="slideM" min="0" max="100" value="20">
-                        <div class="mt-4 p-3 bg-light rounded text-center border">
-                            <h4>PIB Total</h4>
-                            <h2 id="totalPIB" class="pib-total text-success">100</h2>
+                        <div class="mt-4 p-3 rounded text-center border" style="background:var(--bg)">
+                            <h5 class="mb-1">PIB Total</h5>
+                            <h2 id="totalPIB" class="pib-total text-success mb-2">100</h2>
+                            <div id="composicion" class="small text-muted"></div>
                         </div>
+                        <div id="alertaPeru" class="mt-2 small" style="display:none"></div>
                     </div>
                     <div class="col-md-7">
                         <canvas id="graficoPIB"></canvas>
@@ -538,6 +467,25 @@
         let ctx = document.getElementById('graficoPIB').getContext('2d');
         let chart;
 
+        const escenarios = {
+            reset:  { c: 60, i: 20, g: 15, x: 25, m: 20 },
+            peru:   { c: 65, i: 22, g: 12, x: 24, m: 23 },
+            auge:   { c: 80, i: 35, g: 20, x: 30, m: 25 },
+            recesion: { c: 45, i: 10, g: 18, x: 20, m: 18 },
+            crisis: { c: 30, i: 5, g: 25, x: 15, m: 20 }
+        };
+
+        function cargarEscenario(nombre) {
+            const s = escenarios[nombre];
+            if (!s) return;
+            document.getElementById('slideC').value = s.c;
+            document.getElementById('slideI').value = s.i;
+            document.getElementById('slideG').value = s.g;
+            document.getElementById('slideX').value = s.x;
+            document.getElementById('slideM').value = s.m;
+            actualizarSimulador();
+        }
+
         function actualizarSimulador() {
             let c = parseInt(document.getElementById('slideC').value);
             let i = parseInt(document.getElementById('slideI').value);
@@ -554,22 +502,82 @@
             let total = c + i + g + (x - m);
             document.getElementById('totalPIB').innerText = total;
 
+            // Composition percentages
+            let totalGasto = c + i + g + x;
+            if (totalGasto > 0) {
+                let pctC = ((c / totalGasto) * 100).toFixed(0);
+                let pctI = ((i / totalGasto) * 100).toFixed(0);
+                let pctG = ((g / totalGasto) * 100).toFixed(0);
+                let pctNX = (((x - m) / totalGasto) * 100).toFixed(0);
+                document.getElementById('composicion').innerHTML =
+                    `C: ${pctC}% · I: ${pctI}% · G: ${pctG}% · XN: ${pctNX}%`;
+            }
+
+            // Perú comparison alert
+            let peruTotal = 65 + 22 + 12 + (24 - 23);
+            let alerta = document.getElementById('alertaPeru');
+            let diff = total - peruTotal;
+            if (Math.abs(diff) < 5) {
+                alerta.style.display = 'block';
+                alerta.className = 'mt-2 small text-muted';
+                alerta.innerHTML = '<i class="fa-solid fa-circle-info me-1"></i>Similar al PIB real de Perú (~' + peruTotal + ' unidades)';
+            } else if (diff > 0) {
+                alerta.style.display = 'block';
+                alerta.className = 'mt-2 small text-success';
+                alerta.innerHTML = '<i class="fa-solid fa-arrow-up me-1"></i>' + diff + ' unidades por encima del nivel real de Perú';
+            } else {
+                alerta.style.display = 'block';
+                alerta.className = 'mt-2 small text-danger';
+                alerta.innerHTML = '<i class="fa-solid fa-arrow-down me-1"></i>' + Math.abs(diff) + ' unidades por debajo del nivel real de Perú';
+            }
+
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
+
             if (chart) chart.destroy();
             chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Consumo', 'Inversión', 'Gasto Púb.', 'Exportaciones', 'Importaciones'],
+                    labels: ['Consumo (C)', 'Inversión (I)', 'Gasto Púb. (G)', 'Export. (X)', 'Import. (M)'],
                     datasets: [{
                         label: 'Valor',
                         data: [c, i, g, x, -m],
-                        backgroundColor: ['rgba(13,110,253,0.7)','rgba(25,135,84,0.7)','rgba(13,202,240,0.7)','rgba(255,193,7,0.7)','rgba(220,53,69,0.7)'],
-                        borderWidth: 1
+                        backgroundColor: [
+                            'rgba(13,110,253,0.7)',
+                            'rgba(25,135,84,0.7)',
+                            'rgba(13,202,240,0.7)',
+                            'rgba(255,193,7,0.7)',
+                            'rgba(220,53,69,0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(13,110,253)',
+                            'rgb(25,135,84)',
+                            'rgb(13,202,240)',
+                            'rgb(255,193,7)',
+                            'rgb(220,53,69)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 6
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true } }
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    return ctx.dataset.label + ': ' + ctx.parsed.y;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: gridColor }, ticks: { color: textColor } },
+                        x: { grid: { display: false }, ticks: { color: textColor } }
+                    }
                 }
             });
         }

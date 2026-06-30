@@ -289,6 +289,6 @@ function initShareButtons() {
 
 function initSW() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/economia-academica/sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
     }
 }
