@@ -1,294 +1,277 @@
-const materias = [
-    { nombre: 'Macroeconomía', url: 'materias/macroeconomia.html', temas: ['PIB', 'inflación', 'desempleo', 'política monetaria', 'crecimiento'] },
-    { nombre: 'Microeconomía', url: 'materias/microeconomia.html', temas: ['oferta', 'demanda', 'elasticidad', 'utilidad', 'costos', 'mercado'] },
-    { nombre: 'Estadística', url: 'materias/estadistica.html', temas: ['probabilidad', 'regresión', 'hipótesis', 'distribuciones', 'muestreo'] },
-    { nombre: 'Matemáticas', url: 'materias/matematicas.html', temas: ['cálculo', 'derivadas', 'integrales', 'álgebra', 'matrices', 'optimización'] },
-    { nombre: 'Economía Política', url: 'materias/economia-politica.html', temas: ['capitalismo', 'socialismo', 'mercado', 'regulación', 'desarrollo', 'globalización'] }
-];
+/**
+ * Economía para Principiantes — JavaScript Bundle
+ * Clean Architecture: Core → Services → UI → Features → Composition Root
+ * Each module has a single responsibility and no circular dependencies.
+ */
 
-document.addEventListener('DOMContentLoaded', () => {
-    initSearch();
-    initAccordion();
-    initDarkMode();
-    initCardEffects();
-    initScrollEffects();
-    initParallax();
-    initHamburger();
-    initReadingMode();
-    initFilterButtons();
-    initShareButtons();
-
-    initSW();
-});
-
-function initSearch() {
-    const input = document.getElementById('search-input');
-    const results = document.getElementById('search-results');
-
-    if (input) {
-        input.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-
-            if (query.length < 2) {
-                results.classList.remove('active');
-                return;
-            }
-
-            const matches = materias.filter(m =>
-                m.nombre.toLowerCase().includes(query) ||
-                m.temas.some(t => t.toLowerCase().includes(query))
-            );
-
-            if (matches.length > 0) {
-                results.innerHTML = matches.map(m =>
-                    `<div class="search-result"><a href="${m.url}">${m.nombre}</a></div>`
-                ).join('');
-                results.classList.add('active');
-            } else {
-                results.classList.remove('active');
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!input.contains(e.target) && !results.contains(e.target)) {
-                results.classList.remove('active');
-            }
-        });
+// ============================================================
+// CORE: Data Layer (pure data, no side effects)
+// ============================================================
+const EcoData = {
+    materias: [
+        { nombre: 'Macroeconomía', url: 'materias/macroeconomia.html', temas: ['PIB', 'inflación', 'desempleo', 'política monetaria', 'crecimiento'] },
+        { nombre: 'Microeconomía', url: 'materias/microeconomia.html', temas: ['oferta', 'demanda', 'elasticidad', 'utilidad', 'costos', 'mercado'] },
+        { nombre: 'Estadística', url: 'materias/estadistica.html', temas: ['probabilidad', 'regresión', 'hipótesis', 'distribuciones', 'muestreo'] },
+        { nombre: 'Matemáticas', url: 'materias/matematicas.html', temas: ['cálculo', 'derivadas', 'integrales', 'álgebra', 'matrices', 'optimización'] },
+        { nombre: 'Economía Política', url: 'materias/economia-politica.html', temas: ['capitalismo', 'socialismo', 'mercado', 'regulación', 'desarrollo', 'globalización'] }
+    ],
+    config: {
+        EXCHANGE_API: 'https://open.er-api.com/v6/latest/USD',
+        THEME_KEY: 'economia-theme',
+        SW_PATH: './sw.js',
+        SEARCH_MIN_LENGTH: 2
     }
-}
+};
 
-function initAccordion() {
-    const temas = document.querySelectorAll('.tema');
+// ============================================================
+// SERVICES: External APIs
+// ============================================================
+const ApiService = {
+    async fetchTipoCambio() {
+        try {
+            const resp = await fetch(EcoData.config.EXCHANGE_API);
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            const data = await resp.json();
+            return { success: true, rate: data.rates.PEN };
+        } catch (e) {
+            console.warn('API tipo de cambio no disponible:', e.message);
+            return { success: false, rate: 3.75 };
+        }
+    }
+};
 
-    temas.forEach(tema => {
-        const header = tema.querySelector('.tema-header');
-        if (header) {
-            header.addEventListener('click', () => {
-                const isActive = tema.classList.contains('active');
+// ============================================================
+// SERVICES: Storage abstraction
+// ============================================================
+const StorageService = {
+    get(key) { try { return localStorage.getItem(key); } catch { return null; } },
+    set(key, val) { try { localStorage.setItem(key, val); } catch {} },
+    getTheme() {
+        const saved = this.get(EcoData.config.THEME_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    },
+    setTheme(theme) { this.set(EcoData.config.THEME_KEY, theme); }
+};
 
-                document.querySelectorAll('.tema').forEach(t => {
-                    t.classList.remove('active');
-                    const content = t.querySelector('.tema-content');
-                    if (content) content.style.maxHeight = null;
-                    const h = t.querySelector('.tema-header');
-                    if (h) h.setAttribute('aria-expanded', 'false');
-                });
+// ============================================================
+// UI: Theme (dark/light mode)
+// ============================================================
+const ThemeUI = {
+    init() {
+        const toggle = document.getElementById('theme-toggle');
+        const theme = StorageService.getTheme();
+        this._apply(theme, toggle);
 
-                if (!isActive) {
-                    tema.classList.add('active');
-                    const content = tema.querySelector('.tema-content');
-                    if (content) {
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        header.setAttribute('aria-expanded', 'true');
-                    }
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                this._apply(next, toggle);
+                StorageService.setTheme(next);
+            });
+        }
+
+        new MutationObserver(() => {
+            const t = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-bs-theme', t === 'dark' ? 'dark' : 'light');
+        }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+        document.documentElement.setAttribute('data-bs-theme', theme === 'dark' ? 'dark' : 'light');
+    },
+    _apply(theme, btn) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+};
+
+// ============================================================
+// UI: Navigation (smooth scroll)
+// ============================================================
+const NavUI = {
+    init() {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.navbar-collapse')?.classList.remove('show');
                 }
             });
+        });
+    }
+};
 
+// ============================================================
+// UI: Accordion (expandable sections)
+// ============================================================
+const AccordionUI = {
+    init() {
+        document.querySelectorAll('.tema').forEach(tema => {
+            const header = tema.querySelector('.tema-header');
+            if (!header) return;
+            header.addEventListener('click', () => this._toggle(tema));
             header.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    header.click();
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._toggle(tema); }
+            });
+        });
+    },
+    _toggle(tema) {
+        const wasActive = tema.classList.contains('active');
+        document.querySelectorAll('.tema').forEach(t => {
+            t.classList.remove('active');
+            const c = t.querySelector('.tema-content');
+            if (c) c.style.maxHeight = null;
+            t.querySelector('.tema-header')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasActive) {
+            tema.classList.add('active');
+            const c = tema.querySelector('.tema-content');
+            if (c) {
+                c.style.maxHeight = c.scrollHeight + 'px';
+                tema.querySelector('.tema-header')?.setAttribute('aria-expanded', 'true');
+            }
+        }
+    }
+};
+
+// ============================================================
+// UI: Animations (scroll reveal, parallax, card effects)
+// ============================================================
+const AnimationsUI = {
+    init() {
+        this._scrollReveal();
+        this._parallax();
+        this._cardHover();
+    },
+    _scrollReveal() {
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                    obs.unobserve(e.target);
                 }
             });
-        }
-    });
-}
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-function initDarkMode() {
-    const toggle = document.getElementById('theme-toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        if (toggle) toggle.textContent = '☀️';
-    }
-
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            toggle.textContent = next === 'dark' ? '☀️' : '🌙';
-        });
-    }
-}
-
-function initCardEffects() {
-    const cards = document.querySelectorAll('.materia-card, .economista-card');
-
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-12px) scale(1.02)';
+        document.querySelectorAll('.materia-card, .economista-card, .tema').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            obs.observe(el);
         });
 
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
+        document.querySelectorAll('.materias-grid, .economistas-grid').forEach(grid => {
+            Array.from(grid.children).forEach((item, i) => { item.style.transitionDelay = `${i * 0.1}s`; });
         });
-
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px)`;
-        });
-
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-        });
-    });
-}
-
-function initScrollEffects() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.materia-card, .economista-card, .tema').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        observer.observe(el);
-    });
-
-    document.querySelectorAll('.materias-grid, .economistas-grid').forEach(grid => {
-        const items = grid.children;
-        Array.from(items).forEach((item, index) => {
-            item.style.transitionDelay = `${index * 0.1}s`;
-        });
-    });
-}
-
-function initParallax() {
-    const heroBg = document.querySelector('.hero-bg');
-    
-    if (heroBg) {
+    },
+    _parallax() {
+        const bg = document.querySelector('.hero-bg');
+        if (!bg) return;
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * 0.3;
-            heroBg.style.transform = `translate3d(0, ${rate}px, 0)`;
-        });
-    }
-
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            if (!ticking) {
+                requestAnimationFrame(() => { bg.style.transform = `translate3d(0,${window.pageYOffset * 0.3}px,0)`; ticking = false; });
+                ticking = true;
             }
         });
-    });
-}
-
-function initHamburger() {
-    const toggle = document.querySelector('.nav-toggle');
-    const menu = document.querySelector('nav ul');
-    if (toggle && menu) {
-        toggle.addEventListener('click', () => {
-            menu.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', menu.classList.contains('open'));
+    },
+    _cardHover() {
+        document.querySelectorAll('.materia-card, .economista-card').forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const r = this.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width / 2) / 20;
+                const y = (e.clientY - r.top - r.height / 2) / 20;
+                this.style.transform = `perspective(1000px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-12px)`;
+            });
+            card.addEventListener('mouseleave', function() { this.style.transform = ''; });
         });
+    }
+};
+
+// ============================================================
+// FEATURE: Search
+// ============================================================
+const SearchFeature = {
+    init() {
+        const input = document.getElementById('search-input');
+        const results = document.getElementById('search-results');
+        if (!input || !results) return;
+
+        input.addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase().trim();
+            if (q.length < EcoData.config.SEARCH_MIN_LENGTH) { results.classList.remove('active'); return; }
+            const matches = EcoData.materias.filter(m =>
+                m.nombre.toLowerCase().includes(q) || m.temas.some(t => t.includes(q))
+            );
+            if (matches.length) {
+                results.innerHTML = matches.map(m => `<div class="search-result"><a href="${m.url}">${m.nombre}</a></div>`).join('');
+                results.classList.add('active');
+            } else { results.classList.remove('active'); }
+        });
+
         document.addEventListener('click', (e) => {
-            if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.remove('open');
-                toggle.setAttribute('aria-expanded', 'false');
-            }
+            if (!input.contains(e.target) && !results.contains(e.target)) results.classList.remove('active');
         });
     }
-}
+};
 
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.textContent = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-const heroTitle = document.querySelector('.hero-content h2');
-if (heroTitle && (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/'))) {
-    const originalText = heroTitle.textContent;
-    typeWriter(heroTitle, originalText, 30);
-}
-
-function initReadingMode() {
-    const toggle = document.getElementById('reading-toggle');
-    const body = document.body;
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            body.classList.toggle('reading-mode');
-            toggle.innerHTML = body.classList.contains('reading-mode') ? '📖 Normal' : '📖 Leer';
+// ============================================================
+// FEATURE: Extras (reading mode, filters, share, typewriter, SW)
+// ============================================================
+const ExtrasFeature = {
+    init() {
+        // Reading mode
+        const rt = document.getElementById('reading-toggle');
+        if (rt) rt.addEventListener('click', () => {
+            document.body.classList.toggle('reading-mode');
+            rt.innerHTML = document.body.classList.contains('reading-mode') ? '📖 Normal' : '📖 Leer';
         });
-    }
-}
 
-function initFilterButtons() {
-    const buttons = document.querySelectorAll('.btn-filtro');
-    const profiles = document.querySelectorAll('.profile-card');
-    if (buttons.length && profiles.length) {
-        buttons.forEach(btn => {
+        // Filter buttons
+        const btns = document.querySelectorAll('.btn-filtro');
+        const cards = document.querySelectorAll('.profile-card');
+        if (btns.length && cards.length) btns.forEach(btn => {
             btn.addEventListener('click', () => {
-                buttons.forEach(b => b.classList.remove('active'));
+                btns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const school = btn.dataset.school;
-                profiles.forEach(p => {
-                    p.style.display = (school === 'todas' || p.dataset.school === school) ? 'block' : 'none';
-                });
+                const s = btn.dataset.school;
+                cards.forEach(p => { p.style.display = (s === 'todas' || p.dataset.school === s) ? 'block' : 'none'; });
             });
         });
-    }
-}
 
-function initShareButtons() {
-    document.querySelectorAll('.share-btn').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const data = {
-                title: btn.dataset.title || 'Economía para Principiantes',
-                text: btn.dataset.text || 'Mira este contenido',
-                url: btn.dataset.url || window.location.href
-            };
-            if (navigator.share) {
-                try { await navigator.share(data); } catch {}
-            } else {
-                await navigator.clipboard.writeText(data.url);
-                const orig = btn.textContent;
-                btn.textContent = '✅ Copiado';
-                setTimeout(() => { btn.textContent = orig; }, 2000);
-            }
+        // Share buttons
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const data = { title: btn.dataset.title || 'Economía para Principiantes', text: btn.dataset.text || 'Mira esto', url: btn.dataset.url || location.href };
+                if (navigator.share) { try { await navigator.share(data); } catch {} }
+                else { await navigator.clipboard.writeText(data.url); const o = btn.textContent; btn.textContent = '✅ Copiado'; setTimeout(() => btn.textContent = o, 2000); }
+            });
         });
-    });
-}
 
-function initSW() {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        // Typewriter (only on home page)
+        const hero = document.querySelector('.hero-content h2');
+        if (hero && (location.pathname.endsWith('index.html') || location.pathname.endsWith('/'))) {
+            const text = hero.textContent; hero.textContent = '';
+            let i = 0; const type = () => { if (i < text.length) { hero.textContent += text[i++]; setTimeout(type, 30); } };
+            type();
+        }
+
+        // Service Worker
+        if ('serviceWorker' in navigator) navigator.serviceWorker.register(EcoData.config.SW_PATH).catch(() => {});
     }
-}
+};
+
+// ============================================================
+// COMPOSITION ROOT: Wire everything together
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    ThemeUI.init();
+    NavUI.init();
+    AccordionUI.init();
+    AnimationsUI.init();
+    SearchFeature.init();
+    ExtrasFeature.init();
+});
