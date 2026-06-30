@@ -1019,6 +1019,114 @@ body.reading-mode .accordion-body {
     line-height: 2;
 }
 
+/* ============================================================
+   ACCESSIBILITY & UX POLISH
+   ============================================================ */
+
+/* Focus-visible: keyboard-only focus ring */
+:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Skip to main content link */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    z-index: 10000;
+    transition: top 0.2s;
+    text-decoration: none;
+}
+.skip-link:focus {
+    top: 0;
+}
+
+/* Skeleton loading placeholder */
+.skeleton {
+    background: linear-gradient(90deg, var(--border) 25%, var(--bg) 50%, var(--border) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+    min-height: 1em;
+}
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Touch-friendly button sizes */
+.btn-sm {
+    min-height: 36px;
+    min-width: 36px;
+}
+.nav-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Form label visibility */
+.sr-only-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* Reduced motion: disable all decorative animations */
 @media (prefers-reduced-motion: reduce) {
-    .formula-box { transition: none; }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .hero-bg { transform: none !important; }
+    .materia-card:hover { transform: none !important; }
+    .economista-card:hover { transform: none !important; }
+    .tema:hover { transform: none !important; }
+    .scroll-indicator { animation: none !important; }
+    .skeleton { animation: none !important; }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+    .materia-card,
+    .economista-card,
+    .tema,
+    .indicator-card {
+        border: 2px solid ButtonText;
+    }
+    .btn-primary,
+    .theme-toggle {
+        border: 2px solid ButtonText;
+    }
+}
+
+/* Ensure text is readable in both themes */
+[data-theme="dark"] .text-muted {
+    color: #94a3b8 !important;
+}
+[data-theme="dark"] .bg-light {
+    background-color: #1e293b !important;
+}
+[data-theme="dark"] .border {
+    border-color: #334155 !important;
 }

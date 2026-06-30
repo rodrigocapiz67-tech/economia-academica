@@ -80,7 +80,7 @@ const ThemeUI = {
     },
     _apply(theme, btn) {
         document.documentElement.setAttribute('data-theme', theme);
-        if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        if (btn) btn.innerHTML = theme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
     }
 };
 
